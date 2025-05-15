@@ -1,0 +1,241 @@
+{
+    "site": {
+        "title": "图像生成器"
+    },
+    "nav": {
+        "home": "首页",
+        "generate": "生成",
+        "gallery": "画廊",
+        "profile": "个人资料"
+    },
+    "hero": {
+        "title": "将您的创意转化为",
+        "subtitle": "惊艳的视觉作品",
+        "description": "使用我们的平台创建精美的AI生成图像，完全控制每个细节。从宽高比到种子值，我们的平台让您能够实现您的创意愿景。",
+        "startCreating": "开始创作",
+        "exploreGallery": "浏览画廊"
+    },
+    "features": {
+        "title": "强大的生成功能",
+        "description": "我们的平台提供对图像生成过程的完全控制，为您提供创建理想作品的工具。",
+        "items": {
+            "customizablePrompts": {
+                "title": "可自定义提示词",
+                "description": "使用我们先进的提示系统精确描述您想要看到的内容"
+            },
+            "aspectRatios": {
+                "title": "多种宽高比",
+                "description": "从常用宽高比中选择或设置自定义尺寸"
+            },
+            "batchGeneration": {
+                "title": "批量生成",
+                "description": "同时生成最多4张图像以探索不同变化"
+            },
+            "inferenceSteps": {
+                "title": "推理步数控制",
+                "description": "通过可自定义的推理步数调整质量与速度"
+            },
+            "reproducibleResults": {
+                "title": "可重现的结果",
+                "description": "设置特定的种子值以重现或迭代之前的生成结果"
+            },
+            "outputFormats": {
+                "title": "多种输出格式",
+                "description": "以PNG、JPEG或WebP格式导出图像，并可调整质量"
+            },
+            "resolutionControl": {
+                "title": "分辨率控制",
+                "description": "设置百万像素值以控制图像大小和细节"
+            },
+            "easyDownloads": {
+                "title": "轻松下载",
+                "description": "以您喜欢的格式下载单个图像或批量图像"
+            }
+        }
+    },
+    "cta": {
+        "tagline": "释放您的创造力",
+        "title": "立即开始创建惊艳图像",
+        "description": "加入数千名已经在使用我们平台将创意变为现实的创作者。无需技术技能 — 只需要您的想象力。",
+        "startCreating": "立即开始创作",
+        "signIn": "登录",
+        "signOut": "登出"
+    },
+    "footer": {
+        "resources": "资源",
+        "about": "关于我们",
+        "faq": "常见问题",
+        "blog": "博客",
+        "contact": "联系我们",
+        "legal": "法律",
+        "terms": "服务条款",
+        "privacy": "隐私政策",
+        "copyright": "版权"
+    },
+    "generator": {
+        "title": "图像生成器",
+        "description": "通过自定义以下参数创建惊艳的AI生成图像",
+        "authRequired": "需要认证",
+        "authDescription": "您需要登录才能生成图像。",
+        "loginToContinue": "登录以继续",
+        "form": {
+            "prompt": {
+                "label": "提示词",
+                "placeholder": "描述您想要生成的图像...",
+                "description": "详细具体地描述您想要看到的内容"
+            },
+            "aspectRatio": {
+                "label": "宽高比",
+                "placeholder": "选择宽高比",
+                "description": "选择图像的尺寸",
+                "options": {
+                    "square": "正方形 (1:1)",
+                    "landscape": "横向 (16:9)",
+                    "portrait": "纵向 (9:16)",
+                    "standard": "标准 (4:3)",
+                    "photo": "照片 (3:2)",
+                    "panorama": "全景 (2:1)"
+                }
+            },
+            "numOutputs": {
+                "label": "图像数量：{value}",
+                "description": "生成多个变体 (1-4)"
+            },
+            "steps": {
+                "label": "推理步数：{value}",
+                "description": "更高的值 = 更好的质量但生成速度更慢"
+            },
+            "useSeed": {
+                "label": "使用自定义种子",
+                "description": "启用以使用特定的种子值"
+            },
+            "seed": {
+                "label": "种子值",
+                "random": "随机",
+                "description": "相同的种子会产生一致的结果"
+            },
+            "outputFormat": {
+                "label": "输出格式"
+            },
+            "outputQuality": {
+                "label": "输出质量：{value}%",
+                "description": "更高的值 = 更好的质量但文件更大"
+            },
+            "megapixels": {
+                "label": "百万像素",
+                "placeholder": "选择百万像素",
+                "description": "控制生成图像的分辨率",
+                "options": {
+                    "low": "低 (0.5 MP)",
+                    "standard": "标准 (1 MP)",
+                    "high": "高 (2 MP)",
+                    "ultra": "超高 (4 MP)"
+                }
+            },
+            "generateButton": {
+                "generating": "生成中...",
+                "default": "生成图像"
+            }
+        },
+        "output": {
+            "generating": "正在生成您的图像...",
+            "empty": {
+                "title": "尚未生成图像",
+                "description": "填写表单开始生成AI图像。您可以自定义所有参数以匹配您的愿景。"
+            },
+            "actions": {
+                "copyPrompt": "复制提示词",
+                "share": "分享",
+                "details": "详情",
+                "download": "下载"
+            },
+            "toast": {
+                "copyPrompt": {
+                    "title": "提示词已复制",
+                    "description": "提示词已复制到剪贴板"
+                }
+            },
+            "details": {
+                "title": "图像详情",
+                "description": "关于您生成的图像的信息",
+                "prompt": "提示词",
+                "aspectRatio": "宽高比",
+                "seed": "种子",
+                "steps": "步数",
+                "generated": "生成时间",
+                "actions": {
+                    "download": "下载图像",
+                    "openEditor": "在编辑器中打开"
+                }
+            }
+        },
+        "history": {
+            "imageCount": "{count, plural, =1 {# 张图像} other {# 张图像}}",
+            "steps": "步",
+            "actions": {
+                "download": "下载",
+                "regenerate": "重新生成",
+                "delete": "删除"
+            },
+            "empty": {
+                "title": "无生成历史",
+                "description": "在您创建一些图像后，您的生成历史将显示在这里。"
+            }
+        },
+        "tabs": {
+            "output": "已生成图像",
+            "history": "历史"
+        }
+    },
+    "gallery": {
+        "title": "探索社区创作",
+        "description": "发现社区成员创作的精彩AI艺术作品，为您的下一个创意获取灵感。",
+        "viewFull": "查看全部画廊",
+        "prompts": {
+            "1": "日落时分的赛博朋克城市，霓虹灯闪烁",
+            "2": "魔法森林，发光植物和蜿蜒小溪",
+            "3": "环绕有光环气态巨行星的未来太空站",
+            "4": "超现实的漂浮岛屿，瀑布与古代遗迹",
+            "5": "黎明云端的蒸汽朋克飞艇大战",
+            "6": "神秘的水下城市，发光建筑"
+        }
+    },
+    "profile": {
+        "title": "个人主页",
+        "images": "图像",
+        "following": "关注",
+        "followers": "粉丝",
+        "account": "账户",
+        "settings": "设置",
+        "generationHistory": "生成历史",
+        "savedImages": "已保存图像",
+        "privacy": "隐私",
+        "tabs": {
+            "images": "我的图像",
+            "liked": "喜欢",
+            "saved": "已保存"
+        },
+        "empty": {
+            "liked": {
+                "title": "暂无喜欢的图像",
+                "description": "浏览画廊，喜欢激发您灵感的图像。喜欢的内容会显示在这里。"
+            },
+            "saved": {
+                "title": "暂无已保存图像",
+                "description": "将图像保存到收藏夹以便快速参考。灵感都可以在这里整理。"
+            }
+        },
+        "exploreGallery": "浏览画廊"
+    },
+    "login": {
+        "title": "登录",
+        "description": "登录以访问您的个人资料、生成历史和保存的图片",
+        "google": "使用 Google 登录",
+        "twitter": "使用 Twitter 登录",
+        "or": "或",
+        "guest": {
+            "title": "想尝试无账号使用？",
+            "button": "以访客身份继续"
+        }
+    }
+}

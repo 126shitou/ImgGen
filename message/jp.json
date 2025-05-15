@@ -1,0 +1,241 @@
+{
+    "site": {
+        "title": "画像ジェネレーター"
+    },
+    "nav": {
+        "home": "ホーム",
+        "generate": "生成",
+        "gallery": "ギャラリー",
+        "profile": "プロフィール"
+    },
+    "hero": {
+        "title": "あなたのアイデアを",
+        "subtitle": "印象的なビジュアルに",
+        "description": "アスペクト比からシード値まで、あらゆる側面を制御できるAI生成画像を作成。私たちのプラットフォームは、あなたのクリエイティブなビジョンを実現する力を与えます。",
+        "startCreating": "作成を始める",
+        "exploreGallery": "ギャラリーを探索"
+    },
+    "features": {
+        "title": "強力な生成機能",
+        "description": "私たちのプラットフォームは、画像生成プロセスを完全にコントロールし、あなたの想像通りのものを作成するためのツールを提供します。",
+        "items": {
+            "customizablePrompts": {
+                "title": "カスタマイズ可能なプロンプト",
+                "description": "高度なプロンプトシステムで、見たいものを正確に説明"
+            },
+            "aspectRatios": {
+                "title": "複数のアスペクト比",
+                "description": "一般的なアスペクト比から選択するか、独自の寸法を設定"
+            },
+            "batchGeneration": {
+                "title": "バッチ生成",
+                "description": "最大4枚の画像を同時に生成してバリエーションを探索"
+            },
+            "inferenceSteps": {
+                "title": "推論ステップの制御",
+                "description": "カスタマイズ可能な推論ステップで品質と速度を調整"
+            },
+            "reproducibleResults": {
+                "title": "再現可能な結果",
+                "description": "特定のシード値を設定して、以前の生成を再現または反復"
+            },
+            "outputFormats": {
+                "title": "複数の出力形式",
+                "description": "PNG、JPEG、WebPで画像をエクスポート（品質調整可能）"
+            },
+            "resolutionControl": {
+                "title": "解像度制御",
+                "description": "メガピクセル値を設定して画像サイズとディテールを制御"
+            },
+            "easyDownloads": {
+                "title": "簡単なダウンロード",
+                "description": "お好みの形式で個別の画像またはバッチをダウンロード"
+            }
+        }
+    },
+    "cta": {
+        "tagline": "創造性を解き放つ",
+        "title": "今日から素晴らしい画像の作成を始めましょう",
+        "description": "すでに何千人ものクリエイターが私たちのプラットフォームを使用してアイデアを実現しています。技術的なスキルは不要 — あなたの想像力だけが必要です。",
+        "startCreating": "今すぐ作成を始める",
+        "signIn": "サインイン",
+        "signOut": "サインアウト"
+    },
+    "footer": {
+        "resources": "リソース",
+        "about": "会社概要",
+        "faq": "よくある質問",
+        "blog": "ブログ",
+        "contact": "お問い合わせ",
+        "legal": "法的情報",
+        "terms": "利用規約",
+        "privacy": "プライバシーポリシー",
+        "copyright": "著作権"
+    },
+    "generator": {
+        "title": "画像ジェネレーター",
+        "description": "以下のパラメータをカスタマイズして、印象的なAI生成画像を作成",
+        "authRequired": "認証が必要です",
+        "authDescription": "画像を生成するにはサインインが必要です。",
+        "loginToContinue": "続行するにはサインインしてください",
+        "form": {
+            "prompt": {
+                "label": "プロンプト",
+                "placeholder": "生成したい画像を説明してください...",
+                "description": "見たいものを詳細かつ具体的に説明してください"
+            },
+            "aspectRatio": {
+                "label": "アスペクト比",
+                "placeholder": "アスペクト比を選択",
+                "description": "画像の寸法を選択",
+                "options": {
+                    "square": "正方形 (1:1)",
+                    "landscape": "横長 (16:9)",
+                    "portrait": "縦長 (9:16)",
+                    "standard": "標準 (4:3)",
+                    "photo": "写真 (3:2)",
+                    "panorama": "パノラマ (2:1)"
+                }
+            },
+            "numOutputs": {
+                "label": "画像数: {value}",
+                "description": "複数のバリエーションを生成 (1-4)"
+            },
+            "steps": {
+                "label": "推論ステップ: {value}",
+                "description": "値が高いほど品質は向上しますが、生成は遅くなります"
+            },
+            "useSeed": {
+                "label": "カスタムシードを使用",
+                "description": "特定のシード値を使用するには有効にしてください"
+            },
+            "seed": {
+                "label": "シード値",
+                "random": "ランダム",
+                "description": "同じシードで一貫した結果が得られます"
+            },
+            "outputFormat": {
+                "label": "出力形式"
+            },
+            "outputQuality": {
+                "label": "出力品質: {value}%",
+                "description": "値が高いほど品質は向上しますが、ファイルサイズは大きくなります"
+            },
+            "megapixels": {
+                "label": "メガピクセル",
+                "placeholder": "メガピクセルを選択",
+                "description": "生成画像の解像度を制御",
+                "options": {
+                    "low": "低 (0.5 MP)",
+                    "standard": "標準 (1 MP)",
+                    "high": "高 (2 MP)",
+                    "ultra": "超高 (4 MP)"
+                }
+            },
+            "generateButton": {
+                "generating": "生成中...",
+                "default": "画像を生成"
+            }
+        },
+        "output": {
+            "generating": "画像を生成中...",
+            "empty": {
+                "title": "まだ画像が生成されていません",
+                "description": "フォームに記入してAI画像の生成を開始してください。すべてのパラメータをカスタマイズして、あなたのビジョンを実現できます。"
+            },
+            "actions": {
+                "copyPrompt": "プロンプトをコピー",
+                "share": "共有",
+                "details": "詳細",
+                "download": "ダウンロード"
+            },
+            "toast": {
+                "copyPrompt": {
+                    "title": "プロンプトをコピーしました",
+                    "description": "プロンプトがクリップボードにコピーされました"
+                }
+            },
+            "details": {
+                "title": "画像の詳細",
+                "description": "生成された画像の情報",
+                "prompt": "プロンプト",
+                "aspectRatio": "アスペクト比",
+                "seed": "シード",
+                "steps": "ステップ",
+                "generated": "生成日時",
+                "actions": {
+                    "download": "画像をダウンロード",
+                    "openEditor": "エディターで開く"
+                }
+            }
+        },
+        "history": {
+            "imageCount": "{count, plural, =1 {# 枚の画像} other {# 枚の画像}}",
+            "steps": "ステップ",
+            "actions": {
+                "download": "ダウンロード",
+                "regenerate": "再生成",
+                "delete": "削除"
+            },
+            "empty": {
+                "title": "生成履歴がありません",
+                "description": "画像を作成すると、ここに生成履歴が表示されます。"
+            }
+        },
+        "tabs": {
+            "output": "生成された画像",
+            "history": "履歴"
+        }
+    },
+    "gallery": {
+        "title": "コミュニティの作品を探索",
+        "description": "コミュニティの素晴らしいAI生成アートを発見し、次の作品のインスピレーションを得ましょう。",
+        "viewFull": "ギャラリー全体を見る",
+        "prompts": {
+            "1": "ネオンライトが輝く夕暮れのサイバーパンク都市景観",
+            "2": "生物発光する植物と蛇行する小川のある魔法の森",
+            "3": "リング状の惑星を周回する未来の宇宙ステーション",
+            "4": "滝と古代遺跡のある超現実的な浮遊島",
+            "5": "夜明けの雲間でのスチームパンク飛行船の戦い",
+            "6": "生物発光する建築物のある神秘的な海底都市"
+        }
+    },
+    "profile": {
+        "title": "あなたのプロフィール",
+        "images": "画像",
+        "following": "フォロー中",
+        "followers": "フォロワー",
+        "account": "アカウント",
+        "settings": "設定",
+        "generationHistory": "生成履歴",
+        "savedImages": "保存した画像",
+        "privacy": "プライバシー",
+        "tabs": {
+            "images": "あなたの画像",
+            "liked": "いいね",
+            "saved": "保存済み"
+        },
+        "empty": {
+            "liked": {
+                "title": "まだいいねした画像がありません",
+                "description": "ギャラリーを探索して、インスピレーションを与える画像にいいねしてください。簡単なアクセスのためにここに表示されます。"
+            },
+            "saved": {
+                "title": "まだ保存した画像がありません",
+                "description": "クイックリファレンスのために画像をコレクションに保存してください。インスピレーションをここで整理しましょう。"
+            }
+        },
+        "exploreGallery": "ギャラリーを探索"
+    },
+    "login": {
+        "title": "ログイン",
+        "description": "プロフィール、生成履歴、保存した画像にアクセスするにはログインしてください",
+        "google": "Googleでログイン",
+        "twitter": "Twitterでログイン",
+        "or": "または",
+        "guest": {
+            "title": "アカウントなしで試してみませんか？",
+            "button": "ゲストとして続ける"
+        }
+    }
+}

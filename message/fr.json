@@ -1,0 +1,241 @@
+{
+    "site": {
+        "title": "Générateur d'Images"
+    },
+    "nav": {
+        "home": "Accueil",
+        "generate": "Générer",
+        "gallery": "Galerie",
+        "profile": "Profil"
+    },
+    "hero": {
+        "title": "Transformez vos idées en",
+        "subtitle": "Images impressionnantes",
+        "description": "Créez de magnifiques images générées par IA avec un contrôle sans précédent sur chaque aspect. Du ratio d'aspect aux valeurs de seed, notre plateforme vous donne le pouvoir de concrétiser votre vision créative.",
+        "startCreating": "Commencer à créer",
+        "exploreGallery": "Explorer la galerie"
+    },
+    "features": {
+        "title": "Fonctionnalités de génération puissantes",
+        "description": "Notre plateforme offre un contrôle total sur le processus de génération d'images, vous donnant les outils pour créer exactement ce que vous imaginez.",
+        "items": {
+            "customizablePrompts": {
+                "title": "Prompts personnalisables",
+                "description": "Décrivez exactement ce que vous voulez voir avec notre système de prompts avancé"
+            },
+            "aspectRatios": {
+                "title": "Multiples ratios d'aspect",
+                "description": "Choisissez parmi des ratios d'aspect courants ou définissez vos propres dimensions"
+            },
+            "batchGeneration": {
+                "title": "Génération par lots",
+                "description": "Générez jusqu'à 4 images simultanément pour explorer des variations"
+            },
+            "inferenceSteps": {
+                "title": "Contrôle des étapes d'inférence",
+                "description": "Ajustez qualité vs. vitesse avec des étapes d'inférence personnalisables"
+            },
+            "reproducibleResults": {
+                "title": "Résultats reproductibles",
+                "description": "Définissez des valeurs de seed spécifiques pour recréer ou itérer sur des générations précédentes"
+            },
+            "outputFormats": {
+                "title": "Multiples formats de sortie",
+                "description": "Exportez vos images en PNG, JPEG ou WebP avec une qualité ajustable"
+            },
+            "resolutionControl": {
+                "title": "Contrôle de la résolution",
+                "description": "Définissez des valeurs de mégapixels pour contrôler la taille et les détails de l'image"
+            },
+            "easyDownloads": {
+                "title": "Téléchargements faciles",
+                "description": "Téléchargez des images individuelles ou des lots dans votre format préféré"
+            }
+        }
+    },
+    "cta": {
+        "tagline": "Libérez votre créativité",
+        "title": "Commencez à créer des images incroyables aujourd'hui",
+        "description": "Rejoignez des milliers de créateurs qui utilisent déjà notre plateforme pour donner vie à leurs idées. Aucune compétence technique requise — juste votre imagination.",
+        "startCreating": "Commencer à créer maintenant",
+        "signIn": "Se connecter",
+        "signOut": "Se déconnecter"
+    },
+    "footer": {
+        "resources": "Ressources",
+        "about": "À propos",
+        "faq": "FAQ",
+        "blog": "Blog",
+        "contact": "Contact",
+        "legal": "Mentions légales",
+        "terms": "Conditions d'utilisation",
+        "privacy": "Politique de confidentialité",
+        "copyright": "Droits d'auteur"
+    },
+    "generator": {
+        "title": "Générateur d'images",
+        "description": "Créez des images générées par IA impressionnantes en personnalisant les paramètres ci-dessous",
+        "authRequired": "Authentification requise",
+        "authDescription": "Vous devez être connecté pour générer des images.",
+        "loginToContinue": "Connectez-vous pour continuer",
+        "form": {
+            "prompt": {
+                "label": "Prompt",
+                "placeholder": "Décrivez l'image que vous souhaitez générer...",
+                "description": "Soyez détaillé et précis sur ce que vous voulez voir"
+            },
+            "aspectRatio": {
+                "label": "Ratio d'aspect",
+                "placeholder": "Sélectionner un ratio d'aspect",
+                "description": "Choisissez les dimensions pour votre image",
+                "options": {
+                    "square": "Carré (1:1)",
+                    "landscape": "Paysage (16:9)",
+                    "portrait": "Portrait (9:16)",
+                    "standard": "Standard (4:3)",
+                    "photo": "Photo (3:2)",
+                    "panorama": "Panorama (2:1)"
+                }
+            },
+            "numOutputs": {
+                "label": "Nombre d'images : {value}",
+                "description": "Générez plusieurs variations (1-4)"
+            },
+            "steps": {
+                "label": "Étapes d'inférence : {value}",
+                "description": "Valeurs plus élevées = meilleure qualité mais génération plus lente"
+            },
+            "useSeed": {
+                "label": "Utiliser une seed personnalisée",
+                "description": "Activez pour utiliser une valeur de seed spécifique"
+            },
+            "seed": {
+                "label": "Valeur de seed",
+                "random": "Aléatoire",
+                "description": "La même seed produit des résultats cohérents"
+            },
+            "outputFormat": {
+                "label": "Format de sortie"
+            },
+            "outputQuality": {
+                "label": "Qualité de sortie : {value}%",
+                "description": "Valeurs plus élevées = meilleure qualité mais fichier plus volumineux"
+            },
+            "megapixels": {
+                "label": "Mégapixels",
+                "placeholder": "Sélectionner des mégapixels",
+                "description": "Contrôle la résolution des images générées",
+                "options": {
+                    "low": "Basse (0.5 MP)",
+                    "standard": "Standard (1 MP)",
+                    "high": "Haute (2 MP)",
+                    "ultra": "Ultra (4 MP)"
+                }
+            },
+            "generateButton": {
+                "generating": "Génération en cours...",
+                "default": "Générer des images"
+            }
+        },
+        "output": {
+            "generating": "Génération de vos images...",
+            "empty": {
+                "title": "Aucune image générée",
+                "description": "Remplissez le formulaire pour commencer à générer des images avec l'IA. Vous pouvez personnaliser tous les paramètres pour correspondre à votre vision."
+            },
+            "actions": {
+                "copyPrompt": "Copier le prompt",
+                "share": "Partager",
+                "details": "Détails",
+                "download": "Télécharger"
+            },
+            "toast": {
+                "copyPrompt": {
+                    "title": "Prompt copié",
+                    "description": "Le prompt a été copié dans le presse-papiers"
+                }
+            },
+            "details": {
+                "title": "Détails de l'image",
+                "description": "Informations sur votre image générée",
+                "prompt": "Prompt",
+                "aspectRatio": "Ratio d'aspect",
+                "seed": "Seed",
+                "steps": "Étapes",
+                "generated": "Généré",
+                "actions": {
+                    "download": "Télécharger l'image",
+                    "openEditor": "Ouvrir dans l'éditeur"
+                }
+            }
+        },
+        "history": {
+            "imageCount": "{count, plural, =1 {# image} other {# images}}",
+            "steps": "étapes",
+            "actions": {
+                "download": "Télécharger",
+                "regenerate": "Régénérer",
+                "delete": "Supprimer"
+            },
+            "empty": {
+                "title": "Aucun historique de génération",
+                "description": "Votre historique de génération apparaîtra ici après avoir créé quelques images."
+            }
+        },
+        "tabs": {
+            "output": "Images générées",
+            "history": "Historique"
+        }
+    },
+    "gallery": {
+        "title": "Explorez les créations de la communauté",
+        "description": "Découvrez d'incroyables œuvres d'art générées par IA de notre communauté et trouvez l'inspiration pour votre prochaine création.",
+        "viewFull": "Voir la galerie complète",
+        "prompts": {
+            "1": "Paysage urbain cyberpunk éthéré au coucher du soleil avec lumières néon",
+            "2": "Forêt magique avec plantes bioluminescentes et ruisseau sinueux",
+            "3": "Station spatiale futuriste en orbite autour d'une planète gazeuse avec anneaux",
+            "4": "Îles flottantes surréalistes avec cascades et ruines anciennes",
+            "5": "Bataille de dirigeables steampunk dans les nuages à l'aube",
+            "6": "Ville sous-marine mystique avec architecture bioluminescente"
+        }
+    },
+    "profile": {
+        "title": "Votre profil",
+        "images": "Images",
+        "following": "Abonnements",
+        "followers": "Abonnés",
+        "account": "Compte",
+        "settings": "Paramètres",
+        "generationHistory": "Historique de génération",
+        "savedImages": "Images sauvegardées",
+        "privacy": "Confidentialité",
+        "tabs": {
+            "images": "Vos images",
+            "liked": "J'aime",
+            "saved": "Sauvegardées"
+        },
+        "empty": {
+            "liked": {
+                "title": "Aucune image aimée",
+                "description": "Parcourez la galerie et aimez les images qui vous inspirent. Elles apparaîtront ici pour un accès facile."
+            },
+            "saved": {
+                "title": "Aucune image sauvegardée",
+                "description": "Sauvegardez des images dans des collections pour une référence rapide. Organisez vos inspirations ici."
+            }
+        },
+        "exploreGallery": "Explorer la galerie"
+    },
+    "login": {
+        "title": "Connexion",
+        "description": "Connectez-vous pour accéder à votre profil, votre historique de génération et vos images sauvegardées",
+        "google": "Se connecter avec Google",
+        "twitter": "Se connecter avec Twitter",
+        "or": "OU",
+        "guest": {
+            "title": "Vous voulez essayer sans compte ?",
+            "button": "Continuer en tant qu'invité"
+        }
+    }
+}

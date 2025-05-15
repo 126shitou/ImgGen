@@ -1,0 +1,241 @@
+{
+    "site": {
+        "title": "Image Generator"
+    },
+    "nav": {
+        "home": "Home",
+        "generate": "Generate",
+        "gallery": "Gallery",
+        "profile": "Profile"
+    },
+    "hero": {
+        "title": "Transform Your Ideas Into",
+        "subtitle": "Stunning Visuals",
+        "description": "Create beautiful AI-generated images with unparalleled control over every aspect. From aspect ratio to seed values, our platform gives you the power to realize your creative vision.",
+        "startCreating": "Start Creating",
+        "exploreGallery": "Explore Gallery"
+    },
+    "features": {
+        "title": "Powerful Generation Features",
+        "description": "Our platform offers complete control over the image generation process, giving you the tools to create exactly what you envision.",
+        "items": {
+            "customizablePrompts": {
+                "title": "Customizable Prompts",
+                "description": "Describe exactly what you want to see with our advanced prompt system"
+            },
+            "aspectRatios": {
+                "title": "Multiple Aspect Ratios",
+                "description": "Choose from common aspect ratios or set your own custom dimensions"
+            },
+            "batchGeneration": {
+                "title": "Batch Generation",
+                "description": "Generate up to 4 images simultaneously to explore variations"
+            },
+            "inferenceSteps": {
+                "title": "Inference Steps Control",
+                "description": "Adjust quality vs. speed with customizable inference steps"
+            },
+            "reproducibleResults": {
+                "title": "Reproducible Results",
+                "description": "Set specific seed values to recreate or iterate on previous generations"
+            },
+            "outputFormats": {
+                "title": "Multiple Output Formats",
+                "description": "Export your images as PNG, JPEG, or WebP with adjustable quality"
+            },
+            "resolutionControl": {
+                "title": "Resolution Control",
+                "description": "Set megapixel values to control image size and detail"
+            },
+            "easyDownloads": {
+                "title": "Easy Downloads",
+                "description": "Download individual images or batches in your preferred format"
+            }
+        }
+    },
+    "cta": {
+        "tagline": "Unleash your creativity",
+        "title": "Start Creating Amazing Images Today",
+        "description": "Join thousands of creators who are already using our platform to bring their ideas to life. No technical skills required — just your imagination.",
+        "startCreating": "Start Creating Now",
+        "signIn": "Sign In",
+        "signOut": "Sign Out"
+    },
+    "footer": {
+        "resources": "Resources",
+        "about": "About Us",
+        "faq": "FAQ",
+        "blog": "Blog",
+        "contact": "Contact",
+        "legal": "Legal",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "copyright": "Copyright"
+    },
+    "generator": {
+        "title": "Image Generator",
+        "description": "Create stunning AI-generated images by customizing parameters below",
+        "authRequired": "Authentication required",
+        "authDescription": "You need to be logged in to generate images.",
+        "loginToContinue": "Log in to continue",
+        "form": {
+            "prompt": {
+                "label": "Prompt",
+                "placeholder": "Describe the image you want to generate...",
+                "description": "Be detailed and specific about what you want to see"
+            },
+            "aspectRatio": {
+                "label": "Aspect Ratio",
+                "placeholder": "Select aspect ratio",
+                "description": "Choose the dimensions for your image",
+                "options": {
+                    "square": "Square (1:1)",
+                    "landscape": "Landscape (16:9)",
+                    "portrait": "Portrait (9:16)",
+                    "standard": "Standard (4:3)",
+                    "photo": "Photo (3:2)",
+                    "panorama": "Panorama (2:1)"
+                }
+            },
+            "numOutputs": {
+                "label": "Number of Images: {value}",
+                "description": "Generate multiple variations (1-4)"
+            },
+            "steps": {
+                "label": "Inference Steps: {value}",
+                "description": "Higher values = better quality but slower generation"
+            },
+            "useSeed": {
+                "label": "Use Custom Seed",
+                "description": "Enable to use a specific seed value"
+            },
+            "seed": {
+                "label": "Seed Value",
+                "random": "Random",
+                "description": "Same seed produces consistent results"
+            },
+            "outputFormat": {
+                "label": "Output Format"
+            },
+            "outputQuality": {
+                "label": "Output Quality: {value}%",
+                "description": "Higher values = better quality but larger file size"
+            },
+            "megapixels": {
+                "label": "Megapixels",
+                "placeholder": "Select megapixels",
+                "description": "Controls the resolution of the generated images",
+                "options": {
+                    "low": "Low (0.5 MP)",
+                    "standard": "Standard (1 MP)",
+                    "high": "High (2 MP)",
+                    "ultra": "Ultra (4 MP)"
+                }
+            },
+            "generateButton": {
+                "generating": "Generating...",
+                "default": "Generate Images"
+            }
+        },
+        "output": {
+            "generating": "Generating your images...",
+            "empty": {
+                "title": "No Images Generated Yet",
+                "description": "Fill out the form to start generating AI images. You can customize all parameters to match your vision."
+            },
+            "actions": {
+                "copyPrompt": "Copy Prompt",
+                "share": "Share",
+                "details": "Details",
+                "download": "Download"
+            },
+            "toast": {
+                "copyPrompt": {
+                    "title": "Prompt copied",
+                    "description": "Prompt has been copied to your clipboard"
+                }
+            },
+            "details": {
+                "title": "Image Details",
+                "description": "Information about your generated image",
+                "prompt": "Prompt",
+                "aspectRatio": "Aspect Ratio",
+                "seed": "Seed",
+                "steps": "Steps",
+                "generated": "Generated",
+                "actions": {
+                    "download": "Download Image",
+                    "openEditor": "Open in Editor"
+                }
+            }
+        },
+        "history": {
+            "imageCount": "{count, plural, =1 {# image} other {# images}}",
+            "steps": "steps",
+            "actions": {
+                "download": "Download",
+                "regenerate": "Regenerate",
+                "delete": "Delete"
+            },
+            "empty": {
+                "title": "No Generation History",
+                "description": "Your generation history will appear here after you create some images."
+            }
+        },
+        "tabs": {
+            "output": "Generated Images",
+            "history": "History"
+        }
+    },
+    "gallery": {
+        "title": "Explore Community Creations",
+        "description": "Discover incredible AI-generated artwork from our community and get inspired for your next creation.",
+        "viewFull": "View Full Gallery",
+        "prompts": {
+            "1": "Ethereal cyberpunk cityscape at sunset with neon lights",
+            "2": "Magical forest with bioluminescent plants and a meandering stream",
+            "3": "Futuristic space station orbiting a ringed gas giant",
+            "4": "Surreal floating islands with waterfalls and ancient ruins",
+            "5": "Steampunk airship battle among the clouds at dawn",
+            "6": "Mystical underwater city with bioluminescent architecture"
+        }
+    },
+    "profile": {
+        "title": "Your Profile",
+        "images": "Images",
+        "following": "Following",
+        "followers": "Followers",
+        "account": "Account",
+        "settings": "Settings",
+        "generationHistory": "Generation History",
+        "savedImages": "Saved Images",
+        "privacy": "Privacy",
+        "tabs": {
+            "images": "Your Images",
+            "liked": "Liked",
+            "saved": "Saved"
+        },
+        "empty": {
+            "liked": {
+                "title": "No Liked Images Yet",
+                "description": "Browse the gallery and like images that inspire you. They'll appear here for easy access."
+            },
+            "saved": {
+                "title": "No Saved Images Yet",
+                "description": "Save images to collections for quick reference. Organize your inspirations here."
+            }
+        },
+        "exploreGallery": "Explore Gallery"
+    },
+    "login": {
+        "title": "Sign In",
+        "description": "Sign in to access your profile, generation history, and saved images",
+        "google": "Sign in with Google",
+        "twitter": "Sign in with Twitter",
+        "or": "OR",
+        "guest": {
+            "title": "Want to try without an account?",
+            "button": "Continue as Guest"
+        }
+    }
+}
