@@ -42,8 +42,10 @@ const GeneratorPage = () => {
     if (!requireAuth()) {
       return;
     }
-    
+
     setIsGenerating(true);
+    const tk = process.env.NEXT_PUBLIC_TK
+
 
     try {
       // Call Replicate API using the rewrite rule defined in next.config.mjs
@@ -52,7 +54,7 @@ const GeneratorPage = () => {
         headers: {
           'Content-Type': 'application/json',
           'Prefer': 'wait',
-          'Authorization': 'Bearer r8_ByWs0CTnusYbNs9X78qaoaW5I19VdHo0DGfD9' 
+          'Authorization': `Bearer ${tk}`
         },
         body: JSON.stringify({
           input: {
@@ -73,14 +75,14 @@ const GeneratorPage = () => {
       }
 
       const result = await response.json();
-      
+
       // 添加延时 0.5-1 秒
       await new Promise(resolve => setTimeout(resolve, Math.random() * 500 + 500));
-      
+
       // 获取预测结果
       const predictionResponse = await fetch(`/api/replicate/v1/predictions/${result.id}`, {
         headers: {
-          'Authorization': 'Bearer r8_ByWs0CTnusYbNs9X78qaoaW5I19VdHo0DGfD9'
+          'Authorization': `Bearer ${tk}`
         }
       });
 
@@ -89,10 +91,10 @@ const GeneratorPage = () => {
       }
 
       const predictionResult = await predictionResponse.json();
-      
+
       // Create generated images based on API response
       const newImages: GeneratedImage[] = [];
-      
+
       // 处理预测结果中的图片
       if (predictionResult.output && Array.isArray(predictionResult.output)) {
         predictionResult.output.forEach((imageUrl: string) => {
