@@ -73,7 +73,7 @@ const Header = () => {
 
         <nav className="hidden md:flex items-center space-x-8">
           <Link href="/" className="text-foreground/80 hover:text-foreground transition-colors">
-            {t('nav.home')}
+            {t('nav.home') + 'ddd+++++++'}
           </Link>
           <Link href="/generate" className="text-foreground/80 hover:text-foreground transition-colors">
             {t('nav.generate')}
