@@ -51,8 +51,8 @@ const GeneratorPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // 'Prefer': 'wait',
-          'Authorization': 'Bearer r8_TnN084xPzJAoMXKnrVXowlMhcXmBuvl2ddXeS' 
+          'Prefer': 'wait',
+          'Authorization': 'Bearer r8_ByWs0CTnusYbNs9X78qaoaW5I19VdHo0DGfD9' 
         },
         body: JSON.stringify({
           input: {
@@ -74,27 +74,28 @@ const GeneratorPage = () => {
 
       const result = await response.json();
       
+      // 添加延时 0.5-1 秒
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 500 + 500));
+      
+      // 获取预测结果
+      const predictionResponse = await fetch(`/api/replicate/v1/predictions/${result.id}`, {
+        headers: {
+          'Authorization': 'Bearer r8_ByWs0CTnusYbNs9X78qaoaW5I19VdHo0DGfD9'
+        }
+      });
+
+      if (!predictionResponse.ok) {
+        throw new Error(`Prediction request failed with status ${predictionResponse.status}`);
+      }
+
+      const predictionResult = await predictionResponse.json();
+      
       // Create generated images based on API response
       const newImages: GeneratedImage[] = [];
       
-      // Handle the API response - image URL is in response.urls.stream
-      if (result.urls && result.urls.stream) {
-        // Create a single image with the stream URL
-        newImages.push({
-          id: crypto.randomUUID(),
-          url: result.urls.stream,
-          prompt: formData.prompt,
-          aspect_ratio: formData.aspect_ratio,
-          seed: formData.seed || Math.floor(Math.random() * 1000000),
-          num_inference_steps: formData.num_inference_steps || formData.steps || 4,
-          timestamp: new Date(),
-        });
-      } else if (result.output) {
-        // Fallback to previous handling for compatibility
-        // Check if output is an array
-        const outputs = Array.isArray(result.output) ? result.output : [result.output];
-        
-        outputs.forEach((imageUrl: string) => {
+      // 处理预测结果中的图片
+      if (predictionResult.output && Array.isArray(predictionResult.output)) {
+        predictionResult.output.forEach((imageUrl: string) => {
           newImages.push({
             id: crypto.randomUUID(),
             url: imageUrl,
