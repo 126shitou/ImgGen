@@ -12,6 +12,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import {
   Menu,
   X,
   Sun,
@@ -30,6 +41,7 @@ const Header = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showSignOutDialog, setShowSignOutDialog] = useState(false);
   const { theme, setTheme } = useTheme();
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
@@ -151,19 +163,35 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button variant="default" className="gap-1" onClick={isAuthenticated ? () => signOut() : () => router.push('/auth/login')}>
-            {isAuthenticated ? (
-              <>
-                <LogOut className="h-4 w-4 mr-1" />
-                {t('cta.signOut')}
-              </>
-            ) : (
-              <  >
-                <LogIn className="h-4 w-4 mr-1" />
-                {t('cta.signIn')}
-              </>
-            )}
-          </Button>
+          {isAuthenticated ? (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="default" className="gap-1">
+                  <LogOut className="h-4 w-4 mr-1" />
+                  {t('cta.signOut')}
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{t('signOut.confirmTitle') || 'Confirm Sign Out'}</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {t('signOut.confirmMessage') || 'Are you sure you want to sign out of your account?'}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>{t('signOut.cancel') || 'Cancel'}</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => signOut()}>
+                    {t('signOut.confirm') || 'Sign Out'}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          ) : (
+            <Button variant="default" className="gap-1" onClick={() => router.push('/auth/login')}>
+              <LogIn className="h-4 w-4 mr-1" />
+              {t('cta.signIn')}
+            </Button>
+          )}
         </div>
 
         <Button
@@ -237,19 +265,35 @@ const Header = () => {
               </div>
             </div>
 
-            <Button variant="default" className="mt-4" onClick={isAuthenticated ? () => signOut() : () => router.push('/auth/login')}>
-              {isAuthenticated ? (
-                <>
-                  <LogOut className="h-4 w-4 mr-2" />
-                  {t('cta.signOut')}
-                </>
-              ) : (
-                <>
-                  <LogIn className="h-4 w-4 mr-2" />
-                  {t('cta.signIn')}
-                </>
-              )}
-            </Button>
+            {isAuthenticated ? (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="default" className="mt-4">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    {t('cta.signOut')}
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>{t('signOut.confirmTitle') || 'Confirm Sign Out'}</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      {t('signOut.confirmMessage') || 'Are you sure you want to sign out of your account?'}
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{t('signOut.cancel') || 'Cancel'}</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => signOut()}>
+                      {t('signOut.confirm') || 'Sign Out'}
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            ) : (
+              <Button variant="default" className="mt-4" onClick={() => router.push('/auth/login')}>
+                <LogIn className="h-4 w-4 mr-2" />
+                {t('cta.signIn')}
+              </Button>
+            )}
           </div>
         )
       }
