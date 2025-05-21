@@ -10,7 +10,8 @@ import {
   RefreshCw,
   Trash2,
   MoreHorizontal,
-  AlertTriangle
+  AlertTriangle,
+  Star
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -77,6 +78,7 @@ export const GeneratorHistory = ({ images: initialImages, onRegenerate }: Genera
                   seed: item.metadata.seed || 0,
                   num_inference_steps: item.metadata.num_inference_steps || 4,
                   timestamp: item.metadata.createdAt || new Date(),
+                  star: item.metadata.star || false
                 });
               }
             } catch (error) {
@@ -243,6 +245,50 @@ export const GeneratorHistory = ({ images: initialImages, onRegenerate }: Genera
     }
   };
 
+  // 收藏/取消收藏图片
+  const toggleStar = async (image: GeneratedImage) => {
+    try {
+      // 从IndexedDB获取图片数据
+      const imageStorage = getImageStorage();
+      const imageData = await imageStorage.getImage(image.id);
+
+      if (!imageData) {
+        throw new Error('Image data not found');
+      }
+
+      // 更新元数据中的star状态
+      const updatedMetadata = {
+        ...imageData.metadata,
+        star: !image.star
+      };
+
+      // 重新存储图片，更新元数据
+      await imageStorage.updateImageMetadata(image.id, updatedMetadata);
+
+      // 更新本地状态
+      setImages(prevImages => 
+        prevImages.map(img => 
+          img.id === image.id ? { ...img, star: !img.star } : img
+        )
+      );
+
+      // 显示成功消息
+      toast({
+        title: image.star ? t('generator.history.unstarSuccess') : t('generator.history.starSuccess'),
+        description: image.star ? t('generator.history.unstarSuccessDescription') : t('generator.history.starSuccessDescription')
+      });
+    } catch (error) {
+      console.error('Star toggle error:', error);
+
+      // 显示错误消息
+      toast({
+        title: t('generator.history.starError'),
+        description: t('generator.history.starErrorDescription'),
+        variant: 'destructive'
+      });
+    }
+  };
+
   // 删除图片
   const deleteImage = async (id: string) => {
     try {
@@ -354,6 +400,11 @@ export const GeneratorHistory = ({ images: initialImages, onRegenerate }: Genera
                 {groupedImages[date].map((image: GeneratedImage) => (
                   <Card key={image.id} className="overflow-hidden">
                     <div className="relative aspect-square">
+                      {image.star && (
+                        <div className="absolute top-2 right-2 z-10">
+                          <Star className="h-6 w-6 text-yellow-400 fill-yellow-400 drop-shadow-md" />
+                        </div>
+                      )}
                       <Image
                         src={image.url}
                         alt={image.prompt}
@@ -369,6 +420,7 @@ export const GeneratorHistory = ({ images: initialImages, onRegenerate }: Genera
                         <div className="flex items-center space-x-2">
                           <Badge variant="outline">{image.aspect_ratio}</Badge>
                           <Badge variant="outline">{image.num_inference_steps} {t('generator.history.steps')}</Badge>
+                          {image.star && <Badge variant="outline" className="bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800">★ {t('generator.history.starred')}</Badge>}
                         </div>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -387,6 +439,12 @@ export const GeneratorHistory = ({ images: initialImages, onRegenerate }: Genera
                             >
                               <RefreshCw className="h-4 w-4 mr-2" />
                               {t('generator.history.actions.regenerate')}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onSelect={() => toggleStar(image)}
+                            >
+                              <Star className={`h-4 w-4 mr-2 ${image.star ? 'fill-yellow-400 text-yellow-400' : ''}`} />
+                              {image.star ? t('generator.history.actions.unstar') : t('generator.history.actions.star')}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               className="text-destructive"
@@ -408,13 +466,7 @@ export const GeneratorHistory = ({ images: initialImages, onRegenerate }: Genera
       ) : (
         <div className="flex flex-col items-center justify-center h-[500px] text-center">
           <div className="bg-muted rounded-full p-4 mb-4">
-            <Image
-              src="https://images.pexels.com/photos/3493777/pexels-photo-3493777.jpeg"
-              alt="Example image"
-              width={80}
-              height={80}
-              className="rounded-full opacity-20"
-            />
+            <MoreHorizontal className="h-16 w-16 text-muted-foreground opacity-20" />
           </div>
           <h3 className="text-lg font-medium mb-2">{t('generator.history.empty.title')}</h3>
           <p className="text-muted-foreground max-w-md">

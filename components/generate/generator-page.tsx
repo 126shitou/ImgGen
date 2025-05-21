@@ -22,6 +22,7 @@ export type GeneratedImage = {
   seed: number;
   num_inference_steps: number;
   timestamp: Date;
+  star: Boolean
 };
 
 // Mock history of previously generated images
@@ -69,6 +70,7 @@ const GeneratorPage = () => {
                     seed: item.metadata.seed || 0,
                     num_inference_steps: item.metadata.num_inference_steps || 4,
                     timestamp: item.metadata.createdAt || new Date(),
+                    star: false,
                   });
                 }
               } catch (error) {
@@ -168,6 +170,7 @@ const GeneratorPage = () => {
           seed: metadata.seed,
           num_inference_steps: formData.num_inference_steps || 4,
           timestamp: new Date(),
+          star: false,
         });
       }
 

@@ -163,6 +163,44 @@ export class ImageStorage {
     });
   }
 
+  // 更新图片元数据，不更新blob
+  async updateImageMetadata(id: string, metadata: any): Promise<void> {
+    const db = await this.initDB();
+    
+    return new Promise(async (resolve, reject) => {
+      try {
+        // 首先获取现有图片数据
+        const imageData = await this.getImage(id);
+        if (!imageData) {
+          throw new Error('图片数据不存在');
+        }
+        
+        // 创建事务
+        const transaction = db.transaction([this.storeName], 'readwrite');
+        const store = transaction.objectStore(this.storeName);
+        
+        // 合并现有数据和新元数据，保留blob
+        const updatedData = {
+          id,
+          blob: imageData.blob,
+          ...metadata
+        };
+        
+        // 存储更新后的数据
+        const request = store.put(updatedData);
+        
+        request.onsuccess = () => resolve();
+        request.onerror = (event) => {
+          console.error('更新图片元数据失败:', event);
+          reject('更新图片元数据失败');
+        };
+      } catch (error) {
+        console.error('更新图片元数据失败:', error);
+        reject(error);
+      }
+    });
+  }
+
   // 删除图片
   async deleteImage(id: string): Promise<void> {
     const db = await this.initDB();
