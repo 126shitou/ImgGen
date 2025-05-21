@@ -16,18 +16,17 @@ import {
   X,
   Sun,
   Moon,
-  Languages,
-  User,
   LogIn,
   LogOut
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import LanguageSwitcher from '@/components/layout/language-switcher';
 import { useAuth } from '@/lib/auth-context';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const Header = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -67,22 +66,74 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-16">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold text-2xl">{t('site.title')}</span>
+            <span className="font-bold text-2xl">Img Gen</span>
           </Link>
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-foreground/80 hover:text-foreground transition-colors">
+          <Link 
+            href="/" 
+            className={cn(
+              "relative py-1 transition-all duration-200",
+              pathname === "/" 
+                ? "text-foreground font-medium" 
+                : "text-foreground/70 hover:text-foreground",
+              "group"
+            )}
+          >
             {t('nav.home')}
+            <span className={cn(
+              "absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300",
+              pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            )}></span>
           </Link>
-          <Link href="/generate" className="text-foreground/80 hover:text-foreground transition-colors">
+          <Link 
+            href="/generate" 
+            className={cn(
+              "relative py-1 transition-all duration-200",
+              pathname === "/generate" 
+                ? "text-foreground font-medium" 
+                : "text-foreground/70 hover:text-foreground",
+              "group"
+            )}
+          >
             {t('nav.generate')}
+            <span className={cn(
+              "absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300",
+              pathname === "/generate" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            )}></span>
           </Link>
-          <Link href="/gallery" className="text-foreground/80 hover:text-foreground transition-colors">
+          <Link 
+            href="/gallery" 
+            className={cn(
+              "relative py-1 transition-all duration-200",
+              pathname === "/gallery" 
+                ? "text-foreground font-medium" 
+                : "text-foreground/70 hover:text-foreground",
+              "group"
+            )}
+          >
             {t('nav.gallery')}
+            <span className={cn(
+              "absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300",
+              pathname === "/gallery" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            )}></span>
           </Link>
-          <Link href="/profile" className="text-foreground/80 hover:text-foreground transition-colors">
+          <Link 
+            href="/profile" 
+            className={cn(
+              "relative py-1 transition-all duration-200",
+              pathname === "/profile" 
+                ? "text-foreground font-medium" 
+                : "text-foreground/70 hover:text-foreground",
+              "group"
+            )}
+          >
             {t('nav.profile')}
+            <span className={cn(
+              "absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300",
+              pathname === "/profile" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            )}></span>
           </Link>
         </nav>
 
@@ -133,28 +184,48 @@ const Header = () => {
         <div className="md:hidden flex flex-col p-4 border-t border-border bg-background/95 backdrop-blur-sm">
           <Link
             href="/"
-            className="py-2 text-foreground/80 hover:text-foreground"
+            className={cn(
+              "py-2 relative transition-all duration-200",
+              pathname === "/" 
+                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
+                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+            )}
             onClick={() => setIsOpen(false)}
           >
             {t('nav.home')}
           </Link>
           <Link
             href="/generate"
-            className="py-2 text-foreground/80 hover:text-foreground"
+            className={cn(
+              "py-2 relative transition-all duration-200",
+              pathname === "/generate" 
+                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
+                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+            )}
             onClick={() => setIsOpen(false)}
           >
             {t('nav.generate')}
           </Link>
           <Link
             href="/gallery"
-            className="py-2 text-foreground/80 hover:text-foreground"
+            className={cn(
+              "py-2 relative transition-all duration-200",
+              pathname === "/gallery" 
+                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
+                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+            )}
             onClick={() => setIsOpen(false)}
           >
             {t('nav.gallery')}
           </Link>
           <Link
             href="/profile"
-            className="py-2 text-foreground/80 hover:text-foreground"
+            className={cn(
+              "py-2 relative transition-all duration-200",
+              pathname === "/profile" 
+                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
+                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+            )}
             onClick={() => setIsOpen(false)}
           >
             {t('nav.profile')}
