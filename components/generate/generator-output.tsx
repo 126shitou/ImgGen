@@ -4,21 +4,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+
 import {
   Download,
-  MoreHorizontal,
-  Share2,
-  Clipboard,
-  Info,
   ExternalLink
 } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+
 import { toast } from '@/hooks/use-toast';
 import LoadingSpinner from '@/components/ui/loading-spinner';
 import {
@@ -27,7 +18,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { useTranslations } from 'next-intl';
@@ -36,13 +26,11 @@ import type { GeneratedImage } from '@/components/generate/generator-page';
 export interface GeneratorOutputProps {
   images: GeneratedImage[];
   isGenerating: boolean;
-  isAuthenticated?: boolean;
 }
 
 export function GeneratorOutput({
   images,
   isGenerating,
-  isAuthenticated = true
 }: GeneratorOutputProps) {
   const [selectedImage, setSelectedImage] = useState<GeneratedImage | null>(null);
   const t = useTranslations();

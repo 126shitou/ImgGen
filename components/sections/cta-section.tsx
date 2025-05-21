@@ -5,9 +5,12 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sparkles, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useSession } from 'next-auth/react';
 
 export const CTASection = () => {
   const t = useTranslations();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
 
   return (
     <section className="py-20 bg-background">
@@ -39,11 +42,13 @@ export const CTASection = () => {
                 {t('cta.startCreating')} <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="font-medium text-base">
-              <Link href="/auth/login">
-                {t('cta.signIn')}
-              </Link>
-            </Button>
+            {!isAuthenticated && (
+              <Button asChild variant="outline" size="lg" className="font-medium text-base">
+                <Link href="/auth/login">
+                  {t('cta.signIn')}
+                </Link>
+              </Button>
+            )}
           </div>
         </motion.div>
       </div>

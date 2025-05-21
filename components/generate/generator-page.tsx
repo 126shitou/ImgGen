@@ -162,16 +162,25 @@ const GeneratorPage = () => {
           {/* Right Column: Output and History */}
           <div className="lg:col-span-7 xl:col-span-8">
             <Tabs defaultValue="output" className="w-full">
-              <TabsList className="mb-6">
-                <TabsTrigger value="output" className="text-lg py-3 px-6">{t('generator.tabs.output')}</TabsTrigger>
-                <TabsTrigger value="history" className="text-lg py-3 px-6">{t('generator.tabs.history')}</TabsTrigger>
+              <TabsList className="mb-6 bg-background border border-border rounded-md p-1 w-fit">
+                <TabsTrigger 
+                  value="output" 
+                  className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  {t('generator.tabs.output')}
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="history" 
+                  className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  {t('generator.tabs.history')}
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="output">
                 <GeneratorOutput
                   images={generatedImages}
                   isGenerating={isGenerating}
-                  isAuthenticated={isAuthenticated}
                 />
               </TabsContent>
 
