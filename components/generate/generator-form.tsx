@@ -35,7 +35,7 @@ const formSchema = z.object({
   useSeed: z.boolean().default(false),
   output_format: z.enum(["png", "jpg", "webp"]).default("webp"),
   output_quality: z.number().min(1).max(100).default(80),
-  megapixels: z.string().default("1"),
+  megapixels: z.enum(["0.25", "1"]).default("1"),
 });
 
 export type GeneratorFormValues = z.infer<typeof formSchema>;
@@ -54,14 +54,24 @@ export const GeneratorForm = ({ onGenerate, isGenerating, isDisabled = false }: 
   const form = useForm<GeneratorFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      // 提示词
       prompt: "",
+      // 裁剪比例
       aspect_ratio: "1:1",
+      // 输出数量
       num_outputs: 1,
+      // 推理步数
       num_inference_steps: 4,
+      // 种子值
       seed: randomSeed,
+      // 是否使用种子
       useSeed: false,
+      
+      // 输出格式
       output_format: "webp",
+      // 输出质量
       output_quality: 80,
+      // 百万像素
       megapixels: "1",
     },
   });
@@ -69,6 +79,7 @@ export const GeneratorForm = ({ onGenerate, isGenerating, isDisabled = false }: 
   const generateRandomSeed = () => {
     const newSeed = Math.floor(Math.random() * 1000000);
     form.setValue("seed", newSeed);
+ 
   };
 
   return (
@@ -79,7 +90,7 @@ export const GeneratorForm = ({ onGenerate, isGenerating, isDisabled = false }: 
       className="bg-card rounded-xl border border-border p-6 shadow-sm"
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onGenerate)} className="space-y-6">
+         <form onSubmit={form.handleSubmit(onGenerate)} className="space-y-6">
           {/* Prompt */}
           <FormField
             control={form.control}
@@ -320,10 +331,8 @@ export const GeneratorForm = ({ onGenerate, isGenerating, isDisabled = false }: 
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="0.5">{t('generator.form.megapixels.options.low')}</SelectItem>
+                    <SelectItem value="0.25">{t('generator.form.megapixels.options.low')}</SelectItem>
                     <SelectItem value="1">{t('generator.form.megapixels.options.standard')}</SelectItem>
-                    <SelectItem value="2">{t('generator.form.megapixels.options.high')}</SelectItem>
-                    <SelectItem value="4">{t('generator.form.megapixels.options.ultra')}</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormDescription>

@@ -126,10 +126,9 @@
                 "placeholder": "选择百万像素",
                 "description": "控制生成图像的分辨率",
                 "options": {
-                    "low": "低 (0.5 MP)",
-                    "standard": "标准 (1 MP)",
-                    "high": "高 (2 MP)",
-                    "ultra": "超高 (4 MP)"
+                    "low": "低 (0.25 MP)",
+                    "standard": "标准 (1 MP)"
+ 
                 }
             },
             "generateButton": {

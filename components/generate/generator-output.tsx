@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -35,16 +35,22 @@ export function GeneratorOutput({
   const [selectedImage, setSelectedImage] = useState<GeneratedImage | null>(null);
   const t = useTranslations();
 
-  const handleCopyPrompt = (prompt: string) => {
-    navigator.clipboard.writeText(prompt);
-    toast({
-      title: t('generator.output.toast.copyPrompt.title'),
-      description: t('generator.output.toast.copyPrompt.description'),
-    });
-  };
+  // 清理对象URL以防止内存泄漏
+  useEffect(() => {
+    return () => {
+      // 组件卸载时清理所有对象URL
+      images.forEach(image => {
+        if (image.url && image.url.startsWith('blob:')) {
+          URL.revokeObjectURL(image.url);
+        }
+      });
+    };
+  }, [images]);
+
 
   // Function to download image
   const downloadImage = async (imageUrl: string, promptText: string) => {
+    // 如果已经是Blob URL，直接使用而不需要再次获取
     try {
       // Start download spinner
       toast({
@@ -91,11 +97,6 @@ export function GeneratorOutput({
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
 
-      // Show success message
-      toast({
-        title: t('generator.output.toast.download.title') || 'Download Complete',
-        description: t('generator.output.toast.download.success') || 'Image downloaded successfully.',
-      });
     } catch (error) {
       console.error('Download error:', error);
 

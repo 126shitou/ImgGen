@@ -12,10 +12,11 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { LockIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { getImageStorage } from '@/lib/indexedDB';
 
 export type GeneratedImage = {
   id: string;
-  url: string;
+  url: string; // This will now store the base64 data URL, not the original URL
   prompt: string;
   aspect_ratio: string;
   seed: number;
@@ -38,7 +39,56 @@ const GeneratorPage = () => {
   const t = useTranslations();
 
   // Function to generate images using Replicate API
+  // 初始化 IndexedDB 存储
+  useEffect(() => {
+    // 仅在客户端执行
+    if (typeof window !== 'undefined') {
+      // 加载历史记录
+      const loadHistory = async () => {
+        try {
+          const imageStorage = getImageStorage();
+          const images = await imageStorage.listAllImages();
+
+          if (images.length > 0) {
+            const formattedImages = [];
+
+            // 处理每个存储的图片
+            for (const item of images) {
+              try {
+                // 从IndexedDB获取图片Blob
+                const imageData = await imageStorage.getImage(item.id);
+                if (imageData && imageData.blob) {
+                  // 创建临时URL用于显示
+                  const objectUrl = imageStorage.createImageUrl(imageData.blob);
+
+                  formattedImages.push({
+                    id: item.id,
+                    url: objectUrl, // 使用临时对象URL而不是原始URL
+                    prompt: item.metadata.prompt || '',
+                    aspect_ratio: item.metadata.aspect_ratio || '1:1',
+                    seed: item.metadata.seed || 0,
+                    num_inference_steps: item.metadata.num_inference_steps || 4,
+                    timestamp: item.metadata.createdAt || new Date(),
+                  });
+                }
+              } catch (error) {
+                console.error(`Error loading image ${item.id}:`, error);
+              }
+            }
+
+            setHistory(formattedImages);
+          }
+        } catch (error) {
+          console.error('Error loading history from IndexedDB:', error);
+        }
+      };
+
+      loadHistory();
+    }
+  }, []);
+
   const generateImages = async (formData: any) => {
+
     // 检查用户是否已登录，未登录则不执行生成
     if (!isAuthenticated) {
       return;
@@ -47,10 +97,22 @@ const GeneratorPage = () => {
     setIsGenerating(true);
     const tk = process.env.NEXT_PUBLIC_TK
 
+    let sd: any = {
+      prompt: formData.prompt,
+      go_fast: true,
+      megapixels: formData.megapixels,
+      num_outputs: formData.num_outputs,
+      aspect_ratio: formData.aspect_ratio,
+      output_format: formData.output_format,
+      output_quality: formData.output_quality,
+      num_inference_steps: formData.num_inference_steps || 1
+    }
+    if (formData.useSeed) sd.seed = formData.seed
+
 
     try {
       // Call Replicate API using the rewrite rule defined in next.config.mjs
-      const response = await fetch('/api/replicate/v1/models/black-forest-labs/flux-schnell/predictions', {
+      const response = await fetch('/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,16 +120,7 @@ const GeneratorPage = () => {
           'Authorization': `Bearer ${tk}`
         },
         body: JSON.stringify({
-          input: {
-            prompt: formData.prompt,
-            go_fast: true,
-            megapixels: formData.megapixels,
-            num_outputs: formData.num_outputs,
-            aspect_ratio: formData.aspect_ratio,
-            output_format: formData.output_format,
-            output_quality: formData.output_quality,
-            num_inference_steps: formData.num_inference_steps || formData.steps
-          }
+          userId: session.user.id, formData: sd
         })
       });
 
@@ -75,39 +128,46 @@ const GeneratorPage = () => {
         throw new Error(`API request failed with status ${response.status}`);
       }
 
-      const result = await response.json();
-
-      // 添加延时 0.5-1 秒
-      await new Promise(resolve => setTimeout(resolve, Math.random() * 500 + 500));
-
-      // 获取预测结果
-      const predictionResponse = await fetch(`/api/replicate/v1/predictions/${result.id}`, {
-        headers: {
-          'Authorization': `Bearer ${tk}`
-        }
-      });
-
-      if (!predictionResponse.ok) {
-        throw new Error(`Prediction request failed with status ${predictionResponse.status}`);
-      }
-
-      const predictionResult = await predictionResponse.json();
-
-      // Create generated images based on API response
+      const imageDataUrls = await response.json();
       const newImages: GeneratedImage[] = [];
+      const imageStorage = getImageStorage();
 
-      // 处理预测结果中的图片
-      if (predictionResult.output && Array.isArray(predictionResult.output)) {
-        predictionResult.output.forEach((imageUrl: string) => {
-          newImages.push({
-            id: crypto.randomUUID(),
-            url: imageUrl,
-            prompt: formData.prompt,
-            aspect_ratio: formData.aspect_ratio,
-            seed: formData.seed || Math.floor(Math.random() * 1000000),
-            num_inference_steps: formData.num_inference_steps || formData.steps || 4,
-            timestamp: new Date(),
-          });
+      // 处理每个生成的图片
+      for (let i = 0; i < imageDataUrls.length; i++) {
+        const dataUrl = imageDataUrls[i];
+
+        // 将 dataUrl 转换为 Blob
+        const response = await fetch(dataUrl);
+        const blob = await response.blob();
+
+        // 生成唯一ID
+        const id = `img-${Date.now()}-${i}-${Math.random().toString(36).substring(2, 9)}`;
+
+        // 存储图片到 IndexedDB，不存储原始URL
+        const metadata = {
+          prompt: formData.prompt,
+          aspect_ratio: formData.aspect_ratio,
+          seed: formData.useSeed ? formData.seed : Math.floor(Math.random() * 1000000),
+          num_inference_steps: formData.num_inference_steps || 4,
+          output_format: formData.output_format,
+          // 不存储原始URL，只存储相关元数据
+          createdAt: new Date()
+        };
+
+        await imageStorage.storeImageBlob(blob, metadata);
+
+        // 创建临时对象URL用于显示
+        const objectUrl = imageStorage.createImageUrl(blob);
+
+        // 创建图片对象用于显示
+        newImages.push({
+          id,
+          url: objectUrl, // 使用临时对象URL而不是原始URL
+          prompt: formData.prompt,
+          aspect_ratio: formData.aspect_ratio,
+          seed: metadata.seed,
+          num_inference_steps: formData.num_inference_steps || 4,
+          timestamp: new Date(),
         });
       }
 
@@ -163,14 +223,14 @@ const GeneratorPage = () => {
           <div className="lg:col-span-7 xl:col-span-8">
             <Tabs defaultValue="output" className="w-full">
               <TabsList className="mb-6 bg-background border border-border rounded-md p-1 w-fit">
-                <TabsTrigger 
-                  value="output" 
+                <TabsTrigger
+                  value="output"
                   className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
                   {t('generator.tabs.output')}
                 </TabsTrigger>
-                <TabsTrigger 
-                  value="history" 
+                <TabsTrigger
+                  value="history"
                   className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
                   {t('generator.tabs.history')}
@@ -185,7 +245,20 @@ const GeneratorPage = () => {
               </TabsContent>
 
               <TabsContent value="history">
-                <GeneratorHistory images={history} />
+                <GeneratorHistory
+                  images={history}
+                  onRegenerate={(formValues) => {
+                    // 切换到输出标签
+                    const tabsList = document.querySelector('[role="tablist"]');
+                    const outputTab = tabsList?.querySelector('[value="output"]') as HTMLButtonElement;
+                    if (outputTab) {
+                      outputTab.click();
+                    }
+
+                    // 填充表单并触发生成
+                    generateImages(formValues);
+                  }}
+                />
               </TabsContent>
             </Tabs>
           </div>

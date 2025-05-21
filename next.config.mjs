@@ -1,11 +1,8 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const withNextIntl = createNextIntlPlugin();
 
-const bundleAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,9 +13,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  
+
   // 优化图片配置
-  images: { 
+  images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
   },
@@ -58,14 +55,6 @@ const nextConfig = {
   // 生产环境优化
   productionBrowserSourceMaps: false,
 
-  async rewrites() {
-    return [
-      {
-        source: '/api/replicate/:path*',
-        destination: 'https://api.replicate.com/:path*'
-      }
-    ];
-  }
 };
 
-export default bundleAnalyzer(withNextIntl(nextConfig));
+export default withNextIntl(nextConfig);
