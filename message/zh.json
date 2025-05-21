@@ -231,11 +231,6 @@
         "title": "登录",
         "description": "登录以访问您的个人资料、生成历史和保存的图片",
         "google": "使用 Google 登录",
-        "twitter": "使用 Twitter 登录",
-        "or": "或",
-        "guest": {
-            "title": "想尝试无账号使用？",
-            "button": "以访客身份继续"
-        }
+        "github": "使用 Github 登录"
     }
 }

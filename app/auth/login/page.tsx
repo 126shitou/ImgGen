@@ -2,23 +2,40 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { RefreshCw } from 'lucide-react';
-import { useAuth } from '@/lib/auth-context';
+import { RefreshCw, Github } from 'lucide-react';
+
 import { useTranslations } from 'next-intl';
- 
+import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+
 const LoginPage = () => {
-  const { isAuthenticated, login } = useAuth();
   const router = useRouter();
+  
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState<{ [key: string]: boolean }>({
+    google: false,
+    github: false,
+    guest: false
+  });
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
   const t = useTranslations();
+
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // 检查NextAuth会话状态
+  useEffect(() => {
+    if (status === 'authenticated' && session) {
+      router.push('/');
+    }
+  }, [status, session, router]);
 
   // 如果已登录，重定向到个人中心
   useEffect(() => {
@@ -34,6 +51,22 @@ const LoginPage = () => {
   if (isAuthenticated) {
     return null;
   }
+
+  // 处理NextAuth登录
+  const handleSignIn = async (provider: string) => {
+    try {
+      setIsLoading(prev => ({ ...prev, [provider]: true }));
+      await signIn(provider, { callbackUrl: '/', redirect: true });
+    } catch (error) {
+      console.error(`Error signing in with ${provider}:`, error);
+      // 由于重定向，这里的错误处理不会执行，除非发生了客户端错误
+    } finally {
+      // 如果没有重定向，才会执行到这里
+      setIsLoading(prev => ({ ...prev, [provider]: false }));
+    }
+  };
+
+  // 访客登录功能已移除
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -53,7 +86,11 @@ const LoginPage = () => {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-4">
-              <Button className="w-full justify-start" onClick={login}>
+              <Button
+                className="w-full justify-start"
+                onClick={() => handleSignIn('google')}
+                disabled={isLoading.google}
+              >
                 <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -72,28 +109,21 @@ const LoginPage = () => {
                     fill="#EA4335"
                   />
                 </svg>
-                {t('login.google')}
+                {isLoading.google ? t('login.loading') || 'Loading...' : t('login.google') || 'Sign in with Google'}
               </Button>
-              {/* <Button className="w-full justify-start" variant="outline" onClick={login}>
-                <svg className="h-5 w-5 mr-2 text-[#1DA1F2] fill-current" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                </svg>
-                {t('login.twitter')}
-              </Button> */}
+
+              <Button
+                className="w-full justify-start"
+                variant="outline"
+                onClick={() => handleSignIn('github')}
+                disabled={isLoading.github}
+              >
+                <Github className="h-5 w-5 mr-2" />
+                {isLoading.github ? t('login.loading') || 'Loading...' : t('login.github') || 'Sign in with GitHub'}
+              </Button>
             </div>
 
-            <div className="relative flex items-center justify-center mt-6 mb-6">
-              <Separator className="w-full" />
-              <span className="bg-background px-2 text-xs text-muted-foreground absolute">{t('login.or')}</span>
-            </div>
-
-            <p className="text-center text-sm text-muted-foreground mb-4">
-              {t('login.guest.title')}
-            </p>
-            <Button variant="secondary" className="w-full" onClick={login}>
-              <RefreshCw className="h-4 w-4 mr-2" />
-              {t('login.guest.button')}
-            </Button>
+            {/* 访客登录功能已移除 */}
           </CardContent>
         </Card>
       </div>

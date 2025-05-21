@@ -40,7 +40,7 @@ export const CTASection = () => {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="font-medium text-base">
-              <Link href="/login">
+              <Link href="/auth/login">
                 {t('cta.signIn')}
               </Link>
             </Button>

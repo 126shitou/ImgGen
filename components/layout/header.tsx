@@ -17,26 +17,24 @@ import {
   Sun,
   Moon,
   LogIn,
-  LogOut
+  LogOut,
+  User
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import LanguageSwitcher from '@/components/layout/language-switcher';
-import { useAuth } from '@/lib/auth-context';
-import { useRouter, usePathname } from 'next/navigation';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { isAuthenticated, login, logout } = useAuth();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
   const t = useTranslations();
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -50,9 +48,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+
 
   return (
     <header
@@ -71,12 +67,12 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className={cn(
               "relative py-1 transition-all duration-200",
-              pathname === "/" 
-                ? "text-foreground font-medium" 
+              pathname === "/"
+                ? "text-foreground font-medium"
                 : "text-foreground/70 hover:text-foreground",
               "group"
             )}
@@ -87,12 +83,12 @@ const Header = () => {
               pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
             )}></span>
           </Link>
-          <Link 
-            href="/generate" 
+          <Link
+            href="/generate"
             className={cn(
               "relative py-1 transition-all duration-200",
-              pathname === "/generate" 
-                ? "text-foreground font-medium" 
+              pathname === "/generate"
+                ? "text-foreground font-medium"
                 : "text-foreground/70 hover:text-foreground",
               "group"
             )}
@@ -103,12 +99,12 @@ const Header = () => {
               pathname === "/generate" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
             )}></span>
           </Link>
-          <Link 
-            href="/gallery" 
+          <Link
+            href="/gallery"
             className={cn(
               "relative py-1 transition-all duration-200",
-              pathname === "/gallery" 
-                ? "text-foreground font-medium" 
+              pathname === "/gallery"
+                ? "text-foreground font-medium"
                 : "text-foreground/70 hover:text-foreground",
               "group"
             )}
@@ -119,12 +115,12 @@ const Header = () => {
               pathname === "/gallery" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
             )}></span>
           </Link>
-          <Link 
-            href="/profile" 
+          <Link
+            href="/profile"
             className={cn(
               "relative py-1 transition-all duration-200",
-              pathname === "/profile" 
-                ? "text-foreground font-medium" 
+              pathname === "/profile"
+                ? "text-foreground font-medium"
                 : "text-foreground/70 hover:text-foreground",
               "group"
             )}
@@ -155,14 +151,14 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button variant="default" className="gap-1" onClick={isAuthenticated ? logout : () => router.push('/login')}>
+          <Button variant="default" className="gap-1" onClick={isAuthenticated ? () => signOut() : () => router.push('/auth/login')}>
             {isAuthenticated ? (
               <>
                 <LogOut className="h-4 w-4 mr-1" />
                 {t('cta.signOut')}
               </>
             ) : (
-              <>
+              <  >
                 <LogIn className="h-4 w-4 mr-1" />
                 {t('cta.signIn')}
               </>
@@ -180,82 +176,84 @@ const Header = () => {
         </Button>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden flex flex-col p-4 border-t border-border bg-background/95 backdrop-blur-sm">
-          <Link
-            href="/"
-            className={cn(
-              "py-2 relative transition-all duration-200",
-              pathname === "/" 
-                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
-                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
-            )}
-            onClick={() => setIsOpen(false)}
-          >
-            {t('nav.home')}
-          </Link>
-          <Link
-            href="/generate"
-            className={cn(
-              "py-2 relative transition-all duration-200",
-              pathname === "/generate" 
-                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
-                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
-            )}
-            onClick={() => setIsOpen(false)}
-          >
-            {t('nav.generate')}
-          </Link>
-          <Link
-            href="/gallery"
-            className={cn(
-              "py-2 relative transition-all duration-200",
-              pathname === "/gallery" 
-                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
-                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
-            )}
-            onClick={() => setIsOpen(false)}
-          >
-            {t('nav.gallery')}
-          </Link>
-          <Link
-            href="/profile"
-            className={cn(
-              "py-2 relative transition-all duration-200",
-              pathname === "/profile" 
-                ? "text-foreground font-medium pl-2 border-l-2 border-primary" 
-                : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
-            )}
-            onClick={() => setIsOpen(false)}
-          >
-            {t('nav.profile')}
-          </Link>
+      {
+        isOpen && (
+          <div className="md:hidden flex flex-col p-4 border-t border-border bg-background/95 backdrop-blur-sm">
+            <Link
+              href="/"
+              className={cn(
+                "py-2 relative transition-all duration-200",
+                pathname === "/"
+                  ? "text-foreground font-medium pl-2 border-l-2 border-primary"
+                  : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+              )}
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.home')}
+            </Link>
+            <Link
+              href="/generate"
+              className={cn(
+                "py-2 relative transition-all duration-200",
+                pathname === "/generate"
+                  ? "text-foreground font-medium pl-2 border-l-2 border-primary"
+                  : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+              )}
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.generate')}
+            </Link>
+            <Link
+              href="/gallery"
+              className={cn(
+                "py-2 relative transition-all duration-200",
+                pathname === "/gallery"
+                  ? "text-foreground font-medium pl-2 border-l-2 border-primary"
+                  : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+              )}
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.gallery')}
+            </Link>
+            <Link
+              href="/profile"
+              className={cn(
+                "py-2 relative transition-all duration-200",
+                pathname === "/profile"
+                  ? "text-foreground font-medium pl-2 border-l-2 border-primary"
+                  : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
+              )}
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.profile')}
+            </Link>
 
-          <div className="flex justify-between items-center mt-4 pt-4 border-t border-border">
-            <LanguageSwitcher />
+            <div className="flex justify-between items-center mt-4 pt-4 border-t border-border">
+              <LanguageSwitcher />
 
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" onClick={() => setTheme("light")}> <Sun className="h-5 w-5" /> </Button>
-              <Button variant="outline" size="icon" onClick={() => setTheme("dark")}> <Moon className="h-5 w-5" /> </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="icon" onClick={() => setTheme("light")}> <Sun className="h-5 w-5" /> </Button>
+                <Button variant="outline" size="icon" onClick={() => setTheme("dark")}> <Moon className="h-5 w-5" /> </Button>
+              </div>
             </div>
-          </div>
 
-          <Button variant="default" className="mt-4" onClick={isAuthenticated ? logout : () => router.push('/login')}>
-            {isAuthenticated ? (
-              <>
-                <LogOut className="h-4 w-4 mr-2" />
-                {t('cta.signOut')}
-              </>
-            ) : (
-              <>
-                <LogIn className="h-4 w-4 mr-2" />
-                {t('cta.signIn')}
-              </>
-            )}
-          </Button>
-        </div>
-      )}
-    </header>
+            <Button variant="default" className="mt-4" onClick={isAuthenticated ? () => signOut() : () => router.push('/auth/login')}>
+              {isAuthenticated ? (
+                <>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  {t('cta.signOut')}
+                </>
+              ) : (
+                <>
+                  <LogIn className="h-4 w-4 mr-2" />
+                  {t('cta.signIn')}
+                </>
+              )}
+            </Button>
+          </div>
+        )
+      }
+    </header >
   );
 };
 

@@ -5,12 +5,12 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { AuthProvider } from '@/lib/auth-context';
+import { NextAuthProvider } from '@/components/providers/next-auth-provider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
 const inter = Inter({ subsets: ['latin'] });
- export const metadata: Metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL('https://localhost:3000'),
   title: 'ImageGen Portal - Create AI Images Easily',
   description: 'Generate beautiful AI images with customizable parameters',
@@ -40,13 +40,13 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <AuthProvider>
+            <NextAuthProvider>
               <div className="flex min-h-screen flex-col">
                 <Header />
                 <main className="flex-1">{children}</main>
                 <Footer />
               </div>
-            </AuthProvider>
+            </NextAuthProvider>
             <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>

@@ -23,10 +23,6 @@ const UserSchema = new Schema({
         default: 0
     },
     
-    collect: {
-        type: [String],
-        default: []
-    },
     
     createDate: {
         type: String,

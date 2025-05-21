@@ -22,3 +22,22 @@ export const connectToMongoDB = async () => {
         console.log(err)
     }
 }
+
+/**
+ * Closes the MongoDB connection gracefully
+ * @returns {Promise<void>}
+ */
+export const disconnectFromMongoDB = async () => {
+    if (!isConnected) {
+        console.log("No MongoDB connection to close")
+        return
+    }
+    
+    try {
+        await mongoose.disconnect()
+        isConnected = false
+        console.log("MongoDB disconnected successfully")
+    } catch (err) {
+        console.error("Error disconnecting from MongoDB:", err)
+    }
+}

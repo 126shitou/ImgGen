@@ -9,19 +9,13 @@ import { Image as ImageIcon, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export const HeroSection = () => {
-  const [mounted, setMounted] = useState(false);
   const t = useTranslations();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center py-12 md:py-16 overflow-hidden bg-background">
       <div className="w-full max-w-[98vw] 2xl:max-w-[1800px] px-4 md:px-6 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-4">
-        {/* Text Content */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

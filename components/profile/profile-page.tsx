@@ -23,7 +23,7 @@ import {
   Globe,
   ChevronRight
 } from 'lucide-react';
-import { useAuth } from '@/lib/auth-context';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 // Mock user data
@@ -65,7 +65,8 @@ const mockUserImages = [
 ];
 
 const ProfilePage = () => {
-  const { isAuthenticated, login } = useAuth();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const t = useTranslations();
@@ -76,12 +77,12 @@ const ProfilePage = () => {
 
   // 如果未登录，重定向到登录页面
   useEffect(() => {
-    if (mounted && !isAuthenticated) {
-      router.push('/login');
+    if (mounted && status === 'unauthenticated') {
+      router.push('/auth/login');
     }
-  }, [mounted, isAuthenticated, router]);
+  }, [mounted, status, router]);
 
-  if (!mounted) {
+  if (!mounted || status === 'loading') {
     return null;
   }
 

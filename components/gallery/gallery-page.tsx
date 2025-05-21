@@ -21,7 +21,7 @@ import {
   ChevronDown,
   RefreshCw
 } from 'lucide-react';
-import { useAuth } from '@/lib/auth-context';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 // Sample gallery data
@@ -95,13 +95,14 @@ const galleryImages = [
 const GalleryPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { isAuthenticated } = useAuth();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
   const router = useRouter();
   
   // 检查用户是否已登录，未登录则重定向
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/login?redirect=/gallery');
+      router.push('/auth/login?redirect=/gallery');
     }
   }, [isAuthenticated, router]);
 

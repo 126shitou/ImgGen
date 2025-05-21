@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { GeneratorForm } from '@/components/generate/generator-form';
 import { GeneratorOutput } from '@/components/generate/generator-output';
 import { GeneratorHistory } from '@/components/generate/generator-history';
-import { useAuth } from '@/lib/auth-context';
+import { useSession } from 'next-auth/react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -32,14 +32,15 @@ const GeneratorPage = () => {
   const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [history, setHistory] = useState<GeneratedImage[]>(mockHistory);
-  const { isAuthenticated, requireAuth } = useAuth();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
   const router = useRouter();
   const t = useTranslations();
 
   // Function to generate images using Replicate API
   const generateImages = async (formData: any) => {
     // 检查用户是否已登录，未登录则不执行生成
-    if (!requireAuth()) {
+    if (!isAuthenticated) {
       return;
     }
 
@@ -141,7 +142,7 @@ const GeneratorPage = () => {
             <AlertTitle className="text-amber-800 dark:text-amber-300">{t('generator.authRequired')}</AlertTitle>
             <AlertDescription className="text-amber-700 dark:text-amber-400">
               <p className="mb-4">{t('generator.authDescription')}</p>
-              <Button onClick={() => router.push('/login?redirect=/generate')} variant="outline" className="bg-amber-100 dark:bg-amber-900/50 border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-800">
+              <Button onClick={() => router.push('/auth/login?redirect=/generate')} variant="outline" className="bg-amber-100 dark:bg-amber-900/50 border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-800">
                 {t('generator.loginToContinue')}
               </Button>
             </AlertDescription>
