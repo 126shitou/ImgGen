@@ -24,11 +24,11 @@
                 "title": "カスタムプロンプト",
                 "description": "私たちの先進的なプロンプトシステムを使用して、あなたが見たいコンテンツを正確に説明します"
             },
-            "Ratios": {
+            "aspectRatios": {
                 "title": "多様な縦横比",
                 "description": "一般的な縦横比から選択するか、カスタムサイズを設定します"
             },
-            "Generation": {
+            "batchGeneration": {
                 "title": "一括生成",
                 "description": "最大4枚の画像を同時に生成して異なる変化を探求めます"
             },
