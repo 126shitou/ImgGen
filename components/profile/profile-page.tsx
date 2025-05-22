@@ -12,6 +12,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from '@/hooks/use-toast';
+import { getImageStorage } from '@/lib/indexedDB';
 import {
   User,
   Settings,
@@ -24,7 +26,8 @@ import {
   Globe,
   ChevronRight,
   Loader2,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Info
 } from 'lucide-react';
 
 // Format date function
@@ -44,6 +47,18 @@ interface UserImage {
   url: string;
   prompt: string;
   date: string;
+  star?: boolean;
+  timestamp?: number; // 添加时间戳属性用于排序
+  metadata?: {
+    prompt?: string;
+    aspect_ratio?: string;
+    seed?: string | number;
+    num_inference_steps?: number;
+    output_format?: string;
+    outpt_quality?: string;
+    megapixels?: number;
+    createdAt?: Date | string;
+  };
 }
 
 interface Order {
@@ -88,7 +103,7 @@ const mockUserImages: UserImage[] = [
     prompt: 'Floating islands with waterfalls in a sunset sky',
     date: '3 weeks ago',
   },
-  
+
 ];
 
 const ProfilePage = () => {
@@ -97,7 +112,7 @@ const ProfilePage = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('profile');
+  const [activeTab, setActiveTab] = useState('images');
   const [userData, setUserData] = useState<UserData>({
     balance: 0,
     imagesGenerated: 0,
@@ -105,6 +120,8 @@ const ProfilePage = () => {
     favoriteImages: [],
     orders: []
   });
+  // 存储从IndexedDB加载的图片
+  const [loadedImages, setLoadedImages] = useState<UserImage[]>([]);
   const t = useTranslations();
 
   useEffect(() => {
@@ -117,6 +134,224 @@ const ProfilePage = () => {
       router.push('/auth/login');
     }
   }, [mounted, status, router]);
+
+  // 加载图片的公共函数
+  const loadImagesFromIndexedDB = async () => {
+    if (typeof window === 'undefined' || !mounted || !isAuthenticated) return;
+
+    setIsLoading(true);
+    try {
+      const imageStorage = getImageStorage();
+      const images = await imageStorage.listAllImages();
+
+      if (images.length > 0) {
+        const formattedImages: UserImage[] = [];
+
+        // 处理每个存储的图片
+        for (const item of images) {
+          try {
+            // 从IndexedDB获取图片Blob
+            const imageData = await imageStorage.getImage(item.id);
+            if (imageData && imageData.blob) {
+              // 创建临时URL用于显示
+              const objectUrl = imageStorage.createImageUrl(imageData.blob);
+
+              // 格式化日期
+              const date = new Date(imageData.metadata.createdAt || new Date());
+              const now = new Date();
+              const diffTime = now.getTime() - date.getTime(); // 正确的顺序：当前时间 - 创建时间
+              const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+              // 使用适当的时间格式
+              let formattedDate;
+              if (diffDays === 0) {
+                // 今天 - 显示具体时间
+                formattedDate = `今天 ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+              } else if (diffDays < 7) {
+                // 一周内 - 显示相对时间
+                formattedDate = new Intl.RelativeTimeFormat('zh-CN', { numeric: 'auto' }).format(-diffDays, 'day'); // 负值表示过去
+              } else {
+                // 超过一周 - 显示具体日期
+                formattedDate = formatDate(date.toISOString());
+              }
+
+              formattedImages.push({
+                id: item.id,
+                url: objectUrl,
+                prompt: imageData.metadata.prompt || '',
+                date: formattedDate,
+                star: imageData.metadata.star || false,
+                // 添加原始时间戳用于排序
+                timestamp: date.getTime(),
+                // 添加元数据信息
+                metadata: {
+                  prompt: imageData.metadata.prompt || '',
+                  aspect_ratio: imageData.metadata.aspect_ratio || '1:1',
+                  seed: imageData.metadata.seed || 'Random',
+                  num_inference_steps: imageData.metadata.num_inference_steps || 4,
+                  output_format: imageData.metadata.output_format || 'png',
+                  outpt_quality: imageData.metadata.outpt_quality || 'standard',
+                  megapixels: imageData.metadata.megapixels || 1,
+                  createdAt: imageData.metadata.createdAt || new Date()
+                }
+              });
+            }
+          } catch (error) {
+            console.error(`Error loading image ${item.id}:`, error);
+          }
+        }
+
+        // 直接使用原始时间戳进行排序，确保最新的在前面
+        const sortedImages = [...formattedImages].sort((a, b) => {
+          // 降序排列，时间戳大的（越新的）在前面
+          return (b.timestamp || 0) - (a.timestamp || 0);
+        });
+
+        // 更新加载的图片
+        setLoadedImages(sortedImages);
+
+        // 更新用户数据中的生成图片数量
+        setUserData(prev => ({
+          ...prev,
+          imagesGenerated: sortedImages.length
+        }));
+      }
+    } catch (error) {
+      console.error('Error loading images from IndexedDB:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // 初始化时加载图片
+  useEffect(() => {
+    if (mounted && isAuthenticated) {
+      loadImagesFromIndexedDB();
+    }
+  }, [mounted, isAuthenticated]);
+
+  // 处理标签切换
+  const handleTabChange = async (value: string) => {
+    console.log(`Tab changed to: ${value}`);
+    setActiveTab(value);
+
+    if (['images', 'favorites'].includes(value)) {
+      await loadImagesFromIndexedDB();
+      // 当切换到图片标签时，重新加载图片
+    }
+  };
+
+  // 下载图片功能
+  const downloadImage = async (image: UserImage) => {
+    try {
+      // 创建一个链接元素
+      const link = document.createElement('a');
+      link.href = image.url;
+
+      // 生成文件名，使用提示词的前几个字或图片ID
+      const promptWords = image.prompt.split(' ').slice(0, 3).join('_');
+      const fileName = promptWords.length > 0
+        ? `${promptWords}_${image.id.slice(0, 6)}`
+        : `image_${image.id}`;
+
+      // 添加文件后缀
+      const extension = image.metadata?.output_format || 'png';
+      link.download = `${fileName}.${extension}`;
+
+      // 触发下载
+      document.body.appendChild(link);
+      link.click();
+
+      // 清理
+      document.body.removeChild(link);
+
+      // 显示成功消息
+      toast({
+        title: t('profile.downloadSuccess'),
+        description: t('profile.downloadSuccessDescription')
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+
+      // 显示错误消息
+      toast({
+        title: t('profile.downloadError'),
+        description: t('profile.downloadErrorDescription'),
+        variant: 'destructive'
+      });
+    }
+  };
+
+  // 收藏/取消收藏图片
+  const toggleStar = async (image: UserImage) => {
+    try {
+      // 从IndexedDB获取图片数据
+      const imageStorage = getImageStorage();
+      const imageData = await imageStorage.getImage(image.id);
+
+      if (!imageData) {
+        throw new Error('Image data not found');
+      }
+
+      // 更新元数据中的star状态
+      const updatedMetadata = {
+        ...imageData.metadata,
+        star: !image.star
+      };
+
+      // 重新存储图片，更新元数据
+      await imageStorage.updateImageMetadata(image.id, updatedMetadata);
+
+      // 更新本地状态
+      setLoadedImages(prevImages =>
+        prevImages.map(img =>
+          img.id === image.id ? { ...img, star: !img.star } : img
+        )
+      );
+
+      // 显示成功消息
+      toast({
+        title: image.star ? t('profile.unstarSuccess') : t('profile.starSuccess'),
+        description: image.star ? t('profile.unstarSuccessDescription') : t('profile.starSuccessDescription')
+      });
+    } catch (error) {
+      console.error('Star toggle error:', error);
+
+      // 显示错误消息
+      toast({
+        title: t('profile.starError'),
+        description: t('profile.starErrorDescription'),
+        variant: 'destructive'
+      });
+    }
+  };
+
+  // 在页面可见性变化时重新加载图片
+  useEffect(() => {
+    if (typeof window === 'undefined' || !mounted || !isAuthenticated) return;
+
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'visible') {
+        console.log('Page became visible, reloading images');
+        await loadImagesFromIndexedDB();
+      }
+    };
+
+    // 监听页面可见性变化
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // 清理函数
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+
+      // 释放对象URL
+      loadedImages.forEach(image => {
+        if (image.url && image.url.startsWith('blob:')) {
+          URL.revokeObjectURL(image.url);
+        }
+      });
+    };
+  }, [mounted, isAuthenticated, loadedImages]);
 
   useEffect(() => {
     if (session?.user?.id && mounted) {
@@ -131,8 +366,8 @@ const ProfilePage = () => {
           setUserData({
             balance: userData.balance || 0,
             imagesGenerated: userData.imagesGenerated || 0,
-            savedImages: userData.savedImages || mockUserImages,
-            favoriteImages: userData.favoriteImages || mockUserImages.slice(0, 2),
+            savedImages: userData.savedImages,
+            favoriteImages: userData.favoriteImages,
             orders: userData.orders || [
               {
                 id: '1',
@@ -234,15 +469,16 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="container max-w-6xl px-4 md:px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+    <div className="flex min-h-screen">
+      <div className="w-full">
+        <div className="flex flex-col md:flex-row">
           {/* Sidebar - User Profile */}
-          <div className="md:col-span-1">
+          <div className="w-full md:w-64 lg:w-80 flex-shrink-0 p-4">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
+              className="sticky top-4"
             >
               <Card>
                 <CardHeader className="flex flex-col items-center text-center pb-2">
@@ -304,31 +540,36 @@ const ProfilePage = () => {
           </div>
 
           {/* Main Content */}
-          <div className="md:col-span-2">
+          <div className="flex-grow p-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              className="w-full"
             >
               <h1 className="text-3xl font-bold mb-6">{t('profile.title')}</h1>
 
-              <Tabs defaultValue="images">
+              <Tabs
+                value={activeTab}
+                defaultValue="images"
+                onValueChange={handleTabChange}
+              >
                 <TabsList className="mb-6 bg-background border border-border rounded-md p-1 w-fit">
-                  <TabsTrigger 
+                  <TabsTrigger
                     value="orders"
                     className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
                     <History className="h-4 w-4 mr-2" />
                     {t('profile.tabs.orders')}
                   </TabsTrigger>
-                  <TabsTrigger 
+                  <TabsTrigger
                     value="images"
                     className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
                     <ImageIcon className="h-4 w-4 mr-2" />
                     {t('profile.tabs.images')}
                   </TabsTrigger>
-                  <TabsTrigger 
+                  <TabsTrigger
                     value="favorites"
                     className="text-sm font-medium py-2 px-4 rounded-md data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
@@ -339,9 +580,9 @@ const ProfilePage = () => {
 
                 {/* Generated Images Tab */}
                 <TabsContent value="images">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {userData.savedImages.map((image) => (
-                      <Card key={image.id} className="overflow-hidden">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                    {loadedImages.map((image) => (
+                      <div key={image.id} className="group relative overflow-hidden rounded-md border border-border">
                         <div className="relative aspect-square">
                           <Image
                             src={image.url}
@@ -350,16 +591,69 @@ const ProfilePage = () => {
                             className="object-cover"
                           />
                         </div>
-                        <CardContent className="p-4">
-                          <p className="line-clamp-2 mb-2">{image.prompt}</p>
-                          <div className="flex justify-between items-center">
-                            <Badge variant="outline">{image.date}</Badge>
-                            <Button variant="ghost" size="sm">
-                              <Download className="h-4 w-4" />
-                            </Button>
+                        <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                          <p className="text-xs line-clamp-2">{image.prompt}</p>
+
+                          {/* 显示基本元数据 */}
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                              {image.metadata?.aspect_ratio || '1:1'}
+                            </span>
+                            <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                              {image.metadata?.output_format?.toUpperCase() || 'PNG'}
+                            </span>
+                            <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                              Seed: {image.metadata?.seed || 'Random'}
+                            </span>
                           </div>
-                        </CardContent>
-                      </Card>
+
+                          {/* 日期和操作按钮 */}
+                          <div className="flex justify-between items-center mt-1">
+                            <span className="text-xs text-muted-foreground">{image.date}</span>
+                            <div className="flex space-x-1">
+                              <button
+                                className="p-1 rounded-full hover:bg-primary/20"
+                                onClick={() => toggleStar(image)}
+                                title="收藏"
+                              >
+                                <Heart className={`h-3 w-3 ${image.star ? 'fill-primary text-primary' : ''}`} />
+                              </button>
+                              <button
+                                className="p-1 rounded-full hover:bg-primary/20"
+                                title="下载"
+                                onClick={() => downloadImage(image)}
+                              >
+                                <Download className="h-3 w-3" />
+                              </button>
+                              <button
+                                className="p-1 rounded-full hover:bg-primary/20"
+                                title="查看详细信息"
+                                onClick={() => {
+                                  // 显示详细元数据的弹窗
+                                  toast({
+                                    title: '图片详细信息',
+                                    description: (
+                                      <div className="space-y-2 text-xs">
+                                        <div><strong>提示词：</strong> {image.prompt}</div>
+                                        <div><strong>纵横比：</strong> {image.metadata?.aspect_ratio || '1:1'}</div>
+                                        <div><strong>像素：</strong> {image.metadata?.megapixels ? `${image.metadata.megapixels}MP` : '1MP'}</div>
+                                        <div><strong>输出格式：</strong> {image.metadata?.output_format || 'png'}</div>
+                                        <div><strong>输出质量：</strong> {image.metadata?.outpt_quality || 'standard'}</div>
+                                        <div><strong>步数：</strong> {image.metadata?.num_inference_steps || 4}</div>
+                                        <div><strong>Seed：</strong> {image.metadata?.seed || 'Random'}</div>
+                                        <div><strong>创建时间：</strong> {new Date(image.timestamp || 0).toLocaleString()}</div>
+                                      </div>
+                                    ),
+                                    duration: 10000,
+                                  });
+                                }}
+                              >
+                                <Info className="h-3 w-3" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </TabsContent>
@@ -399,58 +693,13 @@ const ProfilePage = () => {
                   )}
                 </TabsContent>
 
-                {/* Saved Images Tab */}
-                <TabsContent value="saved">
-                  {userData.savedImages.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {userData.savedImages.map((image) => (
-                        <Card key={image.id} className="overflow-hidden">
-                          <div className="relative aspect-square">
-                            <Image
-                              src={image.url}
-                              alt={image.prompt}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <CardContent className="p-4">
-                            <p className="line-clamp-2 mb-2">{image.prompt}</p>
-                            <div className="flex justify-between items-center">
-                              <Badge variant="outline">{image.date}</Badge>
-                              <div className="flex gap-1">
-                                <Button variant="ghost" size="sm">
-                                  <Download className="h-4 w-4" />
-                                </Button>
-                                <Button variant="ghost" size="sm">
-                                  <Heart className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-12">
-                      <Bookmark className="h-12 w-12 text-muted-foreground mb-4" />
-                      <h3 className="text-lg font-medium mb-2">{t('profile.empty.saved.title')}</h3>
-                      <p className="text-muted-foreground text-center max-w-md mb-4">
-                        {t('profile.empty.saved.description')}
-                      </p>
-                      <Button>
-                        <Globe className="h-4 w-4 mr-2" />
-                        {t('profile.exploreGallery')}
-                      </Button>
-                    </div>
-                  )}
-                </TabsContent>
 
                 {/* Favorite Images Tab */}
                 <TabsContent value="favorites">
-                  {userData.favoriteImages.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {userData.favoriteImages.map((image) => (
-                        <Card key={image.id} className="overflow-hidden">
+                  {loadedImages.filter(img => img.star).length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                      {loadedImages.filter(img => img.star).map((image) => (
+                        <div key={image.id} className="group relative overflow-hidden rounded-md border border-border">
                           <div className="relative aspect-square">
                             <Image
                               src={image.url}
@@ -459,16 +708,67 @@ const ProfilePage = () => {
                               className="object-cover"
                             />
                           </div>
-                          <CardContent className="p-4">
-                            <p className="line-clamp-2 mb-2">{image.prompt}</p>
-                            <div className="flex justify-between items-center">
-                              <Badge variant="outline">{image.date}</Badge>
-                              <Button variant="ghost" size="sm">
-                                <Download className="h-4 w-4" />
-                              </Button>
+                          <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                            <p className="text-xs line-clamp-2">{image.prompt}</p>
+                            
+                            {/* 显示基本元数据 */}
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                                {image.metadata?.aspect_ratio || '1:1'}
+                              </span>
+                              <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                                {image.metadata?.output_format?.toUpperCase() || 'PNG'}
+                              </span>
+                              <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                                Seed: {image.metadata?.seed || 'Random'}
+                              </span>
                             </div>
-                          </CardContent>
-                        </Card>
+                            
+                            <div className="flex justify-between items-center mt-1">
+                              <span className="text-xs text-muted-foreground">{image.date}</span>
+                              <div className="flex space-x-1">
+                                <button
+                                  className="p-1 rounded-full hover:bg-primary/20"
+                                  onClick={() => toggleStar(image)}
+                                >
+                                  <Heart className={`h-3 w-3 ${image.star ? 'fill-primary text-primary' : ''}`} />
+                                </button>
+                                <button 
+                                  className="p-1 rounded-full hover:bg-primary/20"
+                                  title="下载"
+                                  onClick={() => downloadImage(image)}
+                                >
+                                  <Download className="h-3 w-3" />
+                                </button>
+                                <button
+                                  className="p-1 rounded-full hover:bg-primary/20"
+                                  title="查看详细信息"
+                                  onClick={() => {
+                                    // 显示详细元数据的弹窗
+                                    toast({
+                                      title: '图片详细信息',
+                                      description: (
+                                        <div className="space-y-2 text-xs">
+                                          <div><strong>提示词：</strong> {image.prompt}</div>
+                                          <div><strong>纵横比：</strong> {image.metadata?.aspect_ratio || '1:1'}</div>
+                                          <div><strong>像素：</strong> {image.metadata?.megapixels ? `${image.metadata.megapixels}MP` : '1MP'}</div>
+                                          <div><strong>输出格式：</strong> {image.metadata?.output_format || 'png'}</div>
+                                          <div><strong>输出质量：</strong> {image.metadata?.outpt_quality || 'standard'}</div>
+                                          <div><strong>步数：</strong> {image.metadata?.num_inference_steps || 4}</div>
+                                          <div><strong>Seed：</strong> {image.metadata?.seed || 'Random'}</div>
+                                          <div><strong>创建时间：</strong> {new Date(image.timestamp || 0).toLocaleString()}</div>
+                                        </div>
+                                      ),
+                                      duration: 10000,
+                                    });
+                                  }}
+                                >
+                                  <Info className="h-3 w-3" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   ) : (

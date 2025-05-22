@@ -39,55 +39,147 @@ const GeneratorPage = () => {
   const router = useRouter();
   const t = useTranslations();
 
-  // Function to generate images using Replicate API
-  // 初始化 IndexedDB 存储
+  // 加载图片的公共函数
+  const loadImagesFromIndexedDB = async (imageIds: string[] = []) => {
+    try {
+      const imageStorage = getImageStorage();
+      const loadedImages: GeneratedImage[] = [];
+
+      // 如果提供了特定的ID列表，只加载这些ID的图片
+      if (imageIds.length > 0) {
+        for (const id of imageIds) {
+          try {
+            const imageData = await imageStorage.getImage(id);
+            if (imageData && imageData.blob) {
+              // 创建临时URL用于显示
+              const objectUrl = imageStorage.createImageUrl(imageData.blob);
+
+              loadedImages.push({
+                id: id,
+                url: objectUrl,
+                prompt: imageData.metadata.prompt || '',
+                aspect_ratio: imageData.metadata.aspect_ratio || '1:1',
+                seed: imageData.metadata.seed || 0,
+                num_inference_steps: imageData.metadata.num_inference_steps || 4,
+                timestamp: imageData.metadata.createdAt || new Date(),
+                star: false,
+              });
+            }
+          } catch (error) {
+            console.error(`Error loading image ${id}:`, error);
+          }
+        }
+        return loadedImages;
+      }
+
+      // 如果没有提供特定的ID列表，加载所有图片
+      const images = await imageStorage.listAllImages();
+      if (images.length > 0) {
+        for (const item of images) {
+          try {
+            const imageData = await imageStorage.getImage(item.id);
+            if (imageData && imageData.blob) {
+              // 创建临时URL用于显示
+              const objectUrl = imageStorage.createImageUrl(imageData.blob);
+
+              loadedImages.push({
+                id: item.id,
+                url: objectUrl,
+                prompt: item.metadata.prompt || '',
+                aspect_ratio: item.metadata.aspect_ratio || '1:1',
+                seed: item.metadata.seed || 0,
+                num_inference_steps: item.metadata.num_inference_steps || 4,
+                timestamp: item.metadata.createdAt || new Date(),
+                star: false,
+              });
+            }
+          } catch (error) {
+            console.error(`Error loading image ${item.id}:`, error);
+          }
+        }
+      }
+      return loadedImages;
+    } catch (error) {
+      console.error('Error loading images from IndexedDB:', error);
+      return [];
+    }
+  };
+
+  // 初始化时加载历史记录
   useEffect(() => {
     // 仅在客户端执行
     if (typeof window !== 'undefined') {
-      // 加载历史记录
-      const loadHistory = async () => {
-        try {
-          const imageStorage = getImageStorage();
-          const images = await imageStorage.listAllImages();
+      const initializeHistory = async () => {
+        const loadedImages = await loadImagesFromIndexedDB();
+        setHistory(loadedImages);
+      };
 
-          if (images.length > 0) {
-            const formattedImages = [];
+      initializeHistory();
+    }
+  }, []);
 
-            // 处理每个存储的图片
-            for (const item of images) {
-              try {
-                // 从IndexedDB获取图片Blob
-                const imageData = await imageStorage.getImage(item.id);
-                if (imageData && imageData.blob) {
-                  // 创建临时URL用于显示
-                  const objectUrl = imageStorage.createImageUrl(imageData.blob);
+  // 在页面可见性变化或标签切换时重新加载图片
+  useEffect(() => {
+    // 仅在客户端执行
+    if (typeof window !== 'undefined') {
+      // 处理页面可见性变化
+      const handleVisibilityChange = async () => {
+        if (document.visibilityState === 'visible') {
+          console.log('Page became visible, reloading images');
 
-                  formattedImages.push({
-                    id: item.id,
-                    url: objectUrl, // 使用临时对象URL而不是原始URL
-                    prompt: item.metadata.prompt || '',
-                    aspect_ratio: item.metadata.aspect_ratio || '1:1',
-                    seed: item.metadata.seed || 0,
-                    num_inference_steps: item.metadata.num_inference_steps || 4,
-                    timestamp: item.metadata.createdAt || new Date(),
-                    star: false,
-                  });
-                }
-              } catch (error) {
-                console.error(`Error loading image ${item.id}:`, error);
-              }
-            }
-
-            setHistory(formattedImages);
+          // 重新加载当前生成的图片
+          if (generatedImages.length > 0) {
+            const imageIds = generatedImages.map(img => img.id);
+            const refreshedImages = await loadImagesFromIndexedDB(imageIds);
+            setGeneratedImages(refreshedImages);
           }
-        } catch (error) {
-          console.error('Error loading history from IndexedDB:', error);
+
+          // 重新加载历史记录
+          const refreshedHistory = await loadImagesFromIndexedDB();
+          setHistory(refreshedHistory);
         }
       };
 
-      loadHistory();
+      // 监听页面可见性变化
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+
+      // 监听标签切换
+      const handleTabChange = async (event: Event) => {
+        const tabEvent = event as CustomEvent<{ value: string }>;
+        console.log(`Tab changed to: ${tabEvent.detail.value}`);
+
+        if (tabEvent.detail.value === 'output' && generatedImages.length > 0) {
+          // 当切换到输出标签时，重新加载生成的图片
+          const imageIds = generatedImages.map(img => img.id);
+          const refreshedImages = await loadImagesFromIndexedDB(imageIds);
+          setGeneratedImages(refreshedImages);
+        } else if (tabEvent.detail.value === 'history') {
+          // 当切换到历史标签时，重新加载历史记录
+          const refreshedHistory = await loadImagesFromIndexedDB();
+          setHistory(refreshedHistory);
+        }
+      };
+
+      // 创建一个自定义事件用于监听标签切换
+      document.addEventListener('tabChange', handleTabChange as EventListener);
+
+      // 清理函数
+      return () => {
+
+        // 释放对象URL
+        generatedImages.forEach(image => {
+          if (image.url && image.url.startsWith('blob:')) {
+            URL.revokeObjectURL(image.url);
+          }
+        });
+
+        // 移除事件监听器
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        document.removeEventListener('tabChange', handleTabChange as EventListener);
+      };
     }
-  }, []);
+  }, [generatedImages, history])
+
 
   const generateImages = async (formData: any) => {
 
@@ -142,9 +234,6 @@ const GeneratorPage = () => {
         const response = await fetch(dataUrl);
         const blob = await response.blob();
 
-        // 生成唯一ID
-        const id = `img-${Date.now()}-${i}-${Math.random().toString(36).substring(2, 9)}`;
-
         // 存储图片到 IndexedDB，不存储原始URL
         const metadata = {
           prompt: formData.prompt,
@@ -156,22 +245,28 @@ const GeneratorPage = () => {
           createdAt: new Date()
         };
 
-        await imageStorage.storeImageBlob(blob, metadata);
+        // 存储图片到IndexedDB
+        const imageId = await imageStorage.storeImageBlob(blob, metadata);
 
-        // 创建临时对象URL用于显示
-        const objectUrl = imageStorage.createImageUrl(blob);
+        // 从IndexedDB中读取存储的图片
+        const storedImage = await imageStorage.getImage(imageId);
 
-        // 创建图片对象用于显示
-        newImages.push({
-          id,
-          url: objectUrl, // 使用临时对象URL而不是原始URL
-          prompt: formData.prompt,
-          aspect_ratio: formData.aspect_ratio,
-          seed: metadata.seed,
-          num_inference_steps: formData.num_inference_steps || 4,
-          timestamp: new Date(),
-          star: false,
-        });
+        if (storedImage) {
+          // 创建临时对象URL用于显示
+          const objectUrl = imageStorage.createImageUrl(storedImage.blob);
+
+          // 创建图片对象用于显示
+          newImages.push({
+            id: imageId, // 使用存储返回的ID
+            url: objectUrl,
+            prompt: formData.prompt,
+            aspect_ratio: formData.aspect_ratio,
+            seed: metadata.seed,
+            num_inference_steps: formData.num_inference_steps || 4,
+            timestamp: new Date(),
+            star: false,
+          });
+        }
       }
 
       setGeneratedImages(newImages);
@@ -224,7 +319,17 @@ const GeneratorPage = () => {
 
           {/* Right Column: Output and History */}
           <div className="lg:col-span-7 xl:col-span-8">
-            <Tabs defaultValue="output" className="w-full">
+            <Tabs
+              defaultValue="output"
+              className="w-full"
+              onValueChange={(value) => {
+                // 当标签切换时触发自定义事件
+                const tabChangeEvent = new CustomEvent('tabChange', {
+                  detail: { value }
+                });
+                document.dispatchEvent(tabChangeEvent);
+              }}
+            >
               <TabsList className="mb-6 bg-background border border-border rounded-md p-1 w-fit">
                 <TabsTrigger
                   value="output"

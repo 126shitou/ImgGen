@@ -35,19 +35,6 @@ export function GeneratorOutput({
   const [selectedImage, setSelectedImage] = useState<GeneratedImage | null>(null);
   const t = useTranslations();
 
-  // 清理对象URL以防止内存泄漏
-  useEffect(() => {
-    return () => {
-      // 组件卸载时清理所有对象URL
-      images.forEach(image => {
-        if (image.url && image.url.startsWith('blob:')) {
-          URL.revokeObjectURL(image.url);
-        }
-      });
-    };
-  }, [images]);
-
-
   // Function to download image
   const downloadImage = async (imageUrl: string, promptText: string) => {
     // 如果已经是Blob URL，直接使用而不需要再次获取
