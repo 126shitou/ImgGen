@@ -6,7 +6,8 @@
         "home": "首页",
         "generate": "生成",
         "gallery": "画廊",
-        "profile": "个人资料"
+        "profile": "个人资料",
+        "pricing": "套餐"
     },
     "hero": {
         "title": "将您的创意转化为",
@@ -128,7 +129,6 @@
                 "options": {
                     "low": "低 (0.25 MP)",
                     "standard": "标准 (1 MP)"
- 
                 }
             },
             "generateButton": {

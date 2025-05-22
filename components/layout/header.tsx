@@ -128,6 +128,22 @@ const Header = () => {
             )}></span>
           </Link>
           <Link
+            href="/pricing"
+            className={cn(
+              "relative py-1 transition-all duration-200",
+              pathname === "/pricing"
+                ? "text-foreground font-medium"
+                : "text-foreground/70 hover:text-foreground",
+              "group"
+            )}
+          >
+            {t('nav.pricing') || '套餐'}
+            <span className={cn(
+              "absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300",
+              pathname === "/pricing" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            )}></span>
+          </Link>
+          <Link
             href="/profile"
             className={cn(
               "relative py-1 transition-all duration-200",
