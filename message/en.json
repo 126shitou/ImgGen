@@ -6,12 +6,13 @@
         "home": "Home",
         "generate": "Generate",
         "gallery": "Gallery",
-        "profile": "Profile"
+        "profile": "Profile",
+        "pricing": "Pricing"
     },
     "hero": {
         "title": "Transform Your Ideas Into",
         "subtitle": "Stunning Visuals",
-        "description": "Create beautiful AI-generated images with unparalleled control over every aspect. From aspect ratio to seed values, our platform gives you the power to realize your creative vision.",
+        "description": "Create beautiful AI-generated images with complete control over every detail. From aspect ratio to seed values, our platform gives you the power to realize your creative vision.",
         "startCreating": "Start Creating",
         "exploreGallery": "Explore Gallery"
     },
@@ -29,7 +30,7 @@
             },
             "batchGeneration": {
                 "title": "Batch Generation",
-                "description": "Generate up to 4 images simultaneously to explore variations"
+                "description": "Generate up to 4 images simultaneously to explore different variations"
             },
             "inferenceSteps": {
                 "title": "Inference Steps Control",
@@ -54,7 +55,7 @@
         }
     },
     "cta": {
-        "tagline": "Unleash your creativity",
+        "tagline": "Unleash Your Creativity",
         "title": "Start Creating Amazing Images Today",
         "description": "Join thousands of creators who are already using our platform to bring their ideas to life. No technical skills required — just your imagination.",
         "startCreating": "Start Creating Now",
@@ -66,16 +67,23 @@
         "about": "About Us",
         "faq": "FAQ",
         "blog": "Blog",
-        "contact": "Contact",
+        "contact": "Contact Us",
         "legal": "Legal",
         "terms": "Terms of Service",
         "privacy": "Privacy Policy",
-        "copyright": "Copyright"
+        "copyright": "Image Generation Portal",
+        "allRightsReserved": "All Rights Reserved"
+    },
+    "theme": {
+        "toggle": "Toggle Theme",
+        "light": "Light Mode",
+        "dark": "Dark Mode",
+        "system": "System Settings"
     },
     "generator": {
         "title": "Image Generator",
         "description": "Create stunning AI-generated images by customizing parameters below",
-        "authRequired": "Authentication required",
+        "authRequired": "Authentication Required",
         "authDescription": "You need to be logged in to generate images.",
         "loginToContinue": "Log in to continue",
         "form": {
@@ -126,10 +134,8 @@
                 "placeholder": "Select megapixels",
                 "description": "Controls the resolution of the generated images",
                 "options": {
-                    "low": "Low (0.5 MP)",
-                    "standard": "Standard (1 MP)",
-                    "high": "High (2 MP)",
-                    "ultra": "Ultra (4 MP)"
+                    "low": "Low (0.25 MP)",
+                    "standard": "Standard (1 MP)"
                 }
             },
             "generateButton": {
@@ -151,8 +157,8 @@
             },
             "toast": {
                 "copyPrompt": {
-                    "title": "Prompt copied",
-                    "description": "Prompt has been copied to your clipboard"
+                    "title": "Prompt Copied",
+                    "description": "Prompt has been copied to clipboard"
                 }
             },
             "details": {
@@ -191,17 +197,42 @@
         "title": "Explore Community Creations",
         "description": "Discover incredible AI-generated artwork from our community and get inspired for your next creation.",
         "viewFull": "View Full Gallery",
+        "pageTitle": "Community Gallery",
+        "pageDescription": "Explore and get inspired by amazing AI-generated artwork from our community",
+        "search": {
+            "placeholder": "Search by prompt or style...",
+            "button": "Search"
+        },
+        "filters": {
+            "sortBy": "Sort By",
+            "newest": "Newest First",
+            "popular": "Most Popular",
+            "downloads": "Most Downloads",
+            "filtersButton": "Filters"
+        },
+        "tabs": {
+            "trending": "Trending",
+            "new": "New",
+            "featured": "Featured"
+        },
+        "imageCard": {
+            "by": "by",
+            "likes": "Likes",
+            "downloads": "Downloads"
+        },
+        "loadMore": "Load More Images",
+        "loading": "Loading...",
         "prompts": {
-            "1": "Ethereal cyberpunk cityscape at sunset with neon lights",
-            "2": "Magical forest with bioluminescent plants and a meandering stream",
+            "1": "Cyberpunk city at sunset with neon lights glowing",
+            "2": "Magical forest with luminescent plants and winding stream",
             "3": "Futuristic space station orbiting a ringed gas giant",
             "4": "Surreal floating islands with waterfalls and ancient ruins",
-            "5": "Steampunk airship battle among the clouds at dawn",
-            "6": "Mystical underwater city with bioluminescent architecture"
+            "5": "Steampunk airship battle in the clouds at dawn",
+            "6": "Mystical underwater city with glowing architecture"
         }
     },
     "profile": {
-        "title": "Your Profile",
+        "title": "Profile Page",
         "images": "Images",
         "following": "Following",
         "followers": "Followers",
@@ -210,32 +241,123 @@
         "generationHistory": "Generation History",
         "savedImages": "Saved Images",
         "privacy": "Privacy",
+        "balance": "Balance",
+        "recharge": "Recharge",
+        "signOut": "Sign Out",
+        "favorites": "Favorites",
         "tabs": {
-            "images": "Your Images",
+            "images": "My Images",
             "liked": "Liked",
-            "saved": "Saved"
+            "saved": "Saved",
+            "orders": "Orders",
+            "favorites": "Favorites"
         },
         "empty": {
             "liked": {
                 "title": "No Liked Images Yet",
-                "description": "Browse the gallery and like images that inspire you. They'll appear here for easy access."
+                "description": "Browse the gallery and like images that inspire you. Liked content will appear here."
             },
             "saved": {
                 "title": "No Saved Images Yet",
                 "description": "Save images to collections for quick reference. Organize your inspirations here."
             }
         },
-        "exploreGallery": "Explore Gallery"
+        "exploreGallery": "Explore Gallery",
+        "orders": {
+            "credits": "Minimum currency unit (usually cents)",
+            "paidWith": "Unit"
+        }
     },
     "login": {
-        "title": "Sign In",
-        "description": "Sign in to access your profile, generation history, and saved images",
+        "title": "Login",
+        "description": "Log in to access your profile, generation history, and saved images",
         "google": "Sign in with Google",
-        "twitter": "Sign in with Twitter",
-        "or": "OR",
-        "guest": {
-            "title": "Want to try without an account?",
-            "button": "Continue as Guest"
+        "github": "Sign in with Github",
+        "loading": "Loading..."
+    },
+    "pricing": {
+        "title": "Choose the Plan That's Right for You",
+        "subtitle": "Whether you're a beginner or a professional creator, we have a plan that fits your needs",
+        "plans": {
+            "free": {
+                "name": "Free",
+                "description": "Perfect for first-time users",
+                "buttonText": "Current Plan",
+                "features": {
+                    "1": "Generate 5 images per day",
+                    "2": "Standard resolution",
+                    "3": "Basic model access",
+                    "4": "Community support"
+                }
+            },
+            "basic": {
+                "name": "Basic",
+                "description": "Ideal for individual creators",
+                "buttonText": "Choose Plan",
+                "popular": "Most Popular",
+                "features": {
+                    "1": "Generate 50 images per day",
+                    "2": "High resolution output",
+                    "3": "All basic models",
+                    "4": "Priority customer support",
+                    "5": "Watermark-free export"
+                }
+            },
+            "pro": {
+                "name": "Professional",
+                "description": "For professional creators and teams",
+                "buttonText": "Choose Plan",
+                "features": {
+                    "1": "Unlimited image generation",
+                    "2": "Ultra-high resolution output",
+                    "3": "All advanced models",
+                    "4": "24/7 dedicated customer support",
+                    "5": "Batch generation and API access",
+                    "6": "Team collaboration features"
+                }
+            }
+        },
+        "perMonth": "/month",
+        "loading": "Processing...",
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "questions": {
+                "changePlan": {
+                    "question": "How can I change my plan?",
+                    "answer": "You can upgrade or downgrade your plan at any time in your account settings. Upgrades take effect immediately, while downgrades take effect at the end of your current billing cycle."
+                },
+                "refund": {
+                    "question": "Do you offer refunds?",
+                    "answer": "We offer a 30-day money-back guarantee. If you're not satisfied with the service, please contact our customer support team."
+                },
+                "features": {
+                    "question": "What advanced features are included in paid plans?",
+                    "answer": "Paid plans offer higher image generation limits, higher resolution output, advanced model access, watermark-free export, and priority customer support."
+                }
+            }
+        },
+        "toast": {
+            "loginRequired": {
+                "title": "Please Log In",
+                "description": "You need to be logged in to subscribe to a plan"
+            },
+            "freeUser": {
+                "title": "You're Already Using the Free Version",
+                "description": "You can upgrade to a paid plan anytime to get more features"
+            },
+            "subscriptionError": {
+                "title": "Subscription Failed",
+                "description": "An error occurred while processing your subscription request, please try again later"
+            }
+        }
+    },
+    "payment": {
+        "success": {
+            "title": "Payment Successful",
+            "description": "Your payment has been successfully processed",
+            "message": "Your account has been topped up, you can now use more features",
+            "redirecting": "You will be automatically redirected to your profile page in:",
+            "goToProfile": "Go to Profile Page"
         }
     }
 }

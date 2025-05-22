@@ -6,12 +6,13 @@
         "home": "Accueil",
         "generate": "Générer",
         "gallery": "Galerie",
-        "profile": "Profil"
+        "profile": "Profil",
+        "pricing": "Forfaits"
     },
     "hero": {
         "title": "Transformez vos idées en",
-        "subtitle": "Images impressionnantes",
-        "description": "Créez de magnifiques images générées par IA avec un contrôle sans précédent sur chaque aspect. Du ratio d'aspect aux valeurs de seed, notre plateforme vous donne le pouvoir de concrétiser votre vision créative.",
+        "subtitle": "œuvres visuelles étonnantes",
+        "description": "Créez de magnifiques images générées par IA avec un contrôle total sur chaque détail. Du ratio d'aspect aux valeurs de seed, notre plateforme vous permet de concrétiser votre vision créative.",
         "startCreating": "Commencer à créer",
         "exploreGallery": "Explorer la galerie"
     },
@@ -21,7 +22,7 @@
         "items": {
             "customizablePrompts": {
                 "title": "Prompts personnalisables",
-                "description": "Décrivez exactement ce que vous voulez voir avec notre système de prompts avancé"
+                "description": "Décrivez précisément ce que vous voulez voir avec notre système de prompts avancé"
             },
             "aspectRatios": {
                 "title": "Multiples ratios d'aspect",
@@ -29,15 +30,15 @@
             },
             "batchGeneration": {
                 "title": "Génération par lots",
-                "description": "Générez jusqu'à 4 images simultanément pour explorer des variations"
+                "description": "Générez jusqu'à 4 images simultanément pour explorer différentes variations"
             },
             "inferenceSteps": {
                 "title": "Contrôle des étapes d'inférence",
-                "description": "Ajustez qualité vs. vitesse avec des étapes d'inférence personnalisables"
+                "description": "Ajustez la qualité et la vitesse avec des étapes d'inférence personnalisables"
             },
             "reproducibleResults": {
                 "title": "Résultats reproductibles",
-                "description": "Définissez des valeurs de seed spécifiques pour recréer ou itérer sur des générations précédentes"
+                "description": "Définissez des valeurs de seed spécifiques pour reproduire ou itérer sur des générations précédentes"
             },
             "outputFormats": {
                 "title": "Multiples formats de sortie",
@@ -45,17 +46,17 @@
             },
             "resolutionControl": {
                 "title": "Contrôle de la résolution",
-                "description": "Définissez des valeurs de mégapixels pour contrôler la taille et les détails de l'image"
+                "description": "Définissez des valeurs en mégapixels pour contrôler la taille et les détails de l'image"
             },
             "easyDownloads": {
                 "title": "Téléchargements faciles",
-                "description": "Téléchargez des images individuelles ou des lots dans votre format préféré"
+                "description": "Téléchargez des images individuelles ou par lots dans votre format préféré"
             }
         }
     },
     "cta": {
         "tagline": "Libérez votre créativité",
-        "title": "Commencez à créer des images incroyables aujourd'hui",
+        "title": "Commencez à créer des images étonnantes dès maintenant",
         "description": "Rejoignez des milliers de créateurs qui utilisent déjà notre plateforme pour donner vie à leurs idées. Aucune compétence technique requise — juste votre imagination.",
         "startCreating": "Commencer à créer maintenant",
         "signIn": "Se connecter",
@@ -70,7 +71,14 @@
         "legal": "Mentions légales",
         "terms": "Conditions d'utilisation",
         "privacy": "Politique de confidentialité",
-        "copyright": "Droits d'auteur"
+        "copyright": "Portail de Génération d'Images",
+        "allRightsReserved": "Tous droits réservés"
+    },
+    "theme": {
+        "toggle": "Changer de thème",
+        "light": "Mode clair",
+        "dark": "Mode sombre",
+        "system": "Paramètres système"
     },
     "generator": {
         "title": "Générateur d'images",
@@ -99,7 +107,7 @@
             },
             "numOutputs": {
                 "label": "Nombre d'images : {value}",
-                "description": "Générez plusieurs variations (1-4)"
+                "description": "Générez plusieurs variantes (1-4)"
             },
             "steps": {
                 "label": "Étapes d'inférence : {value}",
@@ -126,10 +134,8 @@
                 "placeholder": "Sélectionner des mégapixels",
                 "description": "Contrôle la résolution des images générées",
                 "options": {
-                    "low": "Basse (0.5 MP)",
-                    "standard": "Standard (1 MP)",
-                    "high": "Haute (2 MP)",
-                    "ultra": "Ultra (4 MP)"
+                    "low": "Basse (0.25 MP)",
+                    "standard": "Standard (1 MP)"
                 }
             },
             "generateButton": {
@@ -162,7 +168,7 @@
                 "aspectRatio": "Ratio d'aspect",
                 "seed": "Seed",
                 "steps": "Étapes",
-                "generated": "Généré",
+                "generated": "Généré le",
                 "actions": {
                     "download": "Télécharger l'image",
                     "openEditor": "Ouvrir dans l'éditeur"
@@ -191,17 +197,42 @@
         "title": "Explorez les créations de la communauté",
         "description": "Découvrez d'incroyables œuvres d'art générées par IA de notre communauté et trouvez l'inspiration pour votre prochaine création.",
         "viewFull": "Voir la galerie complète",
+        "pageTitle": "Galerie communautaire",
+        "pageDescription": "Explorez et inspirez-vous des superbes œuvres d'art générées par IA de notre communauté",
+        "search": {
+            "placeholder": "Rechercher par prompt ou style...",
+            "button": "Rechercher"
+        },
+        "filters": {
+            "sortBy": "Trier par",
+            "newest": "Plus récent",
+            "popular": "Plus populaire",
+            "downloads": "Plus téléchargé",
+            "filtersButton": "Filtres"
+        },
+        "tabs": {
+            "trending": "Tendances",
+            "new": "Nouveau",
+            "featured": "À la une"
+        },
+        "imageCard": {
+            "by": "par",
+            "likes": "J'aime",
+            "downloads": "Téléchargements"
+        },
+        "loadMore": "Charger plus d'images",
+        "loading": "Chargement...",
         "prompts": {
-            "1": "Paysage urbain cyberpunk éthéré au coucher du soleil avec lumières néon",
-            "2": "Forêt magique avec plantes bioluminescentes et ruisseau sinueux",
-            "3": "Station spatiale futuriste en orbite autour d'une planète gazeuse avec anneaux",
+            "1": "Ville cyberpunk au coucher du soleil, lumières néon clignotantes",
+            "2": "Forêt magique, plantes lumineuses et ruisseau sinueux",
+            "3": "Station spatiale futuriste en orbite autour d'une planète gazeuse géante avec anneaux",
             "4": "Îles flottantes surréalistes avec cascades et ruines anciennes",
             "5": "Bataille de dirigeables steampunk dans les nuages à l'aube",
-            "6": "Ville sous-marine mystique avec architecture bioluminescente"
+            "6": "Ville sous-marine mystique avec bâtiments lumineux"
         }
     },
     "profile": {
-        "title": "Votre profil",
+        "title": "Page de profil",
         "images": "Images",
         "following": "Abonnements",
         "followers": "Abonnés",
@@ -210,32 +241,123 @@
         "generationHistory": "Historique de génération",
         "savedImages": "Images sauvegardées",
         "privacy": "Confidentialité",
+        "balance": "Solde",
+        "recharge": "Recharger",
+        "signOut": "Se déconnecter",
+        "favorites": "Favoris",
         "tabs": {
-            "images": "Vos images",
+            "images": "Mes images",
             "liked": "J'aime",
-            "saved": "Sauvegardées"
+            "saved": "Sauvegardées",
+            "orders": "Commandes",
+            "favorites": "Favoris"
         },
         "empty": {
             "liked": {
                 "title": "Aucune image aimée",
-                "description": "Parcourez la galerie et aimez les images qui vous inspirent. Elles apparaîtront ici pour un accès facile."
+                "description": "Parcourez la galerie et aimez les images qui vous inspirent. Le contenu aimé apparaîtra ici."
             },
             "saved": {
                 "title": "Aucune image sauvegardée",
                 "description": "Sauvegardez des images dans des collections pour une référence rapide. Organisez vos inspirations ici."
             }
         },
-        "exploreGallery": "Explorer la galerie"
+        "exploreGallery": "Explorer la galerie",
+        "orders": {
+            "credits": "Unité monétaire minimale (généralement en centimes)",
+            "paidWith": "Unité"
+        }
     },
     "login": {
         "title": "Connexion",
         "description": "Connectez-vous pour accéder à votre profil, votre historique de génération et vos images sauvegardées",
         "google": "Se connecter avec Google",
-        "twitter": "Se connecter avec Twitter",
-        "or": "OU",
-        "guest": {
-            "title": "Vous voulez essayer sans compte ?",
-            "button": "Continuer en tant qu'invité"
+        "github": "Se connecter avec Github",
+        "loading":"Traitement en cours..."
+    },
+    "pricing": {
+        "title": "Choisissez le forfait qui vous convient",
+        "subtitle": "Que vous soyez débutant ou créateur professionnel, nous avons un plan adapté à vos besoins",
+        "plans": {
+            "free": {
+                "name": "Gratuit",
+                "description": "Parfait pour les débutants",
+                "buttonText": "Forfait actuel",
+                "features": {
+                    "1": "Générez 5 images par jour",
+                    "2": "Résolution standard",
+                    "3": "Accès aux modèles de base",
+                    "4": "Support communautaire"
+                }
+            },
+            "basic": {
+                "name": "Basique",
+                "description": "Idéal pour les créateurs individuels",
+                "buttonText": "Choisir ce forfait",
+                "popular": "Plus populaire",
+                "features": {
+                    "1": "Générez 50 images par jour",
+                    "2": "Sortie haute résolution",
+                    "3": "Tous les modèles de base",
+                    "4": "Support client prioritaire",
+                    "5": "Exportation sans filigrane"
+                }
+            },
+            "pro": {
+                "name": "Professionnel",
+                "description": "Pour les créateurs professionnels et les équipes",
+                "buttonText": "Choisir ce forfait",
+                "features": {
+                    "1": "Génération d'images illimitée",
+                    "2": "Sortie en ultra haute résolution",
+                    "3": "Tous les modèles avancés",
+                    "4": "Support client dédié 24/7",
+                    "5": "Génération par lots et accès API",
+                    "6": "Fonctionnalités de collaboration d'équipe"
+                }
+            }
+        },
+        "perMonth": "/mois",
+        "loading": "Traitement en cours...",
+        "faq": {
+            "title": "Questions fréquentes",
+            "questions": {
+                "changePlan": {
+                    "question": "Comment puis-je changer mon forfait ?",
+                    "answer": "Vous pouvez mettre à niveau ou rétrograder votre forfait à tout moment dans les paramètres de votre compte. Les mises à niveau prennent effet immédiatement, tandis que les rétrogradations prennent effet à la fin de votre cycle de facturation actuel."
+                },
+                "refund": {
+                    "question": "Proposez-vous des remboursements ?",
+                    "answer": "Nous offrons une garantie de remboursement de 30 jours. Si vous n'êtes pas satisfait du service, veuillez contacter notre équipe de support client."
+                },
+                "features": {
+                    "question": "Quelles fonctionnalités avancées sont incluses dans les forfaits payants ?",
+                    "answer": "Les forfaits payants offrent des limites de génération d'images plus élevées, une sortie en haute résolution, l'accès à des modèles avancés, l'exportation sans filigrane et un support client prioritaire."
+                }
+            }
+        },
+        "toast": {
+            "loginRequired": {
+                "title": "Veuillez vous connecter",
+                "description": "Vous devez être connecté pour souscrire à un forfait"
+            },
+            "freeUser": {
+                "title": "Vous utilisez déjà la version gratuite",
+                "description": "Vous pouvez passer à un forfait payant à tout moment pour obtenir plus de fonctionnalités"
+            },
+            "subscriptionError": {
+                "title": "Échec de l'abonnement",
+                "description": "Une erreur s'est produite lors du traitement de votre demande d'abonnement, veuillez réessayer plus tard"
+            }
+        }
+    },
+    "payment":{
+        "success":{
+            "title":"Paiement réussi",
+            "description":"Votre paiement a été traité avec succès",
+            "message":"Votre compte a été rechargé, vous pouvez maintenant utiliser plus de fonctionnalités",
+            "redirecting":"Vous serez automatiquement redirigé vers votre page de profil dans :",
+            "goToProfile":"Aller à la page de profil"
         }
     }
 }

@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
 import getStripe from '@/lib/stripe';
+import { useTranslations } from 'next-intl';
 
 
 
@@ -31,54 +32,55 @@ const PricingPage = () => {
   const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations('pricing');
 
   // 套餐数据
   const plans: PricingPlan[] = [
     {
       id: 'free',
-      name: '免费版',
+      name: t('plans.free.name'),
       price: 0,
       currency: 'USD',
-      description: '适合初次尝试的用户',
+      description: t('plans.free.description'),
       features: [
-        '每天生成5张图片',
-        '标准分辨率',
-        '基础模型访问',
-        '社区支持'
+        t('plans.free.features.1'),
+        t('plans.free.features.2'),
+        t('plans.free.features.3'),
+        t('plans.free.features.4')
       ],
-      buttonText: '当前方案'
+      buttonText: t('plans.free.buttonText')
     },
     {
       id: 'basic',
-      name: '基础版',
+      name: t('plans.basic.name'),
       price: 10,
       currency: 'USD',
-      description: '适合个人创作者',
+      description: t('plans.basic.description'),
       features: [
-        '每天生成50张图片',
-        '高分辨率输出',
-        '所有基础模型',
-        '优先客户支持',
-        '无水印导出'
+        t('plans.basic.features.1'),
+        t('plans.basic.features.2'),
+        t('plans.basic.features.3'),
+        t('plans.basic.features.4'),
+        t('plans.basic.features.5')
       ],
       popular: true,
-      buttonText: '选择方案',
+      buttonText: t('plans.basic.buttonText'),
     },
     {
       id: 'pro',
-      name: '专业版',
+      name: t('plans.pro.name'),
       price: 50,
       currency: 'USD',
-      description: '适合专业创作者和团队',
+      description: t('plans.pro.description'),
       features: [
-        '无限生成图片',
-        '超高分辨率输出',
-        '所有高级模型',
-        '24/7专属客户支持',
-        '批量生成和API访问',
-        '团队协作功能'
+        t('plans.pro.features.1'),
+        t('plans.pro.features.2'),
+        t('plans.pro.features.3'),
+        t('plans.pro.features.4'),
+        t('plans.pro.features.5'),
+        t('plans.pro.features.6')
       ],
-      buttonText: '选择方案',
+      buttonText: t('plans.pro.buttonText'),
     }
   ];
 
@@ -86,8 +88,8 @@ const PricingPage = () => {
   const handleSubscription = async (type: string) => {
     if (!isAuthenticated) {
       toast({
-        title: '请先登录',
-        description: '您需要登录后才能订阅套餐',
+        title: t('toast.loginRequired.title'),
+        description: t('toast.loginRequired.description'),
         variant: 'destructive'
       });
       router.push('/auth/login');
@@ -104,8 +106,8 @@ const PricingPage = () => {
 
     if (type === 'free') {
       toast({
-        title: '您已经在使用免费版',
-        description: '您可以随时升级到付费方案获取更多功能',
+        title: t('toast.freeUser.title'),
+        description: t('toast.freeUser.description'),
       });
       return;
     }
@@ -138,8 +140,8 @@ const PricingPage = () => {
     } catch (error) {
       console.error('订阅错误:', error);
       toast({
-        title: '订阅失败',
-        description: '处理您的订阅请求时出现错误，请稍后再试',
+        title: t('toast.subscriptionError.title'),
+        description: t('toast.subscriptionError.description'),
         variant: 'destructive'
       });
     } finally {
@@ -157,7 +159,7 @@ const PricingPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          选择适合您的套餐
+          {t('title')}
         </motion.h1>
         <motion.p
           className="text-xl text-muted-foreground max-w-3xl mx-auto"
@@ -165,7 +167,7 @@ const PricingPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          无论您是初学者还是专业创作者，我们都有适合您需求的方案
+          {t('subtitle')}
         </motion.p>
       </div>
 
@@ -181,7 +183,7 @@ const PricingPage = () => {
               {plan.popular && (
                 <Badge className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/2 px-3 py-1">
                   <Sparkles className="h-3.5 w-3.5 mr-1" />
-                  最受欢迎
+                  {t('plans.basic.popular')}
                 </Badge>
               )}
               <CardHeader>
@@ -191,7 +193,7 @@ const PricingPage = () => {
                 </CardTitle>
                 <div className="flex items-baseline mt-2">
                   <span className="text-3xl font-bold">${plan.price}</span>
-                  <span className="text-muted-foreground ml-1">/月</span>
+                  <span className="text-muted-foreground ml-1">{t('perMonth')}</span>
                 </div>
                 <CardDescription className="mt-2">{plan.description}</CardDescription>
               </CardHeader>
@@ -212,7 +214,7 @@ const PricingPage = () => {
                   onClick={() => handleSubscription(plan.id)}
                   disabled={isLoading && selectedPlan === plan.id}
                 >
-                  {isLoading && selectedPlan === plan.id ? '处理中...' : plan.buttonText}
+                  {isLoading && selectedPlan === plan.id ? t('loading') : plan.buttonText}
                 </Button>
               </CardFooter>
             </Card>
@@ -221,19 +223,19 @@ const PricingPage = () => {
       </div>
 
       <div className="mt-16 text-center">
-        <h2 className="text-2xl font-bold mb-4">常见问题</h2>
+        <h2 className="text-2xl font-bold mb-4">{t('faq.title')}</h2>
         <div className="max-w-3xl mx-auto space-y-6 text-left">
           <div>
-            <h3 className="text-lg font-medium mb-2">如何更改我的套餐？</h3>
-            <p className="text-muted-foreground">您可以随时在账户设置中升级或降级您的套餐。升级将立即生效，降级将在当前计费周期结束后生效。</p>
+            <h3 className="text-lg font-medium mb-2">{t('faq.questions.changePlan.question')}</h3>
+            <p className="text-muted-foreground">{t('faq.questions.changePlan.answer')}</p>
           </div>
           <div>
-            <h3 className="text-lg font-medium mb-2">是否提供退款？</h3>
-            <p className="text-muted-foreground">我们提供30天的退款保证。如果您对服务不满意，请联系我们的客户支持团队。</p>
+            <h3 className="text-lg font-medium mb-2">{t('faq.questions.refund.question')}</h3>
+            <p className="text-muted-foreground">{t('faq.questions.refund.answer')}</p>
           </div>
           <div>
-            <h3 className="text-lg font-medium mb-2">付费套餐包含哪些高级功能？</h3>
-            <p className="text-muted-foreground">付费套餐提供更高的图片生成限额、更高分辨率输出、高级模型访问、无水印导出以及优先客户支持等功能。</p>
+            <h3 className="text-lg font-medium mb-2">{t('faq.questions.features.question')}</h3>
+            <p className="text-muted-foreground">{t('faq.questions.features.answer')}</p>
           </div>
         </div>
       </div>

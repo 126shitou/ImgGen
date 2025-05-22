@@ -498,7 +498,7 @@ const ProfilePage = () => {
                         <p className="text-sm text-muted-foreground">{t('profile.balance')}</p>
                         <p className="text-2xl font-bold">{userData.balance}</p>
                       </div>
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" onClick={() => router.push('/pricing')}>
                         {t('profile.recharge')}
                       </Button>
                     </div>
@@ -716,7 +716,7 @@ const ProfilePage = () => {
                       <p className="text-muted-foreground text-center max-w-md mb-4">
                         {t('profile.empty.orders.description')}
                       </p>
-                      <Button variant="outline">
+                      <Button variant="outline" onClick={() => router.push('/pricing')}>
                         {t('profile.recharge')}
                       </Button>
                     </div>

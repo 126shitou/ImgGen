@@ -6,142 +6,148 @@
         "home": "Startseite",
         "generate": "Generieren",
         "gallery": "Galerie",
-        "profile": "Profil"
+        "profile": "Profil",
+        "pricing": "Tarif"
     },
     "hero": {
-        "title": "Verwandeln Sie Ihre Ideen in",
-        "subtitle": "Beeindruckende Visualisierungen",
-        "description": "Erstellen Sie wunderschöne KI-generierte Bilder mit unvergleichlicher Kontrolle über jeden Aspekt. Von Seitenverhältnis bis zu Seed-Werten - unsere Plattform gibt Ihnen die Macht, Ihre kreative Vision zu verwirklichen.",
-        "startCreating": "Jetzt erstellen",
-        "exploreGallery": "Galerie erkunden"
+        "title": "Ihre Kreativität in",
+        "subtitle": "Besondere visuelle Werke umwandeln",
+        "description": "Verwenden Sie unserer Plattform, um exquisite AI-generierte Bilder zu erstellen, steuern Sie jedes Detail. Von der Breite bis zu den Seedwerten - unsere Plattform ermöglicht Ihnen, Ihre kreativen Visionen umzusetzen.",
+        "startCreating": "Erstellen beginnen",
+        "exploreGallery": "Galerie durchsuchen"
     },
     "features": {
-        "title": "Leistungsstarke Generierungsfunktionen",
-        "description": "Unsere Plattform bietet vollständige Kontrolle über den Bildgenerierungsprozess und gibt Ihnen die Werkzeuge, um genau das zu erstellen, was Sie sich vorstellen.",
+        "title": "Starkes Generieren",
+        "description": "Unsere Plattform bietet Ihnen vollständige Kontrolle über den Bildgenerierungsprozess, und bietet Ihnen Werkzeuge, um ideale Werke zu erstellen.",
         "items": {
             "customizablePrompts": {
-                "title": "Anpassbare Prompts",
-                "description": "Beschreiben Sie genau, was Sie sehen möchten, mit unserem fortschrittlichen Prompt-System"
+                "title": "Anpassungsfähige Prompts",
+                "description": "Beschreiben Sie präzise, was Sie sehen möchten, mit unserem fortschrittlichen Promptsystem"
             },
             "aspectRatios": {
-                "title": "Mehrere Seitenverhältnisse",
-                "description": "Wählen Sie aus gängigen Seitenverhältnissen oder legen Sie eigene Dimensionen fest"
+                "title": "Mehrere Aspekte",
+                "description": "Wählen Sie aus gängigen Aspekten oder legen Sie Ihre eigenen Größe fest"
             },
             "batchGeneration": {
-                "title": "Batch-Generierung",
-                "description": "Generieren Sie bis zu 4 Bilder gleichzeitig, um Variationen zu erkunden"
+                "title": "Batchgenerierung",
+                "description": "Generieren Sie bis zu vier Bilder gleichzeitig, um verschiedene Variationen zu erkunden"
             },
             "inferenceSteps": {
-                "title": "Inferenzschritte-Steuerung",
-                "description": "Passen Sie Qualität und Geschwindigkeit mit anpassbaren Inferenzschritten an"
+                "title": "Schrittpunkte steuern",
+                "description": "Passen Sie die Qualität und Geschwindigkeit durch anpassungsfähige Schritte an"
             },
             "reproducibleResults": {
-                "title": "Reproduzierbare Ergebnisse",
-                "description": "Legen Sie spezifische Seed-Werte fest, um frühere Generierungen zu reproduzieren oder zu iterieren"
+                "title": "Wiederherstellbare Ergebnisse",
+                "description": "Legen Sie einen spezifischen Seedwert fest, um frühere Ergebnisse wiederherzustellen oder zu iterieren"
             },
             "outputFormats": {
                 "title": "Mehrere Ausgabeformate",
-                "description": "Exportieren Sie Ihre Bilder als PNG, JPEG oder WebP mit einstellbarer Qualität"
+                "description": "Exportieren Sie Bilder im PNG-, JPEG oder Web-Format und passen Sie die Qualität an"
             },
             "resolutionControl": {
                 "title": "Auflösungskontrolle",
-                "description": "Legen Sie Megapixel-Werte fest, um Bildgröße und Details zu steuern"
+                "description": "Legen Sie den Megapixelwert fest, um die Größe und Details des Bildes zu kontrollieren"
             },
             "easyDownloads": {
                 "title": "Einfache Downloads",
-                "description": "Laden Sie einzelne Bilder oder Batches in Ihrem bevorzugten Format herunter"
+                "description": "Laden Sie einzelne Bilder oder mehrere Bilder in Ihrer bevorzugteten Formate herunter"
             }
         }
     },
     "cta": {
-        "tagline": "Entfesseln Sie Ihre Kreativität",
-        "title": "Beginnen Sie noch heute mit der Erstellung erstaunlicher Bilder",
-        "description": "Schließen Sie sich Tausenden von Kreativen an, die unsere Plattform bereits nutzen, um ihre Ideen zum Leben zu erwecken. Keine technischen Fähigkeiten erforderlich — nur Ihre Fantasie.",
-        "startCreating": "Jetzt erstellen",
-        "signIn": "Anmelden",
-        "signOut": "Abmelden"
+        "tagline": "Ihre Kreativität freisetzen",
+        "title": "Sofort erstellen Sie beeindruckende Bilder",
+        "description": "Treten Sie sich der Tausende von Künstlern bei uns zusammen, die ihre Ideen in die Realität umwandeln. Keine technische Fähigkeiten - nur Ihre Fantasie.",
+        "startCreating": "Sofort beginnen Sie mit dem Erstellen",
+        "signIn": "Einloggen",
+        "signOut": "Ausloggen"
     },
     "footer": {
         "resources": "Ressourcen",
         "about": "Über uns",
-        "faq": "FAQ",
+        "faq": "Häufige fragen",
         "blog": "Blog",
-        "contact": "Kontakt",
+        "contact": "Kontaktieren Sie uns",
         "legal": "Rechtliches",
-        "terms": "Nutzungsbedingungen",
-        "privacy": "Datenschutz",
-        "copyright": "Urheberrecht"
+        "terms": "Nutzbedingungen",
+        "privacy": "Datenschutzrichtlinie",
+        "copyright": "Bildgenerator Portal",
+        "allRightsReserved": "Alle Rechte vorbehalten"
+    },
+    "theme": {
+        "toggle": "Thema umschalten",
+        "light": "Hellmodus",
+        "dark": "Dunkelmodus",
+        "system": "Systemeinstellung"
     },
     "generator": {
         "title": "Bildgenerator",
-        "description": "Erstellen Sie beeindruckende KI-generierte Bilder durch Anpassung der Parameter unten",
+        "description": "Erstellen Sie beeindruckende AI-generierte Bilder durch Anpassung der folgenden Parameter",
         "authRequired": "Authentifizierung erforderlich",
-        "authDescription": "Sie müssen angemeldet sein, um Bilder zu generieren.",
-        "loginToContinue": "Anmelden, um fortzufahren",
+        "authDescription": "Sie müssen sich einloggen, um Bilder zu generieren.",
+        "loginToContinue": "Einloggen, um fortzufahren",
         "form": {
             "prompt": {
                 "label": "Prompt",
-                "placeholder": "Beschreiben Sie das Bild, das Sie generieren möchten...",
-                "description": "Seien Sie detailliert und spezifisch bei Ihrer Beschreibung"
+                "placeholder": "Beschreiben Sie, was Sie generieren möchten...",
+                "description": "Beschreiben Sie präzise, was Sie sehen möchten"
             },
             "aspectRatio": {
                 "label": "Seitenverhältnis",
                 "placeholder": "Seitenverhältnis auswählen",
-                "description": "Wählen Sie die Dimensionen für Ihr Bild",
+                "description": "Wählen Sie die Größe des Bildes",
                 "options": {
                     "square": "Quadrat (1:1)",
-                    "landscape": "Querformat (16:9)",
-                    "portrait": "Hochformat (9:16)",
+                    "landscape": "Landscape (16:9)",
+                    "portrait": "Portrait (9:16)",
                     "standard": "Standard (4:3)",
                     "photo": "Foto (3:2)",
                     "panorama": "Panorama (2:1)"
                 }
             },
             "numOutputs": {
-                "label": "Anzahl der Bilder: {value}",
-                "description": "Generieren Sie mehrere Variationen (1-4)"
+                "label": "Bildanzahl: {value}",
+                "description": "Mehrere Varianten generieren (1-4)"
             },
             "steps": {
-                "label": "Inferenzschritte: {value}",
+                "label": "Schrittpunkte: {value}",
                 "description": "Höhere Werte = bessere Qualität, aber langsamere Generierung"
             },
             "useSeed": {
-                "label": "Benutzerdefinierten Seed verwenden",
-                "description": "Aktivieren Sie diese Option, um einen spezifischen Seed-Wert zu verwenden"
+                "label": "Eigenen Seed verwenden",
+                "description": "Aktivieren, um einen spezifischen Seedwert zu verwenden"
             },
             "seed": {
-                "label": "Seed-Wert",
+                "label": "Seedwert",
                 "random": "Zufällig",
-                "description": "Gleicher Seed erzeugt konsistente Ergebnisse"
+                "description": "Gleiche Seedwerte erzeugen identische Ergebnisse"
             },
             "outputFormat": {
                 "label": "Ausgabeformat"
             },
             "outputQuality": {
                 "label": "Ausgabequalität: {value}%",
-                "description": "Höhere Werte = bessere Qualität, aber größere Dateigröße"
+                "description": "Höhere Werte = bessere Qualität, aber größere Dateien"
             },
             "megapixels": {
-                "label": "Megapixel",
-                "placeholder": "Megapixel auswählen",
-                "description": "Steuert die Auflösung der generierten Bilder",
+                "label": "Megapixels",
+                "placeholder": "Megapixels auswerte",
+                "description": "Steuern Sie die Auflösung des generierten Bildes",
                 "options": {
-                    "low": "Niedrig (0,5 MP)",
-                    "standard": "Standard (1 MP)",
-                    "high": "Hoch (2 MP)",
-                    "ultra": "Ultra (4 MP)"
+                    "low": "Niedrig (0,25 MP)",
+                    "standard": "Standard (1 MP)"
                 }
             },
             "generateButton": {
-                "generating": "Generiere...",
-                "default": "Bilder generieren"
+                "generating": "Wird generiert...",
+                "default": "Bild generieren"
             }
         },
         "output": {
-            "generating": "Generiere Ihre Bilder...",
+            "generating": "Ihre Bild wird generiert...",
             "empty": {
-                "title": "Noch keine Bilder generiert",
-                "description": "Füllen Sie das Formular aus, um mit der Generierung von KI-Bildern zu beginnen. Sie können alle Parameter anpassen, um Ihre Vision zu verwirklichen."
+                "title": "Keine Bilder generiert",
+                "description": "Füllen Sie ein Formular aus, um AI-Bilder zu generieren. Sie können alle Parameter anpassen, um Ihren Kreativitätswunsch zu entsprechen."
             },
             "actions": {
                 "copyPrompt": "Prompt kopieren",
@@ -151,8 +157,8 @@
             },
             "toast": {
                 "copyPrompt": {
-                    "title": "Prompt kopiert",
-                    "description": "Prompt wurde in die Zwischenablage kopiert"
+                    "title": "Prompt wurde kopiert",
+                    "description": "Der Prompt wurde in die Zwischenablage kopiert."
                 }
             },
             "details": {
@@ -162,7 +168,7 @@
                 "aspectRatio": "Seitenverhältnis",
                 "seed": "Seed",
                 "steps": "Schritte",
-                "generated": "Generiert",
+                "generated": "Generierungszeit",
                 "actions": {
                     "download": "Bild herunterladen",
                     "openEditor": "Im Editor öffnen"
@@ -174,68 +180,184 @@
             "steps": "Schritte",
             "actions": {
                 "download": "Herunterladen",
-                "regenerate": "Neu generieren",
+                "regenerate": "Erneut generieren",
                 "delete": "Löschen"
             },
             "empty": {
-                "title": "Keine Generierungshistorie",
-                "description": "Ihre Generierungshistorie wird hier erscheinen, nachdem Sie einige Bilder erstellt haben."
+                "title": "Keine Generierungsgeschichte",
+                "description": "Nachdem Sie einige Bilder erstellt haben, wird Ihre Generierungsgeschichte hier angezeigt."
             }
         },
         "tabs": {
             "output": "Generierte Bilder",
-            "history": "Historie"
+            "history": "Geschichte"
         }
     },
     "gallery": {
-        "title": "Entdecken Sie Community-Kreationen",
-        "description": "Entdecken Sie unglaubliche KI-generierte Kunstwerke aus unserer Community und lassen Sie sich für Ihre nächste Kreation inspirieren.",
-        "viewFull": "Vollständige Galerie anzeigen",
+        "title": "Durchsuchen Sie die Gemeinschaftsarbeit",
+        "description": "Entdecken Sie beeindruckende AI-Kunstwerke von Gemeinschaftsmitgliedern und holen Sie Inspiration für Ihre nächste Kreation.",
+        "viewFull": "Galerie ansehen",
+        "pageTitle": "Gemeinschaftsgalerie",
+        "pageDescription": "Durchsuchen und inspirieren Sie sich an beeindruckenden AI-generierten Kunstwerken aus unserer Gemeinschaft",
+        "search": {
+            "placeholder": "Nach Prompt oder Stil suchen...",
+            "button": "Suchen"
+        },
+        "filters": {
+            "sortBy": "Sortierungsmodus",
+            "newest": "Neueste zuerst",
+            "popular": "Beliebteste",
+            "downloads": "Meist herunterladen",
+            "filtersButton": "Filtern"
+        },
+        "tabs": {
+            "trending": "Beliebteste",
+            "new": "Neueste",
+            "featured": "Ausgewählt"
+        },
+        "imageCard": {
+            "by": "Von",
+            "likes": "Gefällt mir",
+            "downloads": "Herunterladen"
+        },
+        "loadMore": "Mehr Bilder laden",
+        "loading": "Wird geladen...",
         "prompts": {
-            "1": "Ätherische Cyberpunk-Stadtlandschaft bei Sonnenuntergang mit Neonlichtern",
-            "2": "Magischer Wald mit biolumineszierenden Pflanzen und einem mäandrierenden Bach",
-            "3": "Futuristische Raumstation, die einen Ringplaneten umkreist",
-            "4": "Surreale schwebende Inseln mit Wasserfällen und antiken Ruinen",
-            "5": "Steampunk-Luftschiffschlacht in den Wolken bei Tagesanbruch",
-            "6": "Mystische Unterwasserstadt mit biolumineszierender Architektur"
+            "1": "Stadt in der Dämmerzeit von Cyberpunk, mit glitzernden Neonlampen",
+            "2": "Magischer Wald, leuchtendes Pflanzen und ein kleines, flüsterndes Bächlein",
+            "3": "Zukunftsraumstation mit umgebenden Halo umgeben",
+            "4": "Überirdische Insel, Wasserfälle und antike Ruinen",
+            "5": "Dämmeres Dampfschiff im Morgengrauen",
+            "6": "Geheimliche Unterwasserstadt, leuchtende Gebäude"
         }
     },
     "profile": {
-        "title": "Ihr Profil",
+        "title": "Persönliches Profil",
         "images": "Bilder",
-        "following": "Folge ich",
+        "following": "Folgen",
         "followers": "Follower",
         "account": "Konto",
         "settings": "Einstellungen",
-        "generationHistory": "Generierungshistorie",
+        "generationHistory": "Generierungsgeschichte",
         "savedImages": "Gespeicherte Bilder",
-        "privacy": "Datenschutz",
+        "privacy": "Privatssphäre",
+        "balance": "Guthaben",
+        "recharge": "Aufladen",
+        "signOut": "Abmelden",
+        "favorites": "Lieblingsbilder",
         "tabs": {
-            "images": "Ihre Bilder",
-            "liked": "Geliked",
-            "saved": "Gespeichert"
+            "images": "Meine Bilder",
+            "liked": "Gefällt mir",
+            "saved": "Gespeichert",
+            "orders": "Bestellungen",
+            "favorites": "Lieblingsbilder"
         },
         "empty": {
             "liked": {
-                "title": "Noch keine gelikten Bilder",
-                "description": "Durchsuchen Sie die Galerie und liken Sie Bilder, die Sie inspirieren. Sie werden hier für einfachen Zugriff erscheinen."
+                "title": "Keine Bilder gefällt mir",
+                "description": "Durchsuchen Sie die Galerie, um Bilder zu likten, die Ihnen Inspiration geben. Gefällte Inhalte werden hier angezeigt."
             },
             "saved": {
-                "title": "Noch keine gespeicherten Bilder",
-                "description": "Speichern Sie Bilder in Sammlungen für schnellen Zugriff. Organisieren Sie Ihre Inspirationen hier."
+                "title": "Keine Bilder gespeichert",
+                "description": "Speichern Sie Bilder in einer Sammlung, um schnell auf sie zuzugreifen. Ihre Inspirationen können Sie hier organisieren."
             }
         },
-        "exploreGallery": "Galerie erkunden"
+        "exploreGallery": "Galerie durchsuchen",
+        "orders": {
+            "credits": "Kleinste Währungseinheiten (im Allgemeinen Cent)",
+            "paidWith": "Bezahlt mit"
+        }
     },
     "login": {
-        "title": "Anmelden",
-        "description": "Melden Sie sich an, um auf Ihr Profil, Ihren Generierungsverlauf und gespeicherte Bilder zuzugreifen",
-        "google": "Mit Google anmelden",
-        "twitter": "Mit Twitter anmelden",
-        "or": "ODER",
-        "guest": {
-            "title": "Möchten Sie es ohne Konto versuchen?",
-            "button": "Als Gast fortfahren"
+        "title": "Einloggen",
+        "description": "Einloggen, um auf Ihr Profil, Ihre Generierungsgeschichte und gespeicherte Bilder zuzugreifen",
+        "google": "Mit Google einloggen",
+        "github": "Mit Github einloggen",
+        "loading": "Wird bearbeitet..."
+    },
+    "pricing": {
+        "title": "Wählen Sie das passende Paket",
+        "subtitle": "Ob Sie Anfänger oder professioneller Künstler sind, wir bieten Pakete für Ihre Bedürfnisse",
+        "plans": {
+            "free": {
+                "name": "Kostenlos",
+                "description": "Für Benutzer, die es zum ersten Mal ausprobieren möchten",
+                "buttonText": "Aktuelles Paket",
+                "features": {
+                    "1": "5 Bilder pro Tag generieren",
+                    "2": "Standardauflösung",
+                    "3": "Zugang zu grundlegenden Modellen",
+                    "4": "Community-Unterstützung"
+                }
+            },
+            "basic": {
+                "name": "Basis",
+                "description": "Für regelmäßige Nutzung geeignet",
+                "buttonText": "Paket auswählen",
+                "popular": "Beliebtest",
+                "features": {
+                    "1": "50 Bilder pro Tag generieren",
+                    "2": "Hochauflösung",
+                    "3": "Zugang zu allen grundlegenden Modellen",
+                    "4": "Prioritäts-Kundensupport",
+                    "5": "Ohne-Wasser-Export"
+                }
+            },
+            "pro": {
+                "name": "Profi",
+                "description": "Für professionelle Künstler und Teams geeignet",
+                "buttonText": "Paket auswählen",
+                "features": {
+                    "1": "Unbegrennte Bildgenerierung",
+                    "2": "Ultrahochauflösung",
+                    "3": "Zugang zu allen fortgeschrittenen Modellen",
+                    "4": "24/7 dedizierte Kundenunterstützung",
+                    "5": "Batchgenerierung und API-Zugang",
+                    "6": "Teamarbeitsfunktionen"
+                }
+            }
+        },
+        "perMonth": "/Monat",
+        "loading": "Wird bearbeitet...",
+        "faq": {
+            "title": "Häufig gestellte Fragen",
+            "questions": {
+                "changePlan": {
+                    "question": "Wie kann ich mein Paket ändern?",
+                    "answer": "Sie können jederzeit in Ihren Kontoeinstellungen Ihr Paket aktualisieren oder herabsen. Aktualisierungen treten sofort wirksam, Herabsen treten nach Ablauf des aktuellen Zahlungszeitraums."
+                },
+                "refund": {
+                    "question": "Gibt es Rückerstattungen?",
+                    "answer": "Wir bieten eine 30-Tage-Rückerstattungsgarantie. Wenn Sie unzufrieden sind, wenden Sie bitte den Kundensupport."
+                },
+                "features": {
+                    "question": "Was enthalten bezahlte Pakete zusätzliche fortgeschrittene Funktionen?",
+                    "answer": "Bezahlte Pakete bieten höhere Bildgenerierungslimits, höhere Auflösungen, Zugang zu fortgeschrittenen Modellen, wasserfreie Exporte und Prioritätskundenunterstützung."
+                }
+            }
+        },
+        "toast": {
+            "loginRequired": {
+                "title": "Bitte einloggen",
+                "description": "Sie müssen sich einloggen, um ein Paket zu abonnieren."
+            },
+            "freeUser": {
+                "title": "Sie verwenden bereits die kostenlose Version",
+                "description": "Sie können jederzeit auf ein bezahltes Paket upgraden, um mehr Funktionen zu erhalten."
+            },
+            "subscriptionError": {
+                "title": "Abonnement fehlgeschlagen",
+                "description": "Beim Bearbeiten Ihrer Abonnementanfrage ist ein Fehler aufgetreten, bitte später noch einmal probieren."
+            }
+        }
+    },
+    "payment": {
+        "success": {
+            "title": "Zahlung erfolgreich",
+            "description": "Ihre Zahlung wurde erfolgreich bearbeitet",
+            "message": "Ihr Konto wurde geladen, Sie können jetzt mehr Funktionen nutzen",
+            "redirecting": "Wird in folgender Sekunden automatisch zu Ihrer Profilseite umgeleitet:",
+            "goToProfile": "Zur Profilseite gehen"
         }
     }
 }

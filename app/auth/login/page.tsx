@@ -135,8 +135,6 @@ const LoginPage = () => {
                 )}
               </Button>
             </div>
-
-            {/* 访客登录功能已移除 */}
           </CardContent>
         </Card>
       </div>

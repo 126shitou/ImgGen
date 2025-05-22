@@ -33,7 +33,8 @@ export async function POST(req: NextRequest) {
             const session = event.data.object
             const line_items = await stripe.checkout.sessions.listLineItems(session.id);
             await connectToDatabase();
- 
+            console.log("line_items", line_items);
+
             const user = await User.findById(session.client_reference_id)
             if (user) {
                 const promises = line_items.data.map(async (ele) => {

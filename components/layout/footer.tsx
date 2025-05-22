@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="bg-background border-t border-border">
       <div className="container mx-auto px-4 md:px-6 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 justify-items-center">
           {/* Resources */}
           <div>
             <h3 className="font-medium text-lg mb-4">{t('footer.resources')}</h3>
@@ -65,7 +65,7 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} ImageGen Portal. All rights reserved.</p>
+          <p> {new Date().getFullYear()} {t('footer.copyright')} {t('footer.allRightsReserved')}</p>
         </div>
       </div>
     </footer>

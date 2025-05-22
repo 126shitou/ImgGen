@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 // Sample gallery data
 const galleryImages = [
@@ -98,6 +99,7 @@ const GalleryPage = () => {
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
   const router = useRouter();
+  const t = useTranslations('gallery');
   
   // 检查用户是否已登录，未登录则重定向
   useEffect(() => {
@@ -127,9 +129,9 @@ const GalleryPage = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Community Gallery</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">{t('pageTitle')}</h1>
           <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-            Explore and get inspired by amazing AI-generated artwork from our community
+            {t('pageDescription')}
           </p>
         </motion.div>
 
@@ -140,7 +142,7 @@ const GalleryPage = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
                 type="text"
-                placeholder="Search by prompt or style..."
+                placeholder={t('search.placeholder')}
                 className="pl-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -152,19 +154,19 @@ const GalleryPage = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="gap-1">
-                  Sort By <ChevronDown className="h-4 w-4 ml-1" />
+                  {t('filters.sortBy')} <ChevronDown className="h-4 w-4 ml-1" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>Newest First</DropdownMenuItem>
-                <DropdownMenuItem>Most Popular</DropdownMenuItem>
-                <DropdownMenuItem>Most Downloaded</DropdownMenuItem>
+                <DropdownMenuItem>{t('filters.newest')}</DropdownMenuItem>
+                <DropdownMenuItem>{t('filters.popular')}</DropdownMenuItem>
+                <DropdownMenuItem>{t('filters.downloads')}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             
             <Button variant="outline">
               <SlidersHorizontal className="h-4 w-4 mr-2" />
-              Filters
+              {t('filters.filtersButton')}
             </Button>
           </div>
         </div>
@@ -172,16 +174,17 @@ const GalleryPage = () => {
         {/* Gallery Tabs */}
         <Tabs defaultValue="trending" className="w-full mb-6">
           <TabsList className="mb-4">
-            <TabsTrigger value="trending">Trending</TabsTrigger>
-            <TabsTrigger value="new">New</TabsTrigger>
-            <TabsTrigger value="featured">Featured</TabsTrigger>
+            <TabsTrigger value="trending">{t('tabs.trending')}</TabsTrigger>
+            <TabsTrigger value="new">{t('tabs.new')}</TabsTrigger>
+            <TabsTrigger value="featured">{t('tabs.featured')}</TabsTrigger>
           </TabsList>
         </Tabs>
 
         {/* Gallery Grid */}
         {isLoading ? (
-          <div className="flex justify-center items-center h-[400px]">
+          <div className="flex justify-center items-center h-[400px] flex-col gap-3">
             <RefreshCw className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-muted-foreground">{t('loading')}</p>
           </div>
         ) : (
           <motion.div 
@@ -232,7 +235,7 @@ const GalleryPage = () => {
                   
                   <div>
                     <p className="text-white text-sm line-clamp-2 mb-1">{image.prompt}</p>
-                    <p className="text-white/70 text-xs mb-2">by {image.creator}</p>
+                    <p className="text-white/70 text-xs mb-2">{t('imageCard.by')} {image.creator}</p>
                     <div className="flex items-center gap-3 text-white/70 text-xs">
                       <span className="flex items-center gap-1">
                         <Heart className="h-3 w-3" /> {image.likes}
@@ -251,7 +254,7 @@ const GalleryPage = () => {
         {/* Load More Button */}
         <div className="flex justify-center mt-12">
           <Button variant="outline" size="lg">
-            Load More Images
+            {t('loadMore')}
           </Button>
         </div>
       </div>

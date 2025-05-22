@@ -71,7 +71,14 @@
         "legal": "法律",
         "terms": "服务条款",
         "privacy": "隐私政策",
-        "copyright": "版权"
+        "copyright": "图像生成门户",
+        "allRightsReserved": "版权所有"
+    },
+    "theme": {
+        "toggle": "切换主题",
+        "light": "浅色模式",
+        "dark": "深色模式",
+        "system": "系统设置"
     },
     "generator": {
         "title": "图像生成器",
@@ -190,9 +197,34 @@
         "title": "探索社区创作",
         "description": "发现社区成员创作的精彩AI艺术作品，为您的下一个创意获取灵感。",
         "viewFull": "查看全部画廊",
+        "pageTitle": "社区画廊",
+        "pageDescription": "探索并从我们社区中的精彩AI生成艺术作品中获取灵感",
+        "search": {
+            "placeholder": "按提示词或风格搜索...",
+            "button": "搜索"
+        },
+        "filters": {
+            "sortBy": "排序方式",
+            "newest": "最新优先",
+            "popular": "最受欢迎",
+            "downloads": "最多下载",
+            "filtersButton": "筛选"
+        },
+        "tabs": {
+            "trending": "热门",
+            "new": "最新",
+            "featured": "精选"
+        },
+        "imageCard": {
+            "by": "作者",
+            "likes": "喜欢",
+            "downloads": "下载"
+        },
+        "loadMore": "加载更多图片",
+        "loading": "正在加载...",
         "prompts": {
             "1": "日落时分的赛博朋克城市，霓虹灯闪烁",
-            "2": "魔法森林，发光植物和蜿蜒小溪",
+            "2": "魔法森林，发光植物和蜥蜴小溪",
             "3": "环绕有光环气态巨行星的未来太空站",
             "4": "超现实的漂浮岛屿，瀑布与古代遗迹",
             "5": "黎明云端的蒸汽朋克飞艇大战",
@@ -209,10 +241,16 @@
         "generationHistory": "生成历史",
         "savedImages": "已保存图像",
         "privacy": "隐私",
+        "balance": "余额",
+        "recharge": "充值",
+        "signOut": "登出",
+        "favorites": "点赞",
         "tabs": {
             "images": "我的图像",
             "liked": "喜欢",
-            "saved": "已保存"
+            "saved": "已保存",
+            "orders": "订单",
+            "favorites": "点赞"
         },
         "empty": {
             "liked": {
@@ -224,12 +262,102 @@
                 "description": "将图像保存到收藏夹以便快速参考。灵感都可以在这里整理。"
             }
         },
-        "exploreGallery": "浏览画廊"
+        "exploreGallery": "浏览画廊",
+        "orders": {
+            "credits": "最小货币单位(一般为分)",
+            "paidWith": "单位"
+        }
     },
     "login": {
         "title": "登录",
         "description": "登录以访问您的个人资料、生成历史和保存的图片",
         "google": "使用 Google 登录",
-        "github": "使用 Github 登录"
+        "github": "使用 Github 登录",
+        "loading": "正在加载..."
+    },
+    "pricing": {
+        "title": "选择适合您的套餐",
+        "subtitle": "无论您是初学者还是专业创作者，我们都有适合您需求的方案",
+        "plans": {
+            "free": {
+                "name": "免费版",
+                "description": "适合初次尝试的用户",
+                "buttonText": "当前方案",
+                "features": {
+                    "1": "每天生成5张图片",
+                    "2": "标准分辨率",
+                    "3": "基础模型访问",
+                    "4": "社区支持"
+                }
+            },
+            "basic": {
+                "name": "基础版",
+                "description": "适合个人创作者",
+                "buttonText": "选择方案",
+                "popular": "最受欢迎",
+                "features": {
+                    "1": "每天生成50张图片",
+                    "2": "高分辨率输出",
+                    "3": "所有基础模型",
+                    "4": "优先客户支持",
+                    "5": "无水印导出"
+                }
+            },
+            "pro": {
+                "name": "专业版",
+                "description": "适合专业创作者和团队",
+                "buttonText": "选择方案",
+                "features": {
+                    "1": "无限生成图片",
+                    "2": "超高分辨率输出",
+                    "3": "所有高级模型",
+                    "4": "24/7专属客户支持",
+                    "5": "批量生成和API访问",
+                    "6": "团队协作功能"
+                }
+            }
+        },
+        "perMonth": "/月",
+        "loading": "处理中...",
+        "faq": {
+            "title": "常见问题",
+            "questions": {
+                "changePlan": {
+                    "question": "如何更改我的套餐？",
+                    "answer": "您可以随时在账户设置中升级或降级您的套餐。升级将立即生效，降级将在当前计费周期结束后生效。"
+                },
+                "refund": {
+                    "question": "是否提供退款？",
+                    "answer": "我们提供30天的退款保证。如果您对服务不满意，请联系我们的客户支持团队。"
+                },
+                "features": {
+                    "question": "付费套餐包含哪些高级功能？",
+                    "answer": "付费套餐提供更高的图片生成限额、更高分辨率输出、高级模型访问、无水印导出以及优先客户支持等功能。"
+                }
+            }
+        },
+        "toast": {
+            "loginRequired": {
+                "title": "请先登录",
+                "description": "您需要登录后才能订阅套餐"
+            },
+            "freeUser": {
+                "title": "您已经在使用免费版",
+                "description": "您可以随时升级到付费方案获取更多功能"
+            },
+            "subscriptionError": {
+                "title": "订阅失败",
+                "description": "处理您的订阅请求时出现错误，请稍后再试"
+            }
+        }
+    },
+    "payment": {
+        "success": {
+            "title": "付款成功",
+            "description": "您的付款已成功处理",
+            "message": "您的账户已充值，您现在可以使用更多的功能",
+            "redirecting": "将在以下秒数后自动跳转到个人资料页面：",
+            "goToProfile": "前往个人资料页面"
+        }
     }
 }

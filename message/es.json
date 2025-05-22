@@ -6,57 +6,58 @@
         "home": "Inicio",
         "generate": "Generar",
         "gallery": "Galería",
-        "profile": "Perfil"
+        "profile": "Perfil",
+        "pricing": "Planes"
     },
     "hero": {
         "title": "Transforma tus ideas en",
-        "subtitle": "Imágenes impresionantes",
-        "description": "Crea hermosas imágenes generadas por IA con un control sin precedentes sobre cada aspecto. Desde la relación de aspecto hasta los valores de semilla, nuestra plataforma te da el poder de hacer realidad tu visión creativa.",
+        "subtitle": "impresionantes obras visuales",
+        "description": "Crea hermosas imágenes generadas por IA con control total sobre cada detalle. Desde la relación de aspecto hasta los valores de semilla, nuestra plataforma te permite realizar tu visión creativa.",
         "startCreating": "Comenzar a crear",
         "exploreGallery": "Explorar galería"
     },
     "features": {
         "title": "Potentes funciones de generación",
-        "description": "Nuestra plataforma ofrece control total sobre el proceso de generación de imágenes, dándote las herramientas para crear exactamente lo que imaginas.",
+        "description": "Nuestra plataforma ofrece control total sobre el proceso de generación de imágenes, proporcionándote las herramientas para crear obras ideales.",
         "items": {
             "customizablePrompts": {
                 "title": "Prompts personalizables",
-                "description": "Describe exactamente lo que quieres ver con nuestro sistema avanzado de prompts"
+                "description": "Describe con precisión lo que quieres ver usando nuestro avanzado sistema de prompts"
             },
             "aspectRatios": {
                 "title": "Múltiples relaciones de aspecto",
-                "description": "Elige entre relaciones de aspecto comunes o establece tus propias dimensiones"
+                "description": "Elige entre relaciones de aspecto comunes o establece dimensiones personalizadas"
             },
             "batchGeneration": {
                 "title": "Generación por lotes",
-                "description": "Genera hasta 4 imágenes simultáneamente para explorar variaciones"
+                "description": "Genera hasta 4 imágenes simultáneamente para explorar diferentes variaciones"
             },
             "inferenceSteps": {
                 "title": "Control de pasos de inferencia",
-                "description": "Ajusta calidad vs. velocidad con pasos de inferencia personalizables"
+                "description": "Ajusta la calidad y velocidad mediante pasos de inferencia personalizables"
             },
             "reproducibleResults": {
                 "title": "Resultados reproducibles",
-                "description": "Establece valores de semilla específicos para recrear o iterar sobre generaciones anteriores"
+                "description": "Establece valores de semilla específicos para reproducir o iterar sobre resultados anteriores"
             },
             "outputFormats": {
                 "title": "Múltiples formatos de salida",
-                "description": "Exporta tus imágenes como PNG, JPEG o WebP con calidad ajustable"
+                "description": "Exporta imágenes en formato PNG, JPEG o WebP con calidad ajustable"
             },
             "resolutionControl": {
                 "title": "Control de resolución",
                 "description": "Establece valores de megapíxeles para controlar el tamaño y detalle de la imagen"
             },
             "easyDownloads": {
-                "title": "Descargas fáciles",
-                "description": "Descarga imágenes individuales o lotes en tu formato preferido"
+                "title": "Descargas sencillas",
+                "description": "Descarga imágenes individuales o por lotes en tu formato preferido"
             }
         }
     },
     "cta": {
         "tagline": "Libera tu creatividad",
-        "title": "Comienza a crear imágenes increíbles hoy",
-        "description": "Únete a miles de creadores que ya están usando nuestra plataforma para dar vida a sus ideas. No se requieren habilidades técnicas — solo tu imaginación.",
+        "title": "Comienza a crear imágenes impresionantes ahora",
+        "description": "Únete a miles de creadores que ya están usando nuestra plataforma para hacer realidad sus ideas. No se requieren habilidades técnicas — solo tu imaginación.",
         "startCreating": "Comenzar a crear ahora",
         "signIn": "Iniciar sesión",
         "signOut": "Cerrar sesión"
@@ -66,15 +67,22 @@
         "about": "Sobre nosotros",
         "faq": "Preguntas frecuentes",
         "blog": "Blog",
-        "contact": "Contacto",
+        "contact": "Contáctanos",
         "legal": "Legal",
         "terms": "Términos de servicio",
         "privacy": "Política de privacidad",
-        "copyright": "Derechos de autor"
+        "copyright": "Portal de Generación de Imágenes",
+        "allRightsReserved": "Todos los derechos reservados"
+    },
+    "theme": {
+        "toggle": "Cambiar tema",
+        "light": "Modo claro",
+        "dark": "Modo oscuro",
+        "system": "Configuración del sistema"
     },
     "generator": {
         "title": "Generador de imágenes",
-        "description": "Crea impresionantes imágenes generadas por IA personalizando los parámetros a continuación",
+        "description": "Crea impresionantes imágenes generadas por IA personalizando los siguientes parámetros",
         "authRequired": "Autenticación requerida",
         "authDescription": "Necesitas iniciar sesión para generar imágenes.",
         "loginToContinue": "Inicia sesión para continuar",
@@ -82,7 +90,7 @@
             "prompt": {
                 "label": "Prompt",
                 "placeholder": "Describe la imagen que quieres generar...",
-                "description": "Sé detallado y específico sobre lo que quieres ver"
+                "description": "Describe detallada y específicamente lo que quieres ver"
             },
             "aspectRatio": {
                 "label": "Relación de aspecto",
@@ -99,7 +107,7 @@
             },
             "numOutputs": {
                 "label": "Número de imágenes: {value}",
-                "description": "Genera múltiples variaciones (1-4)"
+                "description": "Genera múltiples variantes (1-4)"
             },
             "steps": {
                 "label": "Pasos de inferencia: {value}",
@@ -124,21 +132,19 @@
             "megapixels": {
                 "label": "Megapíxeles",
                 "placeholder": "Seleccionar megapíxeles",
-                "description": "Controla la resolución de las imágenes generadas",
+                "description": "Controla la resolución de la imagen generada",
                 "options": {
-                    "low": "Baja (0.5 MP)",
-                    "standard": "Estándar (1 MP)",
-                    "high": "Alta (2 MP)",
-                    "ultra": "Ultra (4 MP)"
+                    "low": "Baja (0.25 MP)",
+                    "standard": "Estándar (1 MP)"
                 }
             },
             "generateButton": {
                 "generating": "Generando...",
-                "default": "Generar imágenes"
+                "default": "Generar imagen"
             }
         },
         "output": {
-            "generating": "Generando tus imágenes...",
+            "generating": "Generando tu imagen...",
             "empty": {
                 "title": "Aún no hay imágenes generadas",
                 "description": "Completa el formulario para comenzar a generar imágenes con IA. Puedes personalizar todos los parámetros para que coincidan con tu visión."
@@ -189,19 +195,44 @@
     },
     "gallery": {
         "title": "Explora creaciones de la comunidad",
-        "description": "Descubre increíbles obras de arte generadas por IA de nuestra comunidad y obtén inspiración para tu próxima creación.",
+        "description": "Descubre increíbles obras de arte generadas por IA de miembros de la comunidad y obtén inspiración para tu próxima creación.",
         "viewFull": "Ver galería completa",
+        "pageTitle": "Galería de la comunidad",
+        "pageDescription": "Explora e inspírate con impresionantes obras de arte generadas por IA de nuestra comunidad",
+        "search": {
+            "placeholder": "Buscar por prompt o estilo...",
+            "button": "Buscar"
+        },
+        "filters": {
+            "sortBy": "Ordenar por",
+            "newest": "Más recientes primero",
+            "popular": "Más populares",
+            "downloads": "Más descargadas",
+            "filtersButton": "Filtrar"
+        },
+        "tabs": {
+            "trending": "Tendencias",
+            "new": "Nuevas",
+            "featured": "Destacadas"
+        },
+        "imageCard": {
+            "by": "Por",
+            "likes": "Me gusta",
+            "downloads": "Descargas"
+        },
+        "loadMore": "Cargar más imágenes",
+        "loading": "Cargando...",
         "prompts": {
-            "1": "Paisaje urbano cyberpunk etéreo al atardecer con luces de neón",
-            "2": "Bosque mágico con plantas bioluminiscentes y un arroyo serpenteante",
+            "1": "Ciudad cyberpunk al atardecer con luces de neón brillantes",
+            "2": "Bosque mágico con plantas luminiscentes y un pequeño arroyo serpenteante",
             "3": "Estación espacial futurista orbitando un planeta gaseoso con anillos",
             "4": "Islas flotantes surrealistas con cascadas y ruinas antiguas",
             "5": "Batalla de dirigibles steampunk entre las nubes al amanecer",
-            "6": "Ciudad submarina mística con arquitectura bioluminiscente"
+            "6": "Ciudad submarina misteriosa con edificios luminiscentes"
         }
     },
     "profile": {
-        "title": "Tu perfil",
+        "title": "Perfil personal",
         "images": "Imágenes",
         "following": "Siguiendo",
         "followers": "Seguidores",
@@ -210,32 +241,123 @@
         "generationHistory": "Historial de generación",
         "savedImages": "Imágenes guardadas",
         "privacy": "Privacidad",
+        "balance": "Saldo",
+        "recharge": "Recargar",
+        "signOut": "Cerrar sesión",
+        "favorites": "Favoritos",
         "tabs": {
-            "images": "Tus imágenes",
+            "images": "Mis imágenes",
             "liked": "Me gusta",
-            "saved": "Guardadas"
+            "saved": "Guardadas",
+            "orders": "Pedidos",
+            "favorites": "Favoritos"
         },
         "empty": {
             "liked": {
-                "title": "Aún no hay imágenes que te gusten",
-                "description": "Explora la galería y da me gusta a las imágenes que te inspiren. Aparecerán aquí para fácil acceso."
+                "title": "No hay imágenes que te gusten",
+                "description": "Explora la galería y da me gusta a las imágenes que te inspiren. El contenido que te guste aparecerá aquí."
             },
             "saved": {
-                "title": "Aún no hay imágenes guardadas",
-                "description": "Guarda imágenes en colecciones para referencia rápida. Organiza tus inspiraciones aquí."
+                "title": "No hay imágenes guardadas",
+                "description": "Guarda imágenes en colecciones para acceder rápidamente. Organiza tus inspiraciones aquí."
             }
         },
-        "exploreGallery": "Explorar galería"
+        "exploreGallery": "Explorar galería",
+        "orders": {
+            "credits": "Unidad monetaria mínima (generalmente centavos)",
+            "paidWith": "Pagado con"
+        }
     },
     "login": {
         "title": "Iniciar sesión",
         "description": "Inicia sesión para acceder a tu perfil, historial de generación e imágenes guardadas",
         "google": "Iniciar sesión con Google",
-        "twitter": "Iniciar sesión con Twitter",
-        "or": "O",
-        "guest": {
-            "title": "¿Quieres probar sin una cuenta?",
-            "button": "Continuar como invitado"
+        "github": "Iniciar sesión con Github",
+        "loading": "Procesando..."
+    },
+    "pricing": {
+        "title": "Elige el plan adecuado para ti",
+        "subtitle": "Ya seas principiante o creador profesional, tenemos planes que se adaptan a tus necesidades",
+        "plans": {
+            "free": {
+                "name": "Gratuito",
+                "description": "Para usuarios que quieren probar por primera vez",
+                "buttonText": "Plan actual",
+                "features": {
+                    "1": "Genera 5 imágenes al día",
+                    "2": "Resolución estándar",
+                    "3": "Acceso a modelos básicos",
+                    "4": "Soporte comunitario"
+                }
+            },
+            "basic": {
+                "name": "Básico",
+                "description": "Ideal para creadores individuales",
+                "buttonText": "Elegir plan",
+                "popular": "Más popular",
+                "features": {
+                    "1": "Genera 50 imágenes al día",
+                    "2": "Salida en alta resolución",
+                    "3": "Todos los modelos básicos",
+                    "4": "Soporte prioritario",
+                    "5": "Exportación sin marca de agua"
+                }
+            },
+            "pro": {
+                "name": "Profesional",
+                "description": "Para creadores profesionales y equipos",
+                "buttonText": "Elegir plan",
+                "features": {
+                    "1": "Generación ilimitada de imágenes",
+                    "2": "Salida en ultra alta resolución",
+                    "3": "Todos los modelos avanzados",
+                    "4": "Soporte dedicado 24/7",
+                    "5": "Generación por lotes y acceso API",
+                    "6": "Funciones de colaboración en equipo"
+                }
+            }
+        },
+        "perMonth": "/mes",
+        "loading": "Procesando...",
+        "faq": {
+            "title": "Preguntas frecuentes",
+            "questions": {
+                "changePlan": {
+                    "question": "¿Cómo puedo cambiar mi plan?",
+                    "answer": "Puedes actualizar o degradar tu plan en cualquier momento desde la configuración de tu cuenta. Las actualizaciones son efectivas inmediatamente, mientras que las degradaciones se aplicarán al final del ciclo de facturación actual."
+                },
+                "refund": {
+                    "question": "¿Ofrecen reembolsos?",
+                    "answer": "Ofrecemos una garantía de reembolso de 30 días. Si no estás satisfecho con el servicio, contacta a nuestro equipo de soporte."
+                },
+                "features": {
+                    "question": "¿Qué características avanzadas incluyen los planes de pago?",
+                    "answer": "Los planes de pago ofrecen límites más altos de generación de imágenes, mayor resolución de salida, acceso a modelos avanzados, exportación sin marca de agua y soporte prioritario al cliente."
+                }
+            }
+        },
+        "toast": {
+            "loginRequired": {
+                "title": "Por favor inicia sesión",
+                "description": "Necesitas iniciar sesión para suscribirte a un plan"
+            },
+            "freeUser": {
+                "title": "Ya estás usando la versión gratuita",
+                "description": "Puedes actualizar a un plan de pago en cualquier momento para obtener más funciones"
+            },
+            "subscriptionError": {
+                "title": "Error de suscripción",
+                "description": "Ocurrió un error al procesar tu solicitud de suscripción, por favor intenta más tarde"
+            }
+        }
+    },
+    "payment": {
+        "success": {
+            "title": "Pago exitoso",
+            "description": "Tu pago ha sido procesado con éxito",
+            "message": "Tu cuenta ha sido recargada, ahora puedes usar más funciones",
+            "redirecting": "Serás redirigido automáticamente a tu página de perfil en los siguientes segundos:",
+            "goToProfile": "Ir a la página de perfil"
         }
     }
 }
