@@ -181,8 +181,15 @@
             "actions": {
                 "download": "下载",
                 "regenerate": "重新生成",
-                "delete": "删除"
+                "delete": "删除",
+                "star": "收藏"
             },
+            "starSuccess": "已添加到收藏",
+            "starSuccessDescription": "图片已成功添加到您的收藏",
+            "unstarSuccess": "已从收藏中移除",
+            "unstarSuccessDescription": "图片已从您的收藏中移除",
+            "starError": "操作失败",
+            "starErrorDescription": "更改收藏状态时出现错误，请稍后再试",
             "empty": {
                 "title": "无生成历史",
                 "description": "在您创建一些图像后，您的生成历史将显示在这里。"
@@ -406,5 +413,11 @@
             "redirecting": "将在以下秒数后自动跳转到个人资料页面：",
             "goToProfile": "前往个人资料页面"
         }
+    },
+    "signOut": {
+        "confirmTitle": "确认登出",
+        "confirmMessage": "您确定要退出登录吗？",
+        "cancel": "取消",
+        "confirm": "退出登录"
     }
 }

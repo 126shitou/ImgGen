@@ -181,8 +181,15 @@
             "actions": {
                 "download": "Descargar",
                 "regenerate": "Regenerar",
-                "delete": "Eliminar"
+                "delete": "Eliminar",
+                "star": "Favorito"
             },
+            "starSuccess": "Añadido a favoritos",
+            "starSuccessDescription": "La imagen ha sido añadida a tus favoritos",
+            "unstarSuccess": "Eliminado de favoritos",
+            "unstarSuccessDescription": "La imagen ha sido eliminada de tus favoritos",
+            "starError": "Operación fallida",
+            "starErrorDescription": "Hubo un error al cambiar el estado de favorito, por favor intenta de nuevo más tarde",
             "empty": {
                 "title": "Sin historial de generación",
                 "description": "Tu historial de generación aparecerá aquí después de crear algunas imágenes."
@@ -400,11 +407,17 @@
     },
     "payment": {
         "success": {
-            "title": "Pago exitoso",
-            "description": "Tu pago ha sido procesado con éxito",
+            "title": "Pago Exitoso",
+            "description": "Tu pago ha sido procesado exitosamente",
             "message": "Tu cuenta ha sido recargada, ahora puedes usar más funciones",
-            "redirecting": "Serás redirigido automáticamente a tu página de perfil en los siguientes segundos:",
-            "goToProfile": "Ir a la página de perfil"
+            "redirecting": "Serás redirigido automáticamente a tu página de perfil en:",
+            "goToProfile": "Ir a la Página de Perfil"
         }
+    },
+    "signOut": {
+        "confirmTitle": "Confirmar Cierre de Sesión",
+        "confirmMessage": "¿Estás seguro de que deseas cerrar sesión en tu cuenta?",
+        "cancel": "Cancelar",
+        "confirm": "Cerrar Sesión"
     }
 }

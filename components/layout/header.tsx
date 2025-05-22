@@ -189,15 +189,15 @@ const Header = () => {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>{t('signOut.confirmTitle') || 'Confirm Sign Out'}</AlertDialogTitle>
+                  <AlertDialogTitle>{t('signOut.confirmTitle')}</AlertDialogTitle>
                   <AlertDialogDescription>
-                    {t('signOut.confirmMessage') || 'Are you sure you want to sign out of your account?'}
+                    {t('signOut.confirmMessage')}
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>{t('signOut.cancel') || 'Cancel'}</AlertDialogCancel>
+                  <AlertDialogCancel>{t('signOut.cancel')}</AlertDialogCancel>
                   <AlertDialogAction onClick={() => signOut()}>
-                    {t('signOut.confirm') || 'Sign Out'}
+                    {t('signOut.confirm')}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

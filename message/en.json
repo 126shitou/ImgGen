@@ -181,8 +181,15 @@
             "actions": {
                 "download": "Download",
                 "regenerate": "Regenerate",
-                "delete": "Delete"
+                "delete": "Delete",
+                "star": "Favorite"
             },
+            "starSuccess": "Added to Favorites",
+            "starSuccessDescription": "Image has been added to your favorites",
+            "unstarSuccess": "Removed from Favorites",
+            "unstarSuccessDescription": "Image has been removed from your favorites",
+            "starError": "Operation Failed",
+            "starErrorDescription": "There was an error changing the favorite status, please try again later",
             "empty": {
                 "title": "No Generation History",
                 "description": "Your generation history will appear here after you create some images."
@@ -406,5 +413,11 @@
             "redirecting": "You will be automatically redirected to your profile page in:",
             "goToProfile": "Go to Profile Page"
         }
+    },
+    "signOut": {
+        "confirmTitle": "Confirm Sign Out",
+        "confirmMessage": "Are you sure you want to sign out of your account?",
+        "cancel": "Cancel",
+        "confirm": "Sign Out"
     }
 }

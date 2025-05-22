@@ -181,8 +181,15 @@
             "actions": {
                 "download": "Télécharger",
                 "regenerate": "Régénérer",
-                "delete": "Supprimer"
+                "delete": "Supprimer",
+                "star": "Favori"
             },
+            "starSuccess": "Ajouté aux favoris",
+            "starSuccessDescription": "L'image a été ajoutée à vos favoris",
+            "unstarSuccess": "Retiré des favoris",
+            "unstarSuccessDescription": "L'image a été retirée de vos favoris",
+            "starError": "Opération échouée",
+            "starErrorDescription": "Une erreur s'est produite lors de la modification du statut de favori, veuillez réessayer plus tard",
             "empty": {
                 "title": "Aucun historique de génération",
                 "description": "Votre historique de génération apparaîtra ici après avoir créé quelques images."
@@ -406,5 +413,11 @@
             "redirecting": "Vous serez automatiquement redirigé vers votre page de profil dans :",
             "goToProfile": "Aller à la page de profil"
         }
+    },
+    "signOut": {
+        "confirmTitle": "Confirmer la déconnexion",
+        "confirmMessage": "Êtes-vous sûr de vouloir vous déconnecter de votre compte ?",
+        "cancel": "Annuler",
+        "confirm": "Déconnexion"
     }
 }

@@ -180,9 +180,16 @@
             "steps": "Schritte",
             "actions": {
                 "download": "Herunterladen",
-                "regenerate": "Erneut generieren",
-                "delete": "Löschen"
+                "regenerate": "Neu generieren",
+                "delete": "Löschen",
+                "star": "Favorit"
             },
+            "starSuccess": "Zu Favoriten hinzugefügt",
+            "starSuccessDescription": "Das Bild wurde zu Ihren Favoriten hinzugefügt",
+            "unstarSuccess": "Aus Favoriten entfernt",
+            "unstarSuccessDescription": "Das Bild wurde aus Ihren Favoriten entfernt",
+            "starError": "Vorgang fehlgeschlagen",
+            "starErrorDescription": "Beim Ändern des Favoritenstatus ist ein Fehler aufgetreten, bitte versuchen Sie es später erneut",
             "empty": {
                 "title": "Keine Generierungsgeschichte",
                 "description": "Nachdem Sie einige Bilder erstellt haben, wird Ihre Generierungsgeschichte hier angezeigt."
@@ -406,5 +413,11 @@
             "redirecting": "Wird in folgender Sekunden automatisch zu Ihrer Profilseite umgeleitet:",
             "goToProfile": "Zur Profilseite gehen"
         }
+    },
+    "signOut": {
+        "confirmTitle": "Abmeldung bestätigen",
+        "confirmMessage": "Sind Sie sicher, dass Sie sich von Ihrem Konto abmelden möchten?",
+        "cancel": "Abbrechen",
+        "confirm": "Abmelden"
     }
 }

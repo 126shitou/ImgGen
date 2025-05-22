@@ -212,8 +212,15 @@
             "actions": {
                 "download": "ダウンロード",
                 "regenerate": "再生成",
-                "delete": "削除"
+                "delete": "削除",
+                "star": "お気に入り"
             },
+            "starSuccess": "お気に入りに追加しました",
+            "starSuccessDescription": "画像がお気に入りに追加されました",
+            "unstarSuccess": "お気に入りから削除しました",
+            "unstarSuccessDescription": "画像がお気に入りから削除されました",
+            "starError": "操作に失敗しました",
+            "starErrorDescription": "お気に入りステータスの変更中にエラーが発生しました。後で再試行してください",
             "empty": {
                 "title": "生成履歴がありません",
                 "description": "画像をいくつか生成すると、生成履歴がここに表示されます。"
@@ -406,5 +413,11 @@
             "redirecting": "以下の秒数で自動的にプロフィールページにジャンプします：",
             "goToProfile": "プロフィールページへ"
         }
+    },
+    "signOut": {
+        "confirmTitle": "ログアウトの確認",
+        "confirmMessage": "本当にアカウントからログアウトしますか？",
+        "cancel": "キャンセル",
+        "confirm": "ログアウト"
     }
 }
