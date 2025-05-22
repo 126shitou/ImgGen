@@ -193,6 +193,37 @@
             "history": "Geschichte"
         }
     },
+    "auth": {
+        "errorPage": {
+            "title": "Authentifizierungsfehler",
+            "description": "Es gab ein Problem mit Ihrer Authentifizierung",
+            "alertTitle": "Authentifizierung fehlgeschlagen",
+            "suggestion": "Hier sind einige Dinge, die Sie versuchen können:",
+            "tips": {
+                "tryAgain": "Erneutern Sie sich erneut",
+                "differentMethod": "Verwenden Sie eine andere Authentifizierungsmethode",
+                "checkConnection": "Überprüfen Sie Ihre Internetverbindung",
+                "contactSupport": "Falls das Problem weiterhin besteht, wenden Sie sich an den Support"
+            },
+            "errorCode": "Fehlercode",
+            "backToLogin": "Zurück zur Anmeldung",
+            "backToHome": "Zur Startseite"
+        },
+        "errors": {
+            "configuration": "Es gibt ein Problem mit der Serverkonfiguration",
+            "accessDenied": "Zugang zu dieser Ressource wurde verweig",
+            "verification": "Der Bestätigungslink wurde möglicherweise bereits verwendet oder ist abgelaufen",
+            "oauthSignin": "Fehler beim OAuth-Anmelden",
+            "oauthCallback": "Fehler im OAuth-Rückruf",
+            "oauthCreateAccount": "Konnte keinen OAuth-Anbieterkonto erstellen",
+            "emailCreateAccount": "Konnte keinen E-Mail-Anbieterkonto erstellen",
+            "callback": "Fehler im Authentifizierungsrückruf",
+            "oauthAccountNotLinked": "Um Ihre Identität zu bestätigen, melden Sie sich mit demselben Konto an, das Sie ursprünglich verwendet haben",
+            "sessionRequired": "Zugang zur Ressource erforderlich, um diese Ressource aufzzugreifen",
+            "default": "Ein Authentifizierungsfehler ist aufgetreten",
+            "unknown": "Ein unbekannter Fehler ist aufgetreten"
+        }
+    },
     "gallery": {
         "title": "Durchsuchen Sie die Gemeinschaftsarbeit",
         "description": "Entdecken Sie beeindruckende AI-Kunstwerke von Gemeinschaftsmitgliedern und holen Sie Inspiration für Ihre nächste Kreation.",
@@ -256,7 +287,16 @@
             "orders": "Bestellungen",
             "favorites": "Lieblingsbilder"
         },
+        "createImages": "Bilder generieren",
         "empty": {
+            "images": {
+                "title": "Keine generierten Bilder",
+                "description": "Sie haben noch keine Bilder erstellt. Beginnen Sie mit der Generierung, um Ihre Kreationen hier zu sehen."
+            },
+            "favorites": {
+                "title": "Keine Lieblingsbilder",
+                "description": "Markieren Sie Bilder als Favoriten, um sie für schnellen Zugriff zu speichern. Ihre Lieblingskreationen werden hier angezeigt."
+            },
             "liked": {
                 "title": "Keine Bilder gefällt mir",
                 "description": "Durchsuchen Sie die Galerie, um Bilder zu likten, die Ihnen Inspiration geben. Gefällte Inhalte werden hier angezeigt."

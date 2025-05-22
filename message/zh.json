@@ -256,7 +256,16 @@
             "orders": "订单",
             "favorites": "点赞"
         },
+        "createImages": "生成图像",
         "empty": {
+            "images": {
+                "title": "空",
+                "description": "暂时没有生成图像"
+            },
+            "favorites": {
+                "title": "空",
+                "description": "暂时没有喜欢的图像"
+            },
             "liked": {
                 "title": "暂无喜欢的图像",
                 "description": "浏览画廊，喜欢激发您灵感的图像。喜欢的内容会显示在这里。"
@@ -281,6 +290,37 @@
         "google": "使用 Google 登录",
         "github": "使用 Github 登录",
         "loading": "正在加载..."
+    },
+    "auth": {
+        "errorPage": {
+            "title": "认证错误",
+            "description": "您的认证过程中出现了问题",
+            "alertTitle": "认证失败",
+            "suggestion": "您可以尝试以下方法：",
+            "tips": {
+                "tryAgain": "再次尝试登录",
+                "differentMethod": "使用不同的认证方式",
+                "checkConnection": "检查您的网络连接",
+                "contactSupport": "如果问题仍然存在，请联系客服"
+            },
+            "errorCode": "错误代码",
+            "backToLogin": "返回登录页",
+            "backToHome": "返回首页"
+        },
+        "errors": {
+            "configuration": "服务器配置出现问题",
+            "accessDenied": "访问被拒绝",
+            "verification": "验证链接可能已被使用或已过期",
+            "oauthSignin": "OAuth 登录过程中出错",
+            "oauthCallback": "OAuth 回调过程中出错",
+            "oauthCreateAccount": "无法创建 OAuth 提供商账户",
+            "emailCreateAccount": "无法创建电子邮件提供商账户",
+            "callback": "认证回调过程中出错",
+            "oauthAccountNotLinked": "为了确认您的身份，请使用您最初使用的相同账户登录",
+            "sessionRequired": "访问此资源需要认证",
+            "default": "发生认证错误",
+            "unknown": "发生未知错误"
+        }
     },
     "pricing": {
         "title": "选择适合您的套餐",

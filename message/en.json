@@ -256,7 +256,16 @@
             "orders": "Orders",
             "favorites": "Favorites"
         },
+        "createImages": "Generate Images",
         "empty": {
+            "images": {
+                "title": "No Generated Images",
+                "description": "You haven't created any images yet. Start generating to see your creations here."
+            },
+            "favorites": {
+                "title": "No Favorite Images",
+                "description": "Mark images as favorites to save them for quick access. Your favorite creations will appear here."
+            },
             "liked": {
                 "title": "No Liked Images Yet",
                 "description": "Browse the gallery and like images that inspire you. Liked content will appear here."
@@ -281,6 +290,37 @@
         "google": "Sign in with Google",
         "github": "Sign in with Github",
         "loading": "Loading..."
+    },
+    "auth": {
+        "errorPage": {
+            "title": "Authentication Error",
+            "description": "There was a problem with your authentication",
+            "alertTitle": "Authentication Failed",
+            "suggestion": "Here are some things you can try:",
+            "tips": {
+                "tryAgain": "Try signing in again",
+                "differentMethod": "Use a different authentication method",
+                "checkConnection": "Check your internet connection",
+                "contactSupport": "Contact support if the problem persists"
+            },
+            "errorCode": "Error code",
+            "backToLogin": "Back to Login",
+            "backToHome": "Go to Home"
+        },
+        "errors": {
+            "configuration": "There is a problem with the server configuration",
+            "accessDenied": "Access was denied to this resource",
+            "verification": "The verification link may have been used or expired",
+            "oauthSignin": "Error in OAuth sign in",
+            "oauthCallback": "Error in OAuth callback",
+            "oauthCreateAccount": "Could not create OAuth provider account",
+            "emailCreateAccount": "Could not create email provider account",
+            "callback": "Error in authentication callback",
+            "oauthAccountNotLinked": "To confirm your identity, sign in with the same account you used originally",
+            "sessionRequired": "Authentication required to access this resource",
+            "default": "Authentication error occurred",
+            "unknown": "An unknown error occurred"
+        }
     },
     "pricing": {
         "title": "Choose the Plan That's Right for You",

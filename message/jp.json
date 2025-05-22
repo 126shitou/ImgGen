@@ -62,6 +62,37 @@
         "signIn": "ログイン",
         "signOut": "ログアウト"
     },
+    "auth": {
+        "errorPage": {
+            "title": "認証エラー",
+            "description": "認証で問題が発生しました",
+            "alertTitle": "認証に失敗しました",
+            "suggestion": "ここにいくつかできることを試してみてください：",
+            "tips": {
+                "tryAgain": "再度ログインしてみてください",
+                "differentMethod": "異なる認証方法を利用してみてください",
+                "checkConnection": "インターネット接続を確認してください",
+                "contactSupport": "問題が続く場合はサポートにお問い合わせください"
+            },
+            "errorCode": "エラーコード",
+            "backToLogin": "ログインに戻る",
+            "backToHome": "ホームに戻る"
+        },
+        "errors": {
+            "configuration": "サーバー構成で問題があります",
+            "accessDenied": "このリソースへのアクセスが拒否されました",
+            "verification": "検証リンクは既に使用されたか、期限が切れています",
+            "oauthSignin": "OAuth ログインでエラー",
+            "oauthCallback": "OAuth コールバックでエラー",
+            "oauthCreateAccount": "OAuth プロバイダーアカウントを作成できませんでした",
+            "emailCreateAccount": "メールプロバイダーアウントを作成できませんでした",
+            "callback": "認証コールバックでエラー",
+            "oauthAccountNotLinked": "アイデンティティを確認するために、元々と同じアカウントでログインしてください",
+            "sessionRequired": "このリソースにアクセスするには認証が必要です",
+            "default": "認証エラーが発生しました",
+            "unknown": "不明なエラーが発生しました"
+        }
+    },
     "footer": {
         "resources": "リソース",
         "about": "私たちについて",
@@ -256,14 +287,23 @@
             "orders": "注文",
             "favorites": "お気に入り"
         },
+        "createImages": "画像を生成する",
         "empty": {
+            "images": {
+                "title": "生成された画像はありません",
+                "description": "まだ画像を作成していません。生成を開始して、あなたの作品をここで確認しましょう。"
+            },
+            "favorites": {
+                "title": "お気に入りの画像はありません",
+                "description": "画像をお気に入りとしてマークして、素早くアクセスできるように保存します。お気に入りの作品はここに表示されます。"
+            },
             "liked": {
-                "title": "お気に入った画像がありません",
-                "description": "ギャラリーをブラウズして、インスピレーションする画像を表示します。お気に入ったコンテンツはここで表示されます。"
+                "title": "「いいね」した画像はありません",
+                "description": "ギャラリーを閲覧して、あなたにインスピレーションを与える画像に「いいね」をしましょう。「いいね」したコンテンツはここに表示されます。"
             },
             "saved": {
-                "title": "保存された画像がありません",
-                "description": "画像を保存フォルダに格納して、素早く参照できるように整理します。インスピレーションは全部ここで管理できます。"
+                "title": "保存された画像はありません",
+                "description": "クイックリファレンス用に画像をコレクションに保存します。あなたのインスピレーションをここで整理します。"
             }
         },
         "exploreGallery": "ギャラリーをブラウズ",
@@ -280,7 +320,7 @@
         "description": "プロフィールページ、生成履歴、保存された画像にアクセスするにはログインする必要があります。",
         "google": "Googleでログイン",
         "github": "Githubでログイン",
-        "loading":"ロード中..."
+        "loading": "ロード中..."
     },
     "pricing": {
         "title": "適切なプランを選びます",

@@ -374,7 +374,6 @@ const ProfilePage = () => {
             throw new Error('Failed to fetch user data');
           }
           const userData = await response.json();
-          console.log("userData", userData);
 
           // 用户数据结构根据User模型调整
           // 设置用户数据

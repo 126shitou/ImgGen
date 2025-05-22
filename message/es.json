@@ -193,6 +193,37 @@
             "history": "Historial"
         }
     },
+    "auth": {
+        "errorPage": {
+            "title": "Error de autenticación",
+            "description": "Hubo un problema con su autenticación",
+            "alertTitle": "Fallo de autenticación",
+            "suggestion": "Aquí hay algunas cosas que puede intentar:",
+            "tips": {
+                "tryAgain": "Intente iniciar sesión de nuevo",
+                "differentMethod": "Usa un método de autenticación diferente",
+                "checkConnection": "Verifique su conexión a Internet",
+                "contactSupport": "Póngase al soporte si el problema persiste"
+            },
+            "errorCode": "Código de error",
+            "backToLogin": "Volver a inicio de sesión",
+            "backToHome": "Ir a la página de inicio"
+        },
+        "errors": {
+            "configuration": "Hay un problema con la configuración del servidor",
+            "accessDenied": "Se le negó el acceso a este recurso",
+            "verification": "El enlace de verificación puede haber sido usado o caducido",
+            "oauthSignin": "Error en inicio de sesión con OAuth",
+            "oauthCallback": "Error en retroallla de OAuth",
+            "oauthCreateAccount": "No se pudo crear una cuenta de proveedor OAuth",
+            "emailCreateAccount": "No se pudo crear una cuenta de proveedor de correo electrónico",
+            "callback": "Error en retroal de autenticación",
+            "oauthAccountNotLinked": "Para confirmar su identidad, inicie sesión con la misma cuenta que usó originalmente",
+            "sessionRequired": "Se requiere autenticación para acceder a este recurso",
+            "default": "Ocurrió un error de autenticación",
+            "unknown": "Ocurrió un error desconocido"
+        }
+    },
     "gallery": {
         "title": "Explora creaciones de la comunidad",
         "description": "Descubre increíbles obras de arte generadas por IA de miembros de la comunidad y obtén inspiración para tu próxima creación.",
@@ -256,7 +287,16 @@
             "orders": "Pedidos",
             "favorites": "Favoritos"
         },
+        "createImages": "Generar imágenes",
         "empty": {
+            "images": {
+                "title": "No hay imágenes generadas",
+                "description": "Aún no has creado ninguna imagen. Comienza a generar para ver tus creaciones aquí."
+            },
+            "favorites": {
+                "title": "No hay imágenes favoritas",
+                "description": "Marca imágenes como favoritas para guardarlas y acceder rápidamente. Tus creaciones favoritas aparecerán aquí."
+            },
             "liked": {
                 "title": "No hay imágenes que te gusten",
                 "description": "Explora la galería y da me gusta a las imágenes que te inspiren. El contenido que te guste aparecerá aquí."

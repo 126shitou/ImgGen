@@ -231,6 +231,37 @@
             "6": "Ville sous-marine mystique avec bâtiments lumineux"
         }
     },
+    "auth": {
+        "errorPage": {
+            "title": "Erreur d'authentification",
+            "description": "Il y a eu un problème avec votre authentification",
+            "alertTitle": "Échec d'authentification",
+            "suggestion": "Voici sont quelques choses que vous pouvez essayer :",
+            "tips": {
+                "tryAgain": " Essayez vous connecter à nouveau",
+                "differentMethod": "Utilisez une méthode d'authentification différente",
+                "checkConnection": "Vérifiez votre connexion Internet",
+                "contactSupport": "Contactez le support si le problème persiste"
+            },
+            "errorCode": "Code d'erreur",
+            "backToLogin": "Retourner à la connexion",
+            "backToHome": "Retourner à l'accueil"
+        },
+        "errors": {
+            "configuration": "Il y a eu un problème avec la configuration du serveur",
+            "accessDenied": "L'accès a été refusé à cette ressource",
+            "verification": "Le lien de vérification a peut avoir été utilisé ou expiré",
+            "oauthSignin": "Erreur à la connexion OAuth",
+            "oauthCallback": "Erreur dans le rappel OAuth",
+            "oauthCreateAccount": "Impossible de créer un compte de fournisseur OAuth",
+            "emailCreateAccount": "Impossible de créer un compte de fournisseur de messagerie",
+            "callback": "Erreur dans le rappel d'authentification",
+            "oauthAccountNotLinked": "Pour confirmer votre identité, connectez-vous avec le même compte que celui que vous avez utilisé auparavant",
+            "sessionRequired": "Authentification nécessaire pour accéder à cette ressource",
+            "default": "Une erreur d'authentification s'est produite",
+            "unknown": "Une erreur inconnue s'est produite"
+        }
+    },
     "profile": {
         "title": "Profil personnel",
         "dateFormat": {
@@ -256,7 +287,16 @@
             "orders": "Commandes",
             "favorites": "Favoris"
         },
+        "createImages": "Générer des images",
         "empty": {
+            "images": {
+                "title": "Aucune image générée",
+                "description": "Vous n'avez pas encore créé d'images. Commencez à générer pour voir vos créations ici."
+            },
+            "favorites": {
+                "title": "Aucune image favorite",
+                "description": "Marquez des images comme favorites pour les enregistrer pour un accès rapide. Vos créations favorites apparaîtront ici."
+            },
             "liked": {
                 "title": "Aucune image aimée",
                 "description": "Parcourez la galerie et aimez les images qui vous inspirent. Le contenu aimé apparaîtra ici."
