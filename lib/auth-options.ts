@@ -51,30 +51,19 @@ export const authOptions: AuthOptions = {
             return true
         },
         async jwt({ token, user, account }) {
-            console.log("token", token);
 
             if (user) {
                 token.id = user.id;
-                token.provider = account?.provider;
             }
             return token;
         },
 
         async session({ session, token }) {
-            if (token && session.user) {
-                session.user.id = token.id as string;
-                try {
-                    await connectToDatabase();
-                    const dbUser = await User.findOne({ email: session.user.email });
+            const sessionUser = await User.findOne({ email: session.user.email });
+            session.user.id = sessionUser._id.toString();
 
-                    if (dbUser) {
-                        session.user.name = dbUser.name || session.user.name;
-                    }
-                } catch (error) {
-                    console.error("Error enriching session:", error);
-                }
-            }
-            return session;
+            session.user = { ...session.user, ...sessionUser._doc }
+            return session
         },
 
         // // 可选：自定义重定向回调

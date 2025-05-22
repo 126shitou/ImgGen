@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from "next-auth"
-import { authOptions } from '@/lib/auth-options';
 
 import Stripe from 'stripe';
 import { connectToDatabase } from '@/lib/mongoose';
@@ -19,13 +17,9 @@ const PRODUCT_TOKEN_LIST = [
 ]
 
 export async function POST(req: NextRequest) {
-    const session = await getServerSession(authOptions)
-
-    if (!session) {
-        return NextResponse.json({ message: "You must be logged in." }, { status: 401 })
-    }
 
     try {
+
         const rawBody = await req.text()
         const signature = req.headers.get("stripe-signature") || ""
 
@@ -39,9 +33,8 @@ export async function POST(req: NextRequest) {
             const session = event.data.object
             const line_items = await stripe.checkout.sessions.listLineItems(session.id);
             await connectToDatabase();
+ 
             const user = await User.findById(session.client_reference_id)
-            console.log("session", JSON.stringify(session));
-            console.log("line_items", JSON.stringify(line_items));
             if (user) {
                 const promises = line_items.data.map(async (ele) => {
                     const pId = ele.price?.product

@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
         const { userId, formData } = body;
+        console.log("userId", userId);
         const token = process.env.NEXT_PUBLIC_TK;
 
         if (!token) {
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest) {
         const requiredBalance = 1;
 
         // 获取用户信息和余额
-        const dbUser = await User.findOne({ id: userId });
+        const dbUser = await User.findById(userId);
         console.log("dbUser", dbUser);
 
         if (!dbUser) {
@@ -71,7 +72,6 @@ export async function POST(request: NextRequest) {
             })
         });
 
-        console.log("replicateResponse", replicateResponse);
 
 
         if (!replicateResponse.ok) {
@@ -135,10 +135,11 @@ export async function POST(request: NextRequest) {
         // 计算并扣除用户余额
         const usedBalance = 1;
         const newBalance = (dbUser.balance - usedBalance).toFixed(2);
+        console.log("newBalance", newBalance);
 
         // 更新用户余额
         await User.findOneAndUpdate(
-            { id: userId },
+            { _id: userId },
             { $set: { balance: parseFloat(newBalance) } }
         );
 

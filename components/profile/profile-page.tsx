@@ -9,26 +9,22 @@ import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from '@/hooks/use-toast';
 import { getImageStorage } from '@/lib/indexedDB';
+
 import {
-  User,
-  Settings,
   History,
-  Bookmark,
-  Lock,
   LogOut,
   Heart,
   Download,
   Globe,
-  ChevronRight,
   Loader2,
   Image as ImageIcon,
   Info
 } from 'lucide-react';
+import Order from '@/models/Order';
 
 // Format date function
 const formatDate = (dateString: string | null | undefined) => {
@@ -62,49 +58,30 @@ interface UserImage {
 }
 
 interface Order {
-  id: string;
+  id?: string;
+  _id?: string;
   product: string;
   price: number;
   createDate: string;
-  status: string;
+  updateDate?: string;
+  status?: string;
+  payName?: string;
+  payEmail?: string;
+  payCurrency?: string;
+  userId?: string;
 }
 
 interface UserData {
+  thirdPartId?: string;
+  name?: string;
+  email?: string;
+  image?: string;
   balance: number;
-  imagesGenerated: number;
-  savedImages: UserImage[];
-  favoriteImages: UserImage[];
-  orders: Order[];
+  createDate?: string;
+  updateDate?: string;
 }
 
-// Mock user images data
-const mockUserImages: UserImage[] = [
-  {
-    id: '1',
-    url: 'https://images.pexels.com/photos/3493777/pexels-photo-3493777.jpeg',
-    prompt: 'Futuristic cityscape with neon lights and flying cars',
-    date: '2 days ago',
-  },
-  {
-    id: '2',
-    url: 'https://images.pexels.com/photos/1910225/pexels-photo-1910225.jpeg',
-    prompt: 'Underwater ancient temple with bioluminescent plants',
-    date: '1 week ago',
-  },
-  {
-    id: '3',
-    url: 'https://images.pexels.com/photos/3109807/pexels-photo-3109807.jpeg',
-    prompt: 'Space station orbiting a gas giant with rings',
-    date: '2 weeks ago',
-  },
-  {
-    id: '4',
-    url: 'https://images.pexels.com/photos/1535162/pexels-photo-1535162.jpeg',
-    prompt: 'Floating islands with waterfalls in a sunset sky',
-    date: '3 weeks ago',
-  },
 
-];
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
@@ -114,17 +91,17 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('images');
   const [userData, setUserData] = useState<UserData>({
-    balance: 0,
-    imagesGenerated: 0,
-    savedImages: [],
-    favoriteImages: [],
-    orders: []
+    balance: 0
   });
+  // 单独存储订单数据
+  const [orders, setOrders] = useState<Order[]>([]);
+  // 从 loadedImages 计算图片相关数据
   // 存储从IndexedDB加载的图片
   const [loadedImages, setLoadedImages] = useState<UserImage[]>([]);
   const t = useTranslations();
 
   useEffect(() => {
+ 
     setMounted(true);
   }, []);
 
@@ -209,12 +186,6 @@ const ProfilePage = () => {
 
         // 更新加载的图片
         setLoadedImages(sortedImages);
-
-        // 更新用户数据中的生成图片数量
-        setUserData(prev => ({
-          ...prev,
-          imagesGenerated: sortedImages.length
-        }));
       }
     } catch (error) {
       console.error('Error loading images from IndexedDB:', error);
@@ -238,6 +209,9 @@ const ProfilePage = () => {
     if (['images', 'favorites'].includes(value)) {
       await loadImagesFromIndexedDB();
       // 当切换到图片标签时，重新加载图片
+    } else if (value === 'orders') {
+      // 当切换到订单标签时，加载订单数据
+      await getOrders();
     }
   };
 
@@ -326,6 +300,38 @@ const ProfilePage = () => {
     }
   };
 
+  const getOrders = async () => {
+    try {
+      setIsLoading(true);
+
+      // 获取订单历史
+      const orderRes = await fetch(`/api/order/user/${session?.user.id}`);
+
+      if (!orderRes.ok) {
+        throw new Error(`Error fetching orders: ${orderRes.status}`);
+      }
+
+      const orderData = await orderRes.json();
+
+      if (orderData.success && Array.isArray(orderData.orders)) {
+        // 将订单数据单独存储
+        setOrders(orderData.orders || []);
+      } else {
+        console.error('Invalid order data format:', orderData);
+        throw new Error('Invalid order data format');
+      }
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      toast({
+        title: t('profile.ordersError'),
+        description: t('profile.ordersErrorDescription'),
+        variant: 'destructive'
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // 在页面可见性变化时重新加载图片
   useEffect(() => {
     if (typeof window === 'undefined' || !mounted || !isAuthenticated) return;
@@ -363,52 +369,42 @@ const ProfilePage = () => {
             throw new Error('Failed to fetch user data');
           }
           const userData = await response.json();
+          console.log("userData",userData);
+          
+          // 用户数据结构根据User模型调整
+          // 设置用户数据
           setUserData({
+            thirdPartId: userData.thirdPartId,
+            name: userData.name,
+            email: userData.email,
+            image: userData.image,
             balance: userData.balance || 0,
-            imagesGenerated: userData.imagesGenerated || 0,
-            savedImages: userData.savedImages,
-            favoriteImages: userData.favoriteImages,
-            orders: userData.orders || [
-              {
-                id: '1',
-                product: '100 积分充值',
-                price: 100,
-                createDate: '2023-05-15T10:30:00Z',
-                status: '已完成'
-              },
-              {
-                id: '2',
-                product: '500 积分充值',
-                price: 500,
-                createDate: '2023-06-20T14:45:00Z',
-                status: '已完成'
-              }
-            ]
+            createDate: userData.createDate,
+            updateDate: userData.updateDate
           });
+
+          // 不需要单独设置图片相关数据，直接从 loadedImages 计算
         } catch (error) {
           console.error('Error fetching user data:', error);
-          setUserData({
-            balance: 1250,
-            imagesGenerated: 47,
-            savedImages: mockUserImages,
-            favoriteImages: mockUserImages.slice(0, 2),
-            orders: [
-              {
-                id: '1',
-                product: '100 积分充值',
-                price: 100,
-                createDate: '2023-05-15T10:30:00Z',
-                status: '已完成'
-              },
-              {
-                id: '2',
-                product: '500 积分充值',
-                price: 500,
-                createDate: '2023-06-20T14:45:00Z',
-                status: '已完成'
-              }
-            ]
+          toast({
+            title: t('profile.error.title'),
+            description: t('profile.error.fetchUserData'),
+            variant: 'destructive'
           });
+
+          // Initialize with empty data instead of mock data
+          setUserData({
+            thirdPartId: '',
+            name: '',
+            email: '',
+            image: '',
+            balance: 0,
+            createDate: '',
+            updateDate: ''
+          });
+
+          // 不需要单独设置图片相关数据，直接从 loadedImages 计算
+          setOrders([]);
         } finally {
           setIsLoading(false);
         }
@@ -511,12 +507,12 @@ const ProfilePage = () => {
                   {/* User Stats */}
                   <div className="flex justify-around py-4">
                     <div className="text-center">
-                      <p className="text-2xl font-bold">{userData.imagesGenerated}</p>
+                      <p className="text-2xl font-bold">{loadedImages.length}</p>
                       <p className="text-sm text-muted-foreground">{t('profile.images')}</p>
                     </div>
                     <Separator orientation="vertical" className="h-12" />
                     <div className="text-center">
-                      <p className="text-2xl font-bold">{userData.favoriteImages.length}</p>
+                      <p className="text-2xl font-bold">{loadedImages.filter(img => img.star).length}</p>
                       <p className="text-sm text-muted-foreground">{t('profile.favorites')}</p>
                     </div>
                   </div>
@@ -580,99 +576,133 @@ const ProfilePage = () => {
 
                 {/* Generated Images Tab */}
                 <TabsContent value="images">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-                    {loadedImages.map((image) => (
-                      <div key={image.id} className="group relative overflow-hidden rounded-md border border-border">
-                        <div className="relative aspect-square">
-                          <Image
-                            src={image.url}
-                            alt={image.prompt}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200">
-                          <p className="text-xs line-clamp-2">{image.prompt}</p>
-
-                          {/* 显示基本元数据 */}
-                          <div className="flex flex-wrap gap-1 mt-1">
-                            <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
-                              {image.metadata?.aspect_ratio || '1:1'}
-                            </span>
-                            <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
-                              {image.metadata?.output_format?.toUpperCase() || 'PNG'}
-                            </span>
-                            <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
-                              Seed: {image.metadata?.seed || 'Random'}
-                            </span>
+                  {loadedImages.length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                      {loadedImages.map((image) => (
+                        <div key={image.id} className="group relative overflow-hidden rounded-md border border-border">
+                          <div className="relative aspect-square">
+                            <Image
+                              src={image.url}
+                              alt={image.prompt}
+                              fill
+                              className="object-cover"
+                            />
                           </div>
+                          <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                            <p className="text-xs line-clamp-2">{image.prompt}</p>
 
-                          {/* 日期和操作按钮 */}
-                          <div className="flex justify-between items-center mt-1">
-                            <span className="text-xs text-muted-foreground">{image.date}</span>
-                            <div className="flex space-x-1">
-                              <button
-                                className="p-1 rounded-full hover:bg-primary/20"
-                                onClick={() => toggleStar(image)}
-                                title="收藏"
-                              >
-                                <Heart className={`h-3 w-3 ${image.star ? 'fill-primary text-primary' : ''}`} />
-                              </button>
-                              <button
-                                className="p-1 rounded-full hover:bg-primary/20"
-                                title="下载"
-                                onClick={() => downloadImage(image)}
-                              >
-                                <Download className="h-3 w-3" />
-                              </button>
-                              <button
-                                className="p-1 rounded-full hover:bg-primary/20"
-                                title="查看详细信息"
-                                onClick={() => {
-                                  // 显示详细元数据的弹窗
-                                  toast({
-                                    title: '图片详细信息',
-                                    description: (
-                                      <div className="space-y-2 text-xs">
-                                        <div><strong>提示词：</strong> {image.prompt}</div>
-                                        <div><strong>纵横比：</strong> {image.metadata?.aspect_ratio || '1:1'}</div>
-                                        <div><strong>像素：</strong> {image.metadata?.megapixels ? `${image.metadata.megapixels}MP` : '1MP'}</div>
-                                        <div><strong>输出格式：</strong> {image.metadata?.output_format || 'png'}</div>
-                                        <div><strong>输出质量：</strong> {image.metadata?.outpt_quality || 'standard'}</div>
-                                        <div><strong>步数：</strong> {image.metadata?.num_inference_steps || 4}</div>
-                                        <div><strong>Seed：</strong> {image.metadata?.seed || 'Random'}</div>
-                                        <div><strong>创建时间：</strong> {new Date(image.timestamp || 0).toLocaleString()}</div>
-                                      </div>
-                                    ),
-                                    duration: 10000,
-                                  });
-                                }}
-                              >
-                                <Info className="h-3 w-3" />
-                              </button>
+                            {/* 显示基本元数据 */}
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                                {image.metadata?.aspect_ratio || '1:1'}
+                              </span>
+                              <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                                {image.metadata?.output_format?.toUpperCase() || 'PNG'}
+                              </span>
+                              <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
+                                Seed: {image.metadata?.seed || 'Random'}
+                              </span>
+                            </div>
+
+                            {/* 日期和操作按钮 */}
+                            <div className="flex justify-between items-center mt-1">
+                              <span className="text-xs text-muted-foreground">{image.date}</span>
+                              <div className="flex space-x-1">
+                                <button
+                                  className="p-1 rounded-full hover:bg-primary/20"
+                                  onClick={() => toggleStar(image)}
+                                  title="收藏"
+                                >
+                                  <Heart className={`h-3 w-3 ${image.star ? 'fill-primary text-primary' : ''}`} />
+                                </button>
+                                <button
+                                  className="p-1 rounded-full hover:bg-primary/20"
+                                  title="下载"
+                                  onClick={() => downloadImage(image)}
+                                >
+                                  <Download className="h-3 w-3" />
+                                </button>
+                                <button
+                                  className="p-1 rounded-full hover:bg-primary/20"
+                                  title="查看详细信息"
+                                  onClick={() => {
+                                    // 显示详细元数据的弹窗
+                                    toast({
+                                      title: '图片详细信息',
+                                      description: (
+                                        <div className="space-y-2 text-xs">
+                                          <div><strong>提示词：</strong> {image.prompt}</div>
+                                          <div><strong>纵横比：</strong> {image.metadata?.aspect_ratio || '1:1'}</div>
+                                          <div><strong>像素：</strong> {image.metadata?.megapixels ? `${image.metadata.megapixels}MP` : '1MP'}</div>
+                                          <div><strong>输出格式：</strong> {image.metadata?.output_format || 'png'}</div>
+                                          <div><strong>输出质量：</strong> {image.metadata?.outpt_quality || 'standard'}</div>
+                                          <div><strong>步数：</strong> {image.metadata?.num_inference_steps || 4}</div>
+                                          <div><strong>Seed：</strong> {image.metadata?.seed || 'Random'}</div>
+                                          <div><strong>创建时间：</strong> {new Date(image.timestamp || 0).toLocaleString()}</div>
+                                        </div>
+                                      ),
+                                      duration: 10000,
+                                    });
+                                  }}
+                                >
+                                  <Info className="h-3 w-3" />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-12">
+                      <ImageIcon className="h-12 w-12 text-muted-foreground mb-4" />
+                      <h3 className="text-lg font-medium mb-2">{t('profile.empty.images.title')}</h3>
+                      <p className="text-muted-foreground text-center max-w-md mb-4">
+                        {t('profile.empty.images.description')}
+                      </p>
+                      <Button onClick={() => router.push('/generate')}>
+                        {t('profile.createImages')}
+                      </Button>
+                    </div>
+                  )}
                 </TabsContent>
 
                 {/* Orders Tab */}
                 <TabsContent value="orders">
-                  {userData.orders.length > 0 ? (
+                  {orders.length > 0 ? (
                     <div className="space-y-4">
-                      {userData.orders.map((order) => (
-                        <Card key={order.id}>
+                      {orders.map((order) => (
+                        <Card key={order.id || order._id}>
                           <CardContent className="p-4">
-                            <div className="flex justify-between items-center">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                               <div>
-                                <h3 className="font-medium">{order.product}</h3>
-                                <p className="text-sm text-muted-foreground">{formatDate(order.createDate)}</p>
+
+                                <div className="text-sm text-muted-foreground space-y-1">
+                                  <p>
+                                    <span className="inline-block w-20">付款日期:</span>
+                                    {formatDate(order.createDate)}
+                                  </p>
+                                  {order.payName && (
+                                    <p>
+                                      <span className="inline-block w-20">付款人:</span>
+                                      {order.payName}
+                                    </p>
+                                  )}
+                                  {order.payEmail && (
+                                    <p>
+                                      <span className="inline-block w-20">付款邮件:</span>
+                                      {order.payEmail}
+                                    </p>
+                                  )}
+                                </div>
                               </div>
-                              <div className="text-right">
-                                <p className="font-bold">{order.price} 积分</p>
-                                <Badge variant="outline" className="mt-1">{order.status}</Badge>
+                              <div className="text-right self-start">
+                                <p className="font-bold text-lg">{order.price} {t('profile.orders.credits')}</p>
+                                {order.payCurrency && (
+                                  <p className="text-sm text-muted-foreground">
+                                    {t('profile.orders.paidWith')} {order.payCurrency.toUpperCase()}
+                                  </p>
+                                )}
                               </div>
                             </div>
                           </CardContent>
@@ -693,7 +723,6 @@ const ProfilePage = () => {
                   )}
                 </TabsContent>
 
-
                 {/* Favorite Images Tab */}
                 <TabsContent value="favorites">
                   {loadedImages.filter(img => img.star).length > 0 ? (
@@ -710,7 +739,7 @@ const ProfilePage = () => {
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200">
                             <p className="text-xs line-clamp-2">{image.prompt}</p>
-                            
+
                             {/* 显示基本元数据 */}
                             <div className="flex flex-wrap gap-1 mt-1">
                               <span className="text-[10px] bg-primary/10 text-primary px-1 rounded">
@@ -723,7 +752,7 @@ const ProfilePage = () => {
                                 Seed: {image.metadata?.seed || 'Random'}
                               </span>
                             </div>
-                            
+
                             <div className="flex justify-between items-center mt-1">
                               <span className="text-xs text-muted-foreground">{image.date}</span>
                               <div className="flex space-x-1">
@@ -733,7 +762,7 @@ const ProfilePage = () => {
                                 >
                                   <Heart className={`h-3 w-3 ${image.star ? 'fill-primary text-primary' : ''}`} />
                                 </button>
-                                <button 
+                                <button
                                   className="p-1 rounded-full hover:bg-primary/20"
                                   title="下载"
                                   onClick={() => downloadImage(image)}
@@ -778,10 +807,6 @@ const ProfilePage = () => {
                       <p className="text-muted-foreground text-center max-w-md mb-4">
                         {t('profile.empty.favorites.description')}
                       </p>
-                      <Button>
-                        <Globe className="h-4 w-4 mr-2" />
-                        {t('profile.exploreGallery')}
-                      </Button>
                     </div>
                   )}
                 </TabsContent>
