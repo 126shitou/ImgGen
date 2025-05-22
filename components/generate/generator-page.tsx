@@ -214,7 +214,7 @@ const GeneratorPage = () => {
           'Authorization': `Bearer ${tk}`
         },
         body: JSON.stringify({
-          userId: session.user.id, formData: sd
+          userId: session?.user?.id, formData: sd
         })
       });
 
