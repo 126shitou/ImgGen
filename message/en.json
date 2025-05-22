@@ -232,7 +232,11 @@
         }
     },
     "profile": {
-        "title": "Profile Page",
+        "title": "Personal Profile",
+        "dateFormat": {
+            "today": "Today",
+            "time": "{hours}:{minutes}"
+        },
         "images": "Images",
         "following": "Following",
         "followers": "Followers",
@@ -264,8 +268,11 @@
         },
         "exploreGallery": "Explore Gallery",
         "orders": {
-            "credits": "Minimum currency unit (usually cents)",
-            "paidWith": "Unit"
+            "credits": "Smallest currency unit (generally cents)",
+            "paidWith": "Paid with",
+            "paymentDate": "Payment Date:",
+            "payer": "Payer:",
+            "payerEmail": "Payer Email:"
         }
     },
     "login": {

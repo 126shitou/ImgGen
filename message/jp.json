@@ -233,6 +233,10 @@
     },
     "profile": {
         "title": "プロフィールページ",
+        "dateFormat": {
+            "today": "今日",
+            "time": "{hours}:{minutes}"
+        },
         "images": "画像",
         "following": "フォロー",
         "followers": "フォロワー",
@@ -265,7 +269,10 @@
         "exploreGallery": "ギャラリーをブラウズ",
         "orders": {
             "credits": "最小通貨単位（通常はセント）",
-            "paidWith": "支払い単位"
+            "paidWith": "支払い単位",
+            "paymentDate": "支払日:",
+            "payer": "支払者:",
+            "payerEmail": "支払者メール:"
         }
     },
     "login": {

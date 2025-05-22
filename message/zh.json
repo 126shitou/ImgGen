@@ -233,6 +233,10 @@
     },
     "profile": {
         "title": "个人主页",
+        "dateFormat": {
+            "today": "今天",
+            "time": "{hours}:{minutes}"
+        },
         "images": "图像",
         "following": "关注",
         "followers": "粉丝",
@@ -265,7 +269,10 @@
         "exploreGallery": "浏览画廊",
         "orders": {
             "credits": "最小货币单位(一般为分)",
-            "paidWith": "单位"
+            "paidWith": "单位",
+            "paymentDate": "付款日期:",
+            "payer": "付款人:",
+            "payerEmail": "付款邮件:"
         }
     },
     "login": {

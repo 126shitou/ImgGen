@@ -233,6 +233,10 @@
     },
     "profile": {
         "title": "Perfil personal",
+        "dateFormat": {
+            "today": "Hoy",
+            "time": "{hours}:{minutes}"
+        },
         "images": "Imágenes",
         "following": "Siguiendo",
         "followers": "Seguidores",
@@ -265,7 +269,10 @@
         "exploreGallery": "Explorar galería",
         "orders": {
             "credits": "Unidad monetaria mínima (generalmente centavos)",
-            "paidWith": "Pagado con"
+            "paidWith": "Pagado con",
+            "paymentDate": "Fecha de pago:",
+            "payer": "Pagador:",
+            "payerEmail": "Email del pagador:"
         }
     },
     "login": {

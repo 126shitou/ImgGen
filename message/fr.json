@@ -232,7 +232,11 @@
         }
     },
     "profile": {
-        "title": "Page de profil",
+        "title": "Profil personnel",
+        "dateFormat": {
+            "today": "Aujourd'hui",
+            "time": "{hours}:{minutes}"
+        },
         "images": "Images",
         "following": "Abonnements",
         "followers": "Abonnés",
@@ -265,7 +269,10 @@
         "exploreGallery": "Explorer la galerie",
         "orders": {
             "credits": "Unité monétaire minimale (généralement en centimes)",
-            "paidWith": "Unité"
+            "paidWith": "Payé avec",
+            "paymentDate": "Date de paiement:",
+            "payer": "Payeur:",
+            "payerEmail": "Email du payeur:"
         }
     },
     "login": {
@@ -273,7 +280,7 @@
         "description": "Connectez-vous pour accéder à votre profil, votre historique de génération et vos images sauvegardées",
         "google": "Se connecter avec Google",
         "github": "Se connecter avec Github",
-        "loading":"Traitement en cours..."
+        "loading": "Traitement en cours..."
     },
     "pricing": {
         "title": "Choisissez le forfait qui vous convient",
@@ -351,13 +358,13 @@
             }
         }
     },
-    "payment":{
-        "success":{
-            "title":"Paiement réussi",
-            "description":"Votre paiement a été traité avec succès",
-            "message":"Votre compte a été rechargé, vous pouvez maintenant utiliser plus de fonctionnalités",
-            "redirecting":"Vous serez automatiquement redirigé vers votre page de profil dans :",
-            "goToProfile":"Aller à la page de profil"
+    "payment": {
+        "success": {
+            "title": "Paiement réussi",
+            "description": "Votre paiement a été traité avec succès",
+            "message": "Votre compte a été rechargé, vous pouvez maintenant utiliser plus de fonctionnalités",
+            "redirecting": "Vous serez automatiquement redirigé vers votre page de profil dans :",
+            "goToProfile": "Aller à la page de profil"
         }
     }
 }

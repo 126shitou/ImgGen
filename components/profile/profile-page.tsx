@@ -30,7 +30,10 @@ import Order from '@/models/Order';
 const formatDate = (dateString: string | null | undefined) => {
   if (!dateString) return '';
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat('zh-CN', {
+
+  const locale = localStorage.getItem('language') || 'en';
+
+  return new Intl.DateTimeFormat(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -101,7 +104,7 @@ const ProfilePage = () => {
   const t = useTranslations();
 
   useEffect(() => {
- 
+
     setMounted(true);
   }, []);
 
@@ -142,13 +145,15 @@ const ProfilePage = () => {
               // 使用适当的时间格式
               let formattedDate;
               if (diffDays === 0) {
-                // 今天 - 显示具体时间
-                formattedDate = `今天 ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+                // Today - show specific time
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                formattedDate = `${t('profile.dateFormat.today')} ${t('profile.dateFormat.time', { hours, minutes })}`;
               } else if (diffDays < 7) {
-                // 一周内 - 显示相对时间
-                formattedDate = new Intl.RelativeTimeFormat('zh-CN', { numeric: 'auto' }).format(-diffDays, 'day'); // 负值表示过去
+                const locale = localStorage.getItem('language') || 'en';
+                formattedDate = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(-diffDays, 'day'); // negative value indicates past
               } else {
-                // 超过一周 - 显示具体日期
+                // More than a week - show specific date
                 formattedDate = formatDate(date.toISOString());
               }
 
@@ -369,8 +374,8 @@ const ProfilePage = () => {
             throw new Error('Failed to fetch user data');
           }
           const userData = await response.json();
-          console.log("userData",userData);
-          
+          console.log("userData", userData);
+
           // 用户数据结构根据User模型调整
           // 设置用户数据
           setUserData({
@@ -679,18 +684,18 @@ const ProfilePage = () => {
 
                                 <div className="text-sm text-muted-foreground space-y-1">
                                   <p>
-                                    <span className="inline-block w-20">付款日期:</span>
+                                    <span className="inline-block w-30">{t('profile.orders.paymentDate')}</span>
                                     {formatDate(order.createDate)}
                                   </p>
                                   {order.payName && (
                                     <p>
-                                      <span className="inline-block w-20">付款人:</span>
+                                      <span className="inline-block w-30">{t('profile.orders.payer')}</span>
                                       {order.payName}
                                     </p>
                                   )}
                                   {order.payEmail && (
                                     <p>
-                                      <span className="inline-block w-20">付款邮件:</span>
+                                      <span className="inline-block w-30">{t('profile.orders.payerEmail')}</span>
                                       {order.payEmail}
                                     </p>
                                   )}
