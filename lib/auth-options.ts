@@ -2,7 +2,7 @@
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import { connectToDatabase } from "./mongoose"; // 假设您已有此函数用于 Mongoose 连接
+import { connectToDatabase } from "./mongoose"; // 假设您已有此函数用于ddd Mongoose 连接
 import User from '@/models/User'
 import { getCurrentTime } from '@/lib/utils'
 export const authOptions: AuthOptions = {
