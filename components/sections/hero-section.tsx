@@ -35,13 +35,13 @@ export const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 pt-8">
             <Button asChild size="lg" className="font-medium text-xl px-10 py-8 h-auto group" 
-            onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }) }}
+            onClick={() => { sendGTMEvent({ event: 'START', user: session?.user.email || "unauthenticated" }) }}
             >
               <Link href="/generate" >
                 {t('hero.startCreating')} <ChevronRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="font-medium text-xl px-10 py-8 h-auto" onClick={() => sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" })}>
+            <Button asChild variant="outline" size="lg" className="font-medium text-xl px-10 py-8 h-auto" onClick={() => sendGTMEvent({ event: 'VIEW_GALLERY', user: session?.user.email || "unauthenticated" })}>
               <Link href="/gallery">
                 <ImageIcon className="mr-3 h-6 w-6" /> {t('hero.exploreGallery')}
               </Link>

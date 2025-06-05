@@ -33,7 +33,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale} suppressHydrationWarning>
-      <GoogleTagManager gtmId="GTM-WJFFKXK7" />
+      <GoogleTagManager gtmId="GTM-KZTVQQ8T" />
       <body className={inter.className} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -53,7 +53,7 @@ export default async function RootLayout({
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
-      <GoogleAnalytics gaId="G-V62CZCQHLL" />
+      <GoogleAnalytics gaId="G-T65FVFNYV8" />
     </html>
   );
 }

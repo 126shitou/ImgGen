@@ -98,7 +98,7 @@ const Header = () => {
           </Link>
           <Link
             href="/generate"
-            onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }) }}
+            onClick={() => { sendGTMEvent({ event: 'START', user: session?.user.email || "unauthenticated" }) }}
             className={cn(
               "relative py-1 transition-all duration-200",
               pathname === "/generate"
@@ -114,7 +114,7 @@ const Header = () => {
             )}></span>
           </Link>
           <Link
-            onClick={() => sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" })}
+            onClick={() => sendGTMEvent({ event: 'VIEW_GALLERY', user: session?.user.email || "unauthenticated" })}
             href="/gallery"
             className={cn(
               "relative py-1 transition-all duration-200",
@@ -246,7 +246,7 @@ const Header = () => {
                   ? "text-foreground font-medium pl-2 border-l-2 border-primary"
                   : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
               )}
-              onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }); setIsOpen(false) }}
+              onClick={() => { sendGTMEvent({ event: 'START', user: session?.user.email || "unauthenticated" }); setIsOpen(false) }}
             >
               {t('nav.generate')}
             </Link>
@@ -258,7 +258,7 @@ const Header = () => {
                   ? "text-foreground font-medium pl-2 border-l-2 border-primary"
                   : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
               )}
-              onClick={() => { sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" }); setIsOpen(false) }}
+              onClick={() => { sendGTMEvent({ event: 'VIEW_GALLERY', user: session?.user.email || "unauthenticated" }); setIsOpen(false) }}
             >
               {t('nav.gallery')}
             </Link>

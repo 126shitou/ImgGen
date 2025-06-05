@@ -51,7 +51,7 @@ const LoginPage = () => {
 
   // 处理NextAuth登录
   const handleSignIn = async (provider: string) => {
-    sendGTMEvent({ event: 'IG_LOGIN', provider })
+    sendGTMEvent({ event: 'LOGIN', provider })
     try {
       setIsLoading(true);
       await signIn(provider, { callbackUrl: '/', redirect: true });

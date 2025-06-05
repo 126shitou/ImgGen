@@ -179,7 +179,7 @@ const GeneratorPage = () => {
 
   const generateImages = async (formData: any) => {
     sendGTMEvent({
-      event: 'IG_GEN', user: session?.user.email, imgParams: {
+      event: 'GENERATE', user: session?.user.email, imgParams: {
         prompt: formData.prompt,
         go_fast: true,
         megapixels: formData.megapixels,

@@ -84,7 +84,7 @@ export const GallerySection = () => {
             </p>
           </div>
           <Button asChild variant="outline" className="mt-4 md:mt-0">
-            <Link href="/gallery" className="flex items-center" onClick={() => sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" })}
+            <Link href="/gallery" className="flex items-center" onClick={() => sendGTMEvent({ event: 'VIEW_GALLERY', user: session?.user.email || "unauthenticated" })}
             >
               {t('gallery.viewFull')} <ChevronRight className="ml-1 h-4 w-4" />
             </Link>

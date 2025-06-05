@@ -87,7 +87,7 @@ const PricingPage = () => {
 
   // 处理套餐订阅
   const handleSubscription = async (type: string) => {
-    sendGTMEvent({ event: 'IG_SUBSCRIBE', user: session?.user.email || "unauthenticated", type, billing_cycle: "monthly" })
+    sendGTMEvent({ event: 'SUBSCRIBE', user: session?.user.email || "unauthenticated", type, billing_cycle: "monthly" })
     if (!isAuthenticated) {
       toast({
         title: t('toast.loginRequired.title'),
