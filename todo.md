@@ -1,0 +1,3 @@
+- 语言不存在情况处理
+- 登录界面处理
+- pricing/page.tsx中gtmevent的pricing

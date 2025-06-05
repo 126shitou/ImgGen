@@ -36,6 +36,7 @@ import LanguageSwitcher from '@/components/layout/language-switcher';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const Header = () => {
   const pathname = usePathname();
@@ -97,6 +98,7 @@ const Header = () => {
           </Link>
           <Link
             href="/generate"
+            onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }) }}
             className={cn(
               "relative py-1 transition-all duration-200",
               pathname === "/generate"
@@ -112,6 +114,7 @@ const Header = () => {
             )}></span>
           </Link>
           <Link
+            onClick={() => sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" })}
             href="/gallery"
             className={cn(
               "relative py-1 transition-all duration-200",
@@ -243,7 +246,7 @@ const Header = () => {
                   ? "text-foreground font-medium pl-2 border-l-2 border-primary"
                   : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
               )}
-              onClick={() => setIsOpen(false)}
+              onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }); setIsOpen(false) }}
             >
               {t('nav.generate')}
             </Link>
@@ -255,7 +258,7 @@ const Header = () => {
                   ? "text-foreground font-medium pl-2 border-l-2 border-primary"
                   : "text-foreground/70 hover:text-foreground hover:pl-2 hover:border-l-2 hover:border-primary/50"
               )}
-              onClick={() => setIsOpen(false)}
+              onClick={() => { sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" }); setIsOpen(false) }}
             >
               {t('nav.gallery')}
             </Link>

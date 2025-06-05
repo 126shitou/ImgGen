@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
 import getStripe from '@/lib/stripe';
 import { useTranslations } from 'next-intl';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 
 
@@ -86,6 +87,7 @@ const PricingPage = () => {
 
   // 处理套餐订阅
   const handleSubscription = async (type: string) => {
+    sendGTMEvent({ event: 'IG_SUBSCRIBE', user: session?.user.email || "unauthenticated", type, billing_cycle: "monthly" })
     if (!isAuthenticated) {
       toast({
         title: t('toast.loginRequired.title'),

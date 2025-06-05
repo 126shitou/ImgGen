@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { LockIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { getImageStorage } from '@/lib/indexedDB';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 export type GeneratedImage = {
   id: string;
@@ -25,15 +26,10 @@ export type GeneratedImage = {
   star: Boolean
 };
 
-// Mock history of previously generated images
-const mockHistory: GeneratedImage[] = [
-  // ... existing code ...
-];
-
 const GeneratorPage = () => {
   const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [history, setHistory] = useState<GeneratedImage[]>(mockHistory);
+  const [history, setHistory] = useState<GeneratedImage[]>();
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
   const router = useRouter();
@@ -182,7 +178,18 @@ const GeneratorPage = () => {
 
 
   const generateImages = async (formData: any) => {
-
+    sendGTMEvent({
+      event: 'IG_GEN', user: session?.user.email, imgParams: {
+        prompt: formData.prompt,
+        go_fast: true,
+        megapixels: formData.megapixels,
+        num_outputs: formData.num_outputs,
+        aspect_ratio: formData.aspect_ratio,
+        output_format: formData.output_format,
+        output_quality: formData.output_quality,
+        num_inference_steps: formData.num_inference_steps || 1
+      }
+    })
     // 检查用户是否已登录，未登录则不执行生成
     if (!isAuthenticated) {
       return;

@@ -8,6 +8,7 @@ import Footer from '@/components/layout/footer';
 import { NextAuthProvider } from '@/components/providers/next-auth-provider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale} suppressHydrationWarning>
+      <GoogleTagManager gtmId="GTM-WJFFKXK7" />
       <body className={inter.className} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -51,6 +53,7 @@ export default async function RootLayout({
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
+      <GoogleAnalytics gaId="G-V62CZCQHLL" />
     </html>
   );
 }

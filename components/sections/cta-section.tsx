@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 export const CTASection = () => {
   const t = useTranslations();
@@ -37,7 +38,9 @@ export const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Button asChild size="lg" className="font-medium text-base">
+            <Button asChild size="lg" className="font-medium text-base"
+              onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }) }}
+            >
               <Link href="/generate">
                 {t('cta.startCreating')} <ChevronRight className="ml-1 h-4 w-4" />
               </Link>

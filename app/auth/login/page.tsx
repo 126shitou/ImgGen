@@ -11,10 +11,11 @@ import { RefreshCw, Github, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const LoginPage = () => {
   const router = useRouter();
-  
+
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { data: session, status } = useSession();
@@ -50,6 +51,7 @@ const LoginPage = () => {
 
   // 处理NextAuth登录
   const handleSignIn = async (provider: string) => {
+    sendGTMEvent({ event: 'IG_LOGIN', provider })
     try {
       setIsLoading(true);
       await signIn(provider, { callbackUrl: '/', redirect: true });

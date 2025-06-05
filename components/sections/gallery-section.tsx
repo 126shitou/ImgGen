@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-
+import { sendGTMEvent } from '@next/third-parties/google';
+import { useSession } from 'next-auth/react';
 // Sample gallery images
 const sampleImages = [
   {
@@ -46,7 +47,7 @@ export const GallerySection = () => {
   const [isHovering, setIsHovering] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const t = useTranslations();
-
+  const { data: session } = useSession()
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -83,13 +84,14 @@ export const GallerySection = () => {
             </p>
           </div>
           <Button asChild variant="outline" className="mt-4 md:mt-0">
-            <Link href="/gallery" className="flex items-center">
+            <Link href="/gallery" className="flex items-center" onClick={() => sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" })}
+            >
               {t('gallery.viewFull')} <ChevronRight className="ml-1 h-4 w-4" />
             </Link>
           </Button>
         </div>
 
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"

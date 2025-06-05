@@ -7,10 +7,12 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Image as ImageIcon, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { sendGTMEvent } from '@next/third-parties/google';
+import { useSession } from 'next-auth/react';
 
 export const HeroSection = () => {
   const t = useTranslations();
-
+  const { data: session, status } = useSession();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center py-12 md:py-16 overflow-hidden bg-background">
@@ -32,12 +34,14 @@ export const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 pt-8">
-            <Button asChild size="lg" className="font-medium text-xl px-10 py-8 h-auto group">
-              <Link href="/generate">
+            <Button asChild size="lg" className="font-medium text-xl px-10 py-8 h-auto group" 
+            onClick={() => { sendGTMEvent({ event: 'IG_START', user: session?.user.email || "unauthenticated" }) }}
+            >
+              <Link href="/generate" >
                 {t('hero.startCreating')} <ChevronRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="font-medium text-xl px-10 py-8 h-auto">
+            <Button asChild variant="outline" size="lg" className="font-medium text-xl px-10 py-8 h-auto" onClick={() => sendGTMEvent({ event: 'IG_GALLERY', user: session?.user.email || "unauthenticated" })}>
               <Link href="/gallery">
                 <ImageIcon className="mr-3 h-6 w-6" /> {t('hero.exploreGallery')}
               </Link>
